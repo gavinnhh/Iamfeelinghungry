@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/custom.css"> -->
     <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <link rel="stylesheet" type="text/css" href="css/switch.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <title>I'M FEELING HUNGRY</title>
 
@@ -25,23 +26,39 @@
 
   <body>
 
-    <div class="top_nav">
-      <a href="#Sign_Up">Sign Up</a>
-      <a href="#Sign_In">Sign In</a>
-   </div>
+      <div class="top_nav">
+        <a href="#Sign_Up">Sign Up</a>
+        <a href="#Sign_In">Sign In</a>
+      </div>
 
-     <div class="title">
+      <div class="title">
        <p>I'M FEELING HUNGRY</p>
-     </div>
+      </div>
 
       <div class="search-box">
-      <input type="text" name="" class="search-txt" placeholder="What do you want to eat"/>
-      <a class="search-btn" href="#">
-        <!-- fas fa-search is the search icon -->
-      <i class="fas fa-search"></i>
-      </a>
+        <input type="text" name="" class="search-txt" placeholder="What do you want to eat"/>
+        <a class="search-btn" href="#">
+          <!-- fas fa-search is the search icon -->
+        <i class="fas fa-search"></i>
+        </a>
+      </div>
 
-    </div>
+      <!-- Some search filters  -->
+      <div class="center">
+        <input type="checkbox" name="gluten_free" value="">
+        <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2"> Gluten Free</p>
+
+        <br>
+        <input type="checkbox" name="chinese_food" value="">
+        <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Chinese Food</p>
+        <br>
+        <input type="checkbox" name="mexican_food" value="">
+        <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Mexican Food</p>
+        <br>
+        <input type="checkbox" name="low_carb" value="">
+        <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Low Carb</p>
+
+      </div>
 
       <!--Bootstrap core JavaScript-->
     <!--Placed at the end of the page so that the pages load faster-->
