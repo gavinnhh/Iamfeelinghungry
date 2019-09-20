@@ -19,7 +19,7 @@ body {
  padding: 10px;
 }
 
-.top_nav a{
+.top_nav {
   float: left;
   /* color: #d35400; */
   color: gray;
