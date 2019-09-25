@@ -5,12 +5,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"> -->
+    <link rel="icon" type="image/png" href="test-image-cover.png">
     <!--Bootstrap core CSS-->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/custom.css"> -->
     <link rel="stylesheet" type="text/css" href="css/custom.css">
     <link rel="stylesheet" type="text/css" href="css/switch.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <!-- to get the search icon -->
+    <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
+    <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
     <title>I'M FEELING HUNGRY</title>
 
     <!-- update the version number as needed -->
@@ -28,8 +32,10 @@
 
       <div class="top_nav">
         <!-- better make sign in and sign out as a pop out window -->
-        <a href="#Sign_Up">Sign Up</a>
-        <a href="#Sign_In">Sign In</a>
+        <a href="signup/sign-up-test.html">Sign Up</a>
+        <!-- here may use a pop up window but not link to another page
+              i did this for testing purpose. Will fix it later-->
+        <a href="signin/sign-in-test.html">Sign In</a>
       </div>
 
       <div class="title">
@@ -37,10 +43,13 @@
       </div>
 
       <div class="search-box">
-        <input type="text" name="" class="search-txt" placeholder="What do you want to eat"/>
+        <!-- TODO: make the input as a button -->
+        <!-- <input type="text" name="" class="search-txt" placeholder="I'm Feeling Random"/> -->
+        <!-- <button type="button" name="search-txt" >I'm Feeling Random</button> -->
         <a class="search-btn" href="#">
           <!-- fas fa-search is the search icon -->
-        <i class="fas fa-search"></i>
+          <!-- <i class="fas fa-search"></i> -->
+        <i class="fas fa-grin-tongue"></i>
         </a>
       </div>
 
@@ -61,7 +70,36 @@
 
       </div>
 
-      <!--Bootstrap core JavaScript-->
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-firestore.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+      // Your web app's Firebase configuration
+      // setting connections between front end and back end
+      var firebaseConfig = {
+        apiKey: "AIzaSyBJjuNNBDtW2RgK_C-nwce_DGr3ObKYfZA",
+        authDomain: "i-am-feeling-hungry.firebaseapp.com",
+        databaseURL: "https://i-am-feeling-hungry.firebaseio.com",
+        projectId: "i-am-feeling-hungry",
+        // storageBucket: "i-am-feeling-hungry.appspot.com",
+        // messagingSenderId: "478024235219",
+        appId: "1:478024235219:web:213bcfd5fbd09a78"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+
+      // for future js coding, make auth and firestore reference, meaning create variables
+      // auth: handles any sign in, sign out and sign up
+      // db:
+      // const auth = firebase.auth();
+      // const db = firebase.firestore();
+
+    </script>
+
     <!--Placed at the end of the page so that the pages load faster-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
