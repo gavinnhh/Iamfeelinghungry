@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
   <head>
     <meta charset="utf-8">
@@ -12,63 +12,140 @@
     <!-- <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/custom.css"> -->
     <link rel="stylesheet" type="text/css" href="css/custom.css">
     <link rel="stylesheet" type="text/css" href="css/switch.css">
+    <link rel="stylesheet" type="text/css" href="css/signin.css">
+    <link rel="stylesheet" type="text/css" href="css/signup.css">
+
     <!-- to get the search icon -->
     <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
     <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
     <title>I'M FEELING HUNGRY</title>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/6.6.0/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/6.6.0/firebase-auth.js"></script>
-    <script defer src="/__/firebase/6.6.0/firebase-database.js"></script>
-    <script defer src="/__/firebase/6.6.0/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/6.6.0/firebase-storage.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
-  </head>
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/6.6.0/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/6.6.0/firebase-auth.js"></script>
+  <script defer src="/__/firebase/6.6.0/firebase-database.js"></script>
+  <script defer src="/__/firebase/6.6.0/firebase-messaging.js"></script>
+  <script defer src="/__/firebase/6.6.0/firebase-storage.js"></script>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
+</head>
 
-  <body>
+<body>
 
-      <div class="top_nav">
-        <!-- better make sign in and sign out as a pop out window -->
-        <a href="signup/sign-up-test.html">Sign Up</a>
-        <!-- here may use a pop up window but not link to another page
-              i did this for testing purpose. Will fix it later-->
-        <a href="signin/sign-in-test.html">Sign In</a>
+  <div class="top_nav">
+    <!-- Sign-in button -->
+    <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign In</button>
+    <!-- Sign-up button -->
+    <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+  </div>
+
+  <!-- Sign-in window -->
+  <div id="signInModal" class="modal fade signin">
+    <div class="modal-dialog modal-login">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Welcome</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        </div>
+        <div class="modal-body">
+          <form action="/" method="GET">
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
+              <input type="text" id="name" name="name" class="form-control" placeholder="Username/Email" required="required">
+            </div>
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-lock"></span>
+              <input type="" id="signin-password" name="signin-password" class="form-control" placeholder="Password" required="required">
+            </div>
+            <div class="form-group small clearfix">
+              <a href="#" class="forgot-link">Forgot Password?</a>
+            </div>
+            <div class="form-group">
+              <input id="siginbtn" type="submit" class="btn btn-block btn-lg btn-color" value="Sign In">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <span class="txt">Don’t have an account?</span>
+          <a class="txt" href="#">Sign Up</a>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <div class="title">
-       <p>I'M FEELING HUNGRY</p>
+  <!-- Sign-up window -->
+  <div id="signUpModal" class="modal fade signup">
+    <div class="modal-dialog modal-login">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Sign Up</h4>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button> -->
+        </div>
+        <div class="modal-body">
+          <form action="/" method="GET">
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
+              <input type="text" id="firstname" name="firstname" class="form-control" placeholder="First Name" required="required">
+            </div>
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
+              <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last Name" required="required">
+            </div>
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
+              <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="required">
+            </div>
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-envelope"></span>
+              <input type="text" id="email" name="email" class="form-control" placeholder="Email" required="required">
+            </div>
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-lock"></span>
+              <input type="" id="password" name="password" class="form-control" placeholder="Password" required="required">
+            </div>
+            <!-- <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-lock"></span>
+              <input type="" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="required">
+            </div> -->
+            <div class="form-group">
+              <input  type="button" id="signupbtn" class="btn btn-block btn-lg btn-color" value="Sign Up">
+              <!-- <button type="button" id="signinbtn" name="button">Sign Up</button> -->
+            </div>
+          </form>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <div class="search-box">
-        <!-- TODO: make the input as a button -->
-        <!-- <input type="text" name="" class="search-txt" placeholder="I'm Feeling Random"/> -->
-        <!-- <button type="button" name="search-txt" >I'm Feeling Random</button> -->
-        <a class="search-btn" href="#">
-          <!-- fas fa-search is the search icon -->
-          <!-- <i class="fas fa-search"></i> -->
-        <i class="fas fa-grin-tongue"></i>
-        </a>
-      </div>
+<div class="title">
+  <p>I'M FEELING HUNGRY</p>
+</div>
 
-      <!-- Some search filters  -->
-      <div class="center">
-        <input type="checkbox" name="gluten_free" value="">
-        <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2"> Gluten Free</p>
+<div class="search-box">
+  <input type="text" name="" class="search-txt" placeholder="What do you want to eat"/>
+  <a class="search-btn" href="#">
+    <!-- fas fa-search is the search icon -->
+    <i class="fas fa-search"></i>
+  </a>
+</div>
 
-        <br>
-        <input type="checkbox" name="chinese_food" value="">
-        <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Chinese Food</p>
-        <br>
-        <input type="checkbox" name="mexican_food" value="">
-        <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Mexican Food</p>
-        <br>
-        <input type="checkbox" name="low_carb" value="">
-        <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Low Carb</p>
+<!-- Some search filters  -->
+<div class="center">
+  <input type="checkbox" name="gluten_free" value="">
+  <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2"> Gluten Free</p>
 
-      </div>
+  <br>
+  <input type="checkbox" name="chinese_food" value="">
+  <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Chinese Food</p>
+  <br>
+  <input type="checkbox" name="mexican_food" value="">
+  <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Mexican Food</p>
+  <br>
+  <input type="checkbox" name="low_carb" value="">
+  <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Low Carb</p>
+
+</div>
 
       <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
@@ -103,5 +180,6 @@
     <!--Placed at the end of the page so that the pages load faster-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="signup/auth.js"></script>
   </body>
 </html>

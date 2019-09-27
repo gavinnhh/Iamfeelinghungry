@@ -7,7 +7,19 @@ body {
  background-image: linear-gradient(to right, #33ccff , #33cc33);
 
 }
-.top_nav a{
+
+.search-box {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ background: #2f3640;
+ height: 60px;
+ border-radius: 40px;
+ padding: 10px;
+}
+
+.top_nav {
   float: left;
   /* color: #d35400; */
   color: gray;
@@ -34,27 +46,18 @@ body {
   color: white;
 }
 
-.search-box {
- position: absolute;
- top: 50%;
- left: 50%;
- transform: translate(-50%, -50%);
- background: #2f3640;
- height: 60px;
- border-radius: 40px;
- padding: 10px;
-}
 .search-box:hover > .search-txt {
  width: 240px;
  padding: 0 6px;
 }
 
 .search-box:hover > .search-btn {
- background: #00cc00;
- color: white;
+ background: white;
+ color: black;
 }
 
 .search-btn {
+
  color: #e84118;
  float: right;
  width: 40px;
@@ -69,9 +72,8 @@ body {
  cursor: pointer;
 }
 
-/* smily face size */
 .search-btn > i {
- font-size: 40px;
+ font-size: 20px;
 
 }
 
