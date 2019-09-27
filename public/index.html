@@ -2,17 +2,23 @@
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!--Bootstrap core CSS-->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <!-- <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/custom.css"> -->
-  <link rel="stylesheet" type="text/css" href="css/custom.css">
-  <link rel="stylesheet" type="text/css" href="css/switch.css">
-  <link rel="stylesheet" type="text/css" href="css/signin.css">
-  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-  <title>I'M FEELING HUNGRY</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"> -->
+    <link rel="icon" type="image/png" href="test-image-cover.png">
+    <!--Bootstrap core CSS-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/custom.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <link rel="stylesheet" type="text/css" href="css/switch.css">
+    <link rel="stylesheet" type="text/css" href="css/signin.css">
+    <link rel="stylesheet" type="text/css" href="css/signup.css">
+
+    <!-- to get the search icon -->
+    <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
+    <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
+    <title>I'M FEELING HUNGRY</title>
 
   <!-- update the version number as needed -->
   <script defer src="/__/firebase/6.6.0/firebase-app.js"></script>
@@ -29,9 +35,9 @@
 
   <div class="top_nav">
     <!-- Sign-in button -->
-    <button type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign In</button>
+    <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign In</button>
     <!-- Sign-up button -->
-    <button type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+    <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign Up</button>
   </div>
 
   <!-- Sign-in window -->
@@ -46,17 +52,17 @@
           <form action="/" method="GET">
             <div class="form-group">
               <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
-              <input type="text" id="name" name="name" class="form-control" placeholder="Username/Email" required="required">
+              <input type="text" id="name/email" name="name/emial" class="form-control" placeholder="Username/Email" required="required">
             </div>
             <div class="form-group">
               <span style="position:absolute;left:12px;top:12px;" class="fa fa-lock"></span>
-              <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="required">
+              <input type="" id="signin-password" name="signin-password" class="form-control" placeholder="Password" required="required">
             </div>
             <div class="form-group small clearfix">
               <a href="#" class="forgot-link">Forgot Password?</a>
             </div>
             <div class="form-group">
-              <input type="submit" class="btn btn-block btn-lg btn-color" value="Sign In">
+              <input id="siginbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign In">
             </div>
           </form>
         </div>
@@ -98,18 +104,19 @@
               <span style="position:absolute;left:12px;top:12px;" class="fa fa-lock"></span>
               <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="required">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <span style="position:absolute;left:12px;top:12px;" class="fa fa-lock"></span>
               <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="required">
-            </div>
+            </div> -->
             <div class="form-group">
-              <input type="submit" class="btn btn-block btn-lg btn-color" value="Sign Up">
+              <input id="signupbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign Up">
             </div>
           </form>
         </div>
       </div>
     </div>
   </div>
+
 
 <div class="title">
   <p>I'M FEELING HUNGRY</p>
@@ -140,9 +147,39 @@
 
 </div>
 
-<!--Bootstrap core JavaScript-->
-<!--Placed at the end of the page so that the pages load faster-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-</body>
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-firestore.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+      // Your web app's Firebase configuration
+      // setting connections between front end and back end
+      var firebaseConfig = {
+        apiKey: "AIzaSyBJjuNNBDtW2RgK_C-nwce_DGr3ObKYfZA",
+        authDomain: "i-am-feeling-hungry.firebaseapp.com",
+        databaseURL: "https://i-am-feeling-hungry.firebaseio.com",
+        projectId: "i-am-feeling-hungry",
+        // storageBucket: "i-am-feeling-hungry.appspot.com",
+        // messagingSenderId: "478024235219",
+        appId: "1:478024235219:web:213bcfd5fbd09a78"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+
+      // for future js coding, make auth and firestore reference, meaning create variables
+      // auth: handles any sign in, sign out and sign up
+      // db:
+      // const auth = firebase.auth();
+      // const db = firebase.firestore();
+
+    </script>
+
+    <!--Placed at the end of the page so that the pages load faster-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="signup/auth.js"></script>
+  </body>
 </html>
