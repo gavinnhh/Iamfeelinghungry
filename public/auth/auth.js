@@ -1,5 +1,7 @@
 
-
+/**
+* auth.js handles user every auth thing. Sign In, Sign Up, Sign out
+*/
 // var fname = $('input[id="firstname"]').val();
 //var submitBtn = document.querySelector('input[type="button"]');
 // document.getElementById('signupbtn').addEventListener('click', toggleSignUp, false);
@@ -12,7 +14,8 @@ function handleSignIn()
 
     // Sign in with email and pass.
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-      console.log('signed in!!!');
+      console.log(error);
+      alert(error);
     });
 
     // Make sign in pop up window go away
@@ -28,6 +31,7 @@ function handleSignUp()
     var username = document.getElementById('username').value;
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
+
 
     console.log('fname = ' + fname);
     firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
@@ -52,11 +56,46 @@ function signout()
 
 function profile()
 {
-  console.log('home sign up(profile) clicked');
-  // TODO: create a user profile
+    console.log('home sign up(profile) clicked');
+    // TODO: create a user profile
 
 }
 
+function handleNoAccountSignup()
+{
+    // This is to hide the sign in window when clicking sign up in this sign in window
+    $('#signInModal').modal('hide');
+    return false;
+}
+
+function handleForgotpw()
+{
+    $('#signInModal').modal('hide');
+    return false;
+}
+
+// handleResetpwbtn will send an email to the spicified email
+function handleResetpwbtn()
+{
+    var email = document.getElementById('sendemail').value;
+    firebase.auth().sendPasswordResetEmail(email).then(function() {
+      alert('Password Reset Email Sent!');
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // [START_EXCLUDE]
+      if (errorCode == 'auth/invalid-email') {
+        alert(errorMessage);
+      } else if (errorCode == 'auth/user-not-found') {
+        alert(errorMessage);
+      }
+      console.log(error);
+    });
+    // after send, hide the reset modal
+    $('#resetpwModal').modal('hide');
+    return false;
+}
 
 function initApp() {
       // Listening for auth state changes.
@@ -101,7 +140,10 @@ function initApp() {
       document.getElementById('signupbtn').addEventListener('click', handleSignUp, false);
       document.getElementById('home-signin').addEventListener('click', signout, false);
       document.getElementById('home-signup').addEventListener('click', profile, false);
-      // document.getElementById('verify-email').addEventListener('click', sendEmailVerification, false);
+      document.getElementById('noAccountSignup').addEventListener('click', handleNoAccountSignup, false);
+      document.getElementById('forgotpw').addEventListener('click', handleForgotpw, false);
+      document.getElementById('resetpwbtn').addEventListener('click', handleResetpwbtn, false);
+
       // document.getElementById('password-reset').addEventListener('click', sendPasswordReset, false);
 }
 
