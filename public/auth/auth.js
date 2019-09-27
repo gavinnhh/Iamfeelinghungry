@@ -76,7 +76,7 @@ function initApp() {
           console.log('user logged in with email = ' + email);
           // [START_EXCLUDE]
           //console.log(document.getElementById('home-signin').textContent);
-          document.getElementById('home-signin').textContent = 'Sign out';
+          document.getElementById('home-signin').textContent = 'Sign Out';
           document.getElementById('home-signup').textContent = email;
 
           // To avoid window pop up since already signed in
