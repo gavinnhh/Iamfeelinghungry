@@ -90,3 +90,9 @@ body {
  width: 0px;
  font-weight: bold;
 }
+
+.hide{
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
