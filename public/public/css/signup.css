@@ -1,0 +1,135 @@
+.signup {
+  padding-top: 10%;
+}
+.modal-login {
+  color: #636363;
+  width: 350px;
+}
+.modal-login .modal-content {
+  padding: 20px;
+  border-radius: 30px;
+  border: none;
+  /* background:rgba(255,255,255,0.2); */
+}
+.modal-login .modal-header {
+  border-image: radial-gradient(circle at center, #33ccff , #33cc33) 1 stretch;
+  position: relative;
+  justify-content: center;
+}
+.modal-login h4 {
+  font-family: helvetica;
+  text-align: center;
+  font-size: 30px;
+}
+.modal-login  .form-group {
+  position: relative;
+}
+.modal-login i {
+  position: absolute;
+  left: 13px;
+  top: 11px;
+  font-size: 18px;
+}
+.modal-login .form-control {
+  padding-left: 40px;
+}
+.modal-login .form-control {
+  /*border-color: #12b5e5;*/
+}
+.modal-login .form-control, .modal-login .btn {
+  min-height: 40px;
+  border-radius: 30px;
+  transition: all 0.5s;
+}
+.modal-login .close {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+.modal-login input[type="checkbox"] {
+  margin-top: 1px;
+}
+.modal-login .forgot-link {
+  color: #12b5e5;
+  float: right;
+}
+.modal-login .btn {
+  border: none;
+  line-height: normal;
+}
+.modal-login .btn-color {
+  background-image: linear-gradient(to right, #33ccff , #33cc33);
+}
+.modal-login .modal-footer {
+  color: #999;
+  border: none;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 13px;
+  margin-top: -20px;
+  justify-content: center;
+}
+.modal-login .modal-footer a {
+  color: #12b5e5;
+}
+.txt {
+  font-family: Poppins-Regular;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.button {
+  color: gray;
+}
+meter {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+
+  margin: 0 auto 1em;
+  width: 100%;
+  height: 0.5em;
+
+  /* Applicable only to Firefox */
+  background: none;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+meter::-webkit-meter-bar {
+  background: none;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/* Webkit based browsers */
+meter[value="1"]::-webkit-meter-optimum-value { background: red; }
+meter[value="2"]::-webkit-meter-optimum-value { background: yellow; }
+meter[value="3"]::-webkit-meter-optimum-value { background: orange; }
+meter[value="4"]::-webkit-meter-optimum-value { background: green; }
+
+/* Gecko based browsers */
+meter[value="1"]::-moz-meter-bar { background: red; }
+meter[value="2"]::-moz-meter-bar { background: yellow; }
+meter[value="3"]::-moz-meter-bar { background: orange; }
+meter[value="4"]::-moz-meter-bar { background: green; }
+
+.feedback {
+    color: #9ab;
+    font-size: 70%;
+    padding: 0 .25em;
+    font-family: Courgette, cursive;
+    margin-top: 1em;
+}
+
+.alert-custom{
+  position:relative;
+  font-size: 60%;
+  padding:.5rem .5rem;
+  margin-bottom:1rem;
+  border:1px solid transparent;
+  border-radius:.25rem
+}
+
+.hide{
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
