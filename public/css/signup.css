@@ -82,7 +82,6 @@
 }
 meter {
   /* Reset the default appearance */
-  -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
 
