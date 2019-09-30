@@ -157,10 +157,12 @@
 </div>
 
 <div class="search-box">
-  <input type="text" name="" class="search-txt" placeholder="What do you want to eat"/>
-  <a class="search-btn" href="#">
+  <input id="randomsearchbtn" type="button" name="" class="search-txt" value="I'M FEELING RANDOM"/>
+  <div class="search-btn" href="#">
     <!-- fas fa-search is the search icon -->
-    <i class="fas fa-search"></i>
+    <!-- <i class="fas fa-search"></i> -->
+    <i class="fas fa-grin-tongue"></i>
+  </div>
   </a>
 </div>
 
@@ -218,5 +220,6 @@ firebase.initializeApp(firebaseConfig);
 <script src="auth/passwordmeter.js"></script>
 <script src="auth/badwords.js"></script>
 <script src="bower_components/zxcvbn/dist/zxcvbn.js"></script>
+<script src="randomsearch/randomsearch.js"></script>
 </body>
 </html>
