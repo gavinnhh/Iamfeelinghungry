@@ -1,4 +1,3 @@
-
 /**
 * auth.js handles user every auth thing. Sign In, Sign Up, Sign out
 */
@@ -109,53 +108,6 @@ function handleResetpwbtn()
 }
 
 function initApp() {
-<<<<<<< HEAD
-      // Listening for auth state changes.
-      // [START authstatelistener]
-      // onAuthStateChanged is like a while loop constantly checking the user status
-      firebase.auth().onAuthStateChanged(function(user) {
-        // user is a firebase built-in variable, firebase knows user
-        if (user) {
-          // User is signed in.
-          var displayName = user.displayName;
-          var email = user.email;
-          var emailVerified = user.emailVerified;
-          var photoURL = user.photoURL;
-          var isAnonymous = user.isAnonymous;
-          var uid = user.uid;
-          var providerData = user.providerData;
-          console.log('user logged in with email = ' + email);
-          // [START_EXCLUDE]
-          //console.log(document.getElementById('home-signin').textContent);
-          document.getElementById('home-signin').textContent = 'Sign Out';
-          document.getElementById('home-signup').textContent = email;
-
-          // To avoid window pop up since already signed in
-          $('#home-signin').attr('data-target','#disabled');
-          $('#home-signup').attr('data-target','#disabled');
-          // [END_EXCLUDE]
-        } else {
-          console.log('Currently no user signed in/up');
-          // User is signed out. So return Sign In and Sign Up on home page
-          document.getElementById('home-signin').textContent = 'Sign In';
-          document.getElementById('home-signup').textContent = 'Sign Up';
-
-          // To make window pop up again
-          $('#home-signin').attr('data-target','#signInModal');
-          $('#home-signup').attr('data-target','#signUpModal');
-
-        }
-
-      });
-      // [END authstatelistener]
-      document.getElementById('siginbtn').addEventListener('click', handleSignIn, false);
-      document.getElementById('signupbtn').addEventListener('click', handleSignUp, false);
-      document.getElementById('home-signin').addEventListener('click', signout, false);
-      document.getElementById('home-signup').addEventListener('click', profile, false);
-      document.getElementById('noAccountSignup').addEventListener('click', handleNoAccountSignup, false);
-      document.getElementById('forgotpw').addEventListener('click', handleForgotpw, false);
-      document.getElementById('resetpwbtn').addEventListener('click', handleResetpwbtn, false);
-=======
   // Listening for auth state changes.
   // [START authstatelistener]
   // onAuthStateChanged is like a while loop constantly checking the user status
@@ -203,7 +155,6 @@ function initApp() {
   document.getElementById('resetpwbtn').addEventListener('click', handleResetpwbtn, false);
 
   // document.getElementById('password-reset').addEventListener('click', sendPasswordReset, false);
->>>>>>> 011234feaa7c920100bf9e9216b93974d22f19b4
 }
 
 window.onload = function() {
