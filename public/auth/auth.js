@@ -143,8 +143,6 @@ function initApp() {
       document.getElementById('noAccountSignup').addEventListener('click', handleNoAccountSignup, false);
       document.getElementById('forgotpw').addEventListener('click', handleForgotpw, false);
       document.getElementById('resetpwbtn').addEventListener('click', handleResetpwbtn, false);
-
-      // document.getElementById('password-reset').addEventListener('click', sendPasswordReset, false);
 }
 
 window.onload = function() {
