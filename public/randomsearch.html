@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"> -->
+  <link rel="icon" type="image/png" href="test-image-cover.png">
+  <!--Bootstrap core CSS-->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/custom.css"> -->
+  <link rel="stylesheet" type="text/css" href="css/randomsearch.css">
+  <link rel="stylesheet" type="text/css" href="css/switch.css">
+  <link rel="stylesheet" type="text/css" href="css/signin.css">
+  <link rel="stylesheet" type="text/css" href="css/signup.css">
+
+  <!-- to get the search icon -->
+  <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
+  <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
+  <title>I'M FEELING HUNGRY</title>
+
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/6.6.0/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/6.6.0/firebase-auth.js"></script>
+  <script defer src="/__/firebase/6.6.0/firebase-database.js"></script>
+  <script defer src="/__/firebase/6.6.0/firebase-messaging.js"></script>
+  <script defer src="/__/firebase/6.6.0/firebase-storage.js"></script>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
+</head>
+
+<body>
+
+  <div class="top_nav">
+    <!-- Sign-in button -->
+    <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign In</button>
+    <!-- Sign-up button -->
+    <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+  </div>
+
+  <!-- Sign-in window -->
+  <div id="signInModal" class="modal fade signin">
+    <div class="modal-dialog modal-login">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Welcome</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        </div>
+        <div class="modal-body">
+          <form action="/" method="GET">
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
+              <input type="text" id="name/email" name="name/emial" class="form-control" placeholder="Username/Email" required="required">
+            </div>
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-lock"></span>
+              <input type="password" id="signin-password" name="signin-password" class="form-control" placeholder="Password" required="required">
+            </div>
+            <div class="form-group small clearfix">
+              <!-- <a id="forgotpw" type="button" class="forgot-link">Forgot Password?</a> -->
+              <button id="forgotpw" type="button" class="btn btn-default" style="color: #00ccff;font-size: 12px;" data-toggle="modal" data-target="#resetpwModal">Forgot Password?</button>
+            </div>
+            <div class="form-group">
+              <input id="siginbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign In">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <span style="font-family:helvetica" class="txt">Don’t have an account?</span>
+          <button id="noAccountSignup" type="button" class="btn btn-default" style="color: gray; font-size: 12px;" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sign-up window -->
+  <div id="signUpModal" class="modal fade signup">
+    <div class="modal-dialog modal-login">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Sign Up</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        </div>
+        <div class="modal-body">
+          <form action="/" method="GET">
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
+              <input type="text" id="firstname" name="firstname" class="form-control" placeholder="First Name" required="required">
+            </div>
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
+              <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last Name" required="required">
+            </div>
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
+              <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="required">
+              <div class="alert alert-warning alert-custom hide" role="alert" id="user-alert-message">
+                Invalid Username, please pick a new one.
+              </div>
+            </div>
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-envelope"></span>
+              <input type="text" id="email" name="email" class="form-control" placeholder="Email" required="required">
+            </div>
+            <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-lock"></span>
+              <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="required">
+              <meter max="4" id="password-strength-meter"></meter>
+              <p id="password-strength-text"></p>
+              <div class="alert hide alert-warning alert-custom" role="alert" id="pass-alert-message">
+                Password is not strong enough, please pick a new one.
+              </div>
+            </div>
+            <!-- <div class="form-group">
+            <span style="position:absolute;left:12px;top:12px;" class="fa fa-lock"></span>
+            <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="required">
+          </div> -->
+          <div class="form-group">
+            <input id="signupbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign Up">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Forgot/resetpwModal Sassword -->
+<div id="resetpwModal" class="modal fade resetpwModal">
+  <div class="modal-dialog modal-login">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Forgot Password</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+      </div>
+      <div class="modal-body">
+        <form action="/" method="GET">
+          <div class="form-group">
+            <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
+            <input type="text" id="sendemail" name="sendemail" class="form-control" placeholder="E-mail Address" required="required">
+          </div>
+
+          <div class="form-group">
+            <input id="resetpwbtn" type="button" class="btn btn-block btn-lg btn-color" value="Reset Password">
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="title">
+  <p>Food Fight!</p>
+</div>
+<div class="centertext textFont" style= "font-size: 72px";>
+  <p>VS</p>
+</div>
+
+</br></br></br></br></br></br></br></br></br></br></br></br></br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 offset-md-1 text-center" id="left">
+      <a href="//LINK">
+        <h3>Test image left</h3>
+        <div class= "imagecontainer">
+          <img src="testleft.jpg" alt="test left" class="rounded-corners mx-auto d-block"  width="653" height="400"/>
+          <div class= "overlay">
+            <div class="overlaytext">Test</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 offset-md-2 text-center" id="right">
+        <h3>Test image right</h3>
+        <a href="//LINK">
+          <div class= "imagecontainer">
+            <img src="testright.jpg" alt="test right" class="rounded-corners mx-auto d-block" width="653" height="400"/>
+            <div class= "overlay">
+              <div class="overlaytext">Test</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" id="reroll" href="//LINK" style= "text-align: center" class="textFont buttonbottom btn btn-primary btn-lg">I'm still hungry</button>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-firestore.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+    // Your web app's Firebase configuration
+    // setting connections between front end and back end
+    var firebaseConfig = {
+      apiKey: "AIzaSyBJjuNNBDtW2RgK_C-nwce_DGr3ObKYfZA",
+      authDomain: "i-am-feeling-hungry.firebaseapp.com",
+      databaseURL: "https://i-am-feeling-hungry.firebaseio.com",
+      projectId: "i-am-feeling-hungry",
+      // storageBucket: "i-am-feeling-hungry.appspot.com",
+      // messagingSenderId: "478024235219",
+      appId: "1:478024235219:web:213bcfd5fbd09a78"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    // for future js coding, make auth and firestore reference, meaning create variables
+    // auth: handles any sign in, sign out and sign up
+    // db:
+    // const auth = firebase.auth();
+    // const db = firebase.firestore();
+
+    </script>
+
+    <!--Placed at the end of the page so that the pages load faster-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="auth/auth.js"></script>
+    <script src="auth/passwordmeter.js"></script>
+    <script src="auth/badwords.js"></script>
+    <script src="bower_components/zxcvbn/dist/zxcvbn.js"></script>
+  </body>
+  </html>
