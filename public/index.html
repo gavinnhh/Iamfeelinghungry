@@ -14,6 +14,10 @@
   <link rel="stylesheet" type="text/css" href="css/switch.css">
   <link rel="stylesheet" type="text/css" href="css/signin.css">
   <link rel="stylesheet" type="text/css" href="css/signup.css">
+  <!-- Dropdown menu -->
+  <link rel="stylesheet" type="text/css" href="css/dropdown.css">
+  <link rel="stylesheet" type="text/css" href="css/search-filter.css">
+
 
   <!-- to get the search icon -->
   <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
@@ -166,25 +170,26 @@
     <!-- <i class="fas fa-search"></i> -->
     <i class="fas fa-grin-tongue"></i>
   </div>
-  </a>
+</a>
 </div>
 
 <!-- Some search filters  -->
-<div class="center">
-  <input type="checkbox" name="gluten_free" value="">
-  <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2"> Gluten Free</p>
-
-  <br>
-  <input type="checkbox" name="chinese_food" value="">
-  <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Chinese Food</p>
-  <br>
-  <input type="checkbox" name="mexican_food" value="">
-  <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Mexican Food</p>
-  <br>
-  <input type="checkbox" name="low_carb" value="">
-  <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Low Carb</p>
-
+<div class="search-filter">
+  <div class="search-bar">
+    <h1>I'm feeling 
+      <select multiple id="select">
+        <option data-description="num1">Number 1</option>
+        <option data-description="num2">Number 2</option>
+        <option data-description="num3">Number 3</option>
+        <option data-description="num4">Number 4</option>
+        <option data-description="num5">Number 5</option>
+        <option data-description="num6">Number 6</option>
+      </select>
+    </h1>
+  </div>
+  <div class="move-container mt-2"></div>
 </div>
+
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <!-- <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase.js"></script> -->
@@ -217,10 +222,28 @@ firebase.initializeApp(firebaseConfig);
 // const auth = firebase.auth();
 // const db = firebase.firestore();
 
+// Material Select Initialization
+
 </script>
 
 <!--Placed at the end of the page so that the pages load faster-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Dropdown menu -->
+<!-- <script src="https://cpde.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/propper.js/1.14.7/umd/popper.min.js"></script> -->
+<script src="js/dropdown.js"></script>
+<script>
+tail.select('#select', {
+  search: true,
+  descriptions: true,
+  multilimit: 15,
+  hideSelected: true,
+  hideDisabled: true,
+  multiShowCount: false,
+  multiContainer: '.move-container'
+});
+</script>
+
 <script src="js/bootstrap.min.js"></script>
 <script src="auth/auth.js"></script>
 <script src="auth/passwordmeter.js"></script>
