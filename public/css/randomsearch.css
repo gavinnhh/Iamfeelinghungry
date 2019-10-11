@@ -104,3 +104,7 @@ body {
   background-color: #000000;
   border-radius: 30px
 }
+
+img{
+  max-width: 100%;
+}
