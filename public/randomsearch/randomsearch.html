@@ -6,23 +6,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"> -->
-  <link rel="icon" type="image/png" href="test-image-cover.png">
+  <link rel="icon" type="image/png" href="../test-image-cover.png">
   <!--Bootstrap core CSS-->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
   <!-- <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/custom.css"> -->
-  <link rel="stylesheet" type="text/css" href="css/custom.css">
-  <link rel="stylesheet" type="text/css" href="css/switch.css">
-  <link rel="stylesheet" type="text/css" href="css/signin.css">
-  <link rel="stylesheet" type="text/css" href="css/signup.css">
-  <!-- Dropdown menu -->
-  <link rel="stylesheet" type="text/css" href="css/dropdown.css">
-  <link rel="stylesheet" type="text/css" href="css/search-filter.css">
-
+  <link rel="stylesheet" type="text/css" href="../css/randomsearch.css">
+  <link rel="stylesheet" type="text/css" href="../css/switch.css">
+  <link rel="stylesheet" type="text/css" href="../css/signin.css">
+  <link rel="stylesheet" type="text/css" href="../css/signup.css">
 
   <!-- to get the search icon -->
   <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
   <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
-  <title>I'M FEELING HUNGRY</title>
+  <title>I'M FEELING RANDOM</title>
 
   <!-- update the version number as needed -->
   <script defer src="/__/firebase/6.6.0/firebase-app.js"></script>
@@ -33,8 +29,6 @@
   <script defer src="/__/firebase/6.6.0/firebase-storage.js"></script>
   <!-- initialize the SDK after all desired features are loaded -->
   <script defer src="/__/firebase/init.js"></script>
-
-
 </head>
 
 <body>
@@ -159,98 +153,75 @@
 
 
 <div class="title">
-  <p>I'M FEELING HUNGRY</p>
+  <p>Food Fight!</p>
+</div>
+<div class="centertext textFont" style= "font-size: 72px";>
+  <p>VS</p>
 </div>
 
-<div class="search-box" >
-  <!-- <input id="randomsearchbtn" type="button"  name="" class="search-txt" onclick="window.location='randomsearch/randomsearchresults.html'" value="I'M FEELING RANDOM"/> -->
-  <input id="randomsearchbtn" type="button"  name="" class="search-txt" onclick="window.location='randomsearch/randomsearch.html'" value="I'M FEELING RANDOM"/>
+</br></br></br></br></br></br></br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 offset-md-1 text-center" id="left" >
+      <!-- Once click the image, this link brings the full receipe page  -->
+      <!-- <a href="//LINK"> -->
+        <h3>Test image left</h3>
+        <div class= "imagecontainer">
+          <img id="imgID" src="../testleft.jpg" alt="test left" class="rounded-corners mx-auto d-block"  width="653" height="400"/>
+          <div class= "overlay">
+            <div class="overlaytext">Test</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 offset-md-2 text-center" id="right">
+        <h3>Test image right</h3>
+        <!-- <a href="//LINK"> -->
+          <div class= "imagecontainer">
+            <img id="imgID2" src="../testright.jpg" alt="test right" class="rounded-corners mx-auto d-block" width="653" height="400"/>
+            <div class= "overlay">
+              <div class="overlaytext">Test</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- id="reroll" -->
+    <button id="listall" type="button" style= "text-align: center" class="textFont buttonbottom btn btn-primary btn-lg">I'm still hungry</button>
 
-  <!-- <input id="randomsearchbtn" type="button"  name="" class="search-txt" value="I'M FEELING RANDOM"/> -->
-  <div class="search-btn" href="">
-    <!-- fas fa-search is the search icon -->
-    <!-- <i class="fas fa-search"></i> -->
-    <i class="fas fa-grin-tongue"></i>
-  </div>
-</a>
-</div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-storage.js"></script>
 
-<!-- Some search filters  -->
-<div class="search-filter">
-  <div class="search-bar">
-    <h1>I'm feeling
-      <select multiple id="select" class="dropdown-content">
-        <option data-description="num1">Number 1x</option>
-        <option data-description="num2">Number 2</option>
-        <option data-description="num3">Number 3</option>
-        <option data-description="num4">Number 4</option>
-        <option data-description="num5">Number 5</option>
-        <option data-description="num6">Number 6</option>
-      </select>
-    </h1>
-  </div>
-  <div class="move-container mt-2"></div>
-</div>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
 
+    <script>
+    // Your web app's Firebase configuration
+    // setting connections between front end and back end
+    var firebaseConfig = {
+      apiKey: "AIzaSyBJjuNNBDtW2RgK_C-nwce_DGr3ObKYfZA",
+      authDomain: "i-am-feeling-hungry.firebaseapp.com",
+      databaseURL: "https://i-am-feeling-hungry.firebaseio.com",
+      projectId: "i-am-feeling-hungry",
+      storageBucket: "i-am-feeling-hungry.appspot.com",
+      messagingSenderId: "478024235219",
+      appId: "1:478024235219:web:213bcfd5fbd09a78"
+    };
 
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<!-- <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase.js"></script> -->
-<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-storage.js"></script>
-<!-- TODO: Add SDKs for Firebase products that you want to use
-https://firebase.google.com/docs/web/setup#available-libraries -->
+    firebase.initializeApp(firebaseConfig);
+    </script>
 
-<script>
-// Your web app's Firebase configuration
-// setting connections between front end and back end
-var firebaseConfig = {
-  apiKey: "AIzaSyBJjuNNBDtW2RgK_C-nwce_DGr3ObKYfZA",
-  authDomain: "i-am-feeling-hungry.firebaseapp.com",
-  databaseURL: "https://i-am-feeling-hungry.firebaseio.com",
-  projectId: "i-am-feeling-hungry",
-  storageBucket: "i-am-feeling-hungry.appspot.com",
-  messagingSenderId: "478024235219",
-  appId: "1:478024235219:web:213bcfd5fbd09a78"
-};
-
-firebase.initializeApp(firebaseConfig);
-
-// for future js coding, make auth and firestore reference, meaning create variables
-// auth: handles any sign in, sign out and sign up
-// db:
-// const auth = firebase.auth();
-// const db = firebase.firestore();
-
-// Material Select Initialization
-
-</script>
-
-<!--Placed at the end of the page so that the pages load faster-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Dropdown menu -->
-<!-- <script src="https://cpde.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/propper.js/1.14.7/umd/popper.min.js"></script> -->
-<script src="js/dropdown.js"></script>
-<script>
-tail.select('#select', {
-  search: true,
-  descriptions: true,
-  multilimit: 15,
-  hideSelected: true,
-  hideDisabled: true,
-  multiShowCount: false,
-  multiContainer: '.move-container'
-});
-</script>
-
-<script src="js/bootstrap.min.js"></script>
-<script src="auth/auth.js"></script>
-<script src="auth/passwordmeter.js"></script>
-<script src="auth/badwords.js"></script>
-<script src="bower_components/zxcvbn/dist/zxcvbn.js"></script>
-<!-- <script src="randomsearch/randomsearch.js"></script> -->
-</body>
-</html>
+    <!--Placed at the end of the page so that the pages load faster-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- auth.js declare const db = firebase.firestore(); so no need to declare in any js file after auth.js -->
+    <script src="../auth/auth.js"></script>
+    <script src="../auth/passwordmeter.js"></script>
+    <script src="../auth/badwords.js"></script>
+    <script src="../bower_components/zxcvbn/dist/zxcvbn.js"></script>
+    <script src="../randomsearch/randomsearch.js"></script>
+  </body>
+  </html>
