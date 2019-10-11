@@ -4,7 +4,8 @@ body {
  padding: 0;
  /* background: #e67e22; */
  /* background: "background.jpg"; */
- background-image: linear-gradient(to right, #ee0979 , #ff6a00);
+ /* background-image: linear-gradient(to right, #ee0979 , #ff6a00); */
+ background-image: linear-gradient(to right, #33ccff , #33cc33);
 
 }
 
