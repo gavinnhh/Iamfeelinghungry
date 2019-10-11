@@ -35,36 +35,36 @@ function handleSignUp()
 
   if(!(profanityRegex.test(username))){
     useralert.classList.add("hide")
-  }else{
-    useralert.classList.remove("hide")
-  }
-  if(zxcvbn(password).score >= 3){
-    passalert.classList.add("hide")
-    console.log('username = ' + username);
-    // another way to create user: https://firebase.google.com/docs/auth/admin/manage-users
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
-      console.log(cred);
+    if(zxcvbn(password).score >= 3){
+      passalert.classList.add("hide")
+      console.log('username = ' + username);
+      // another way to create user: https://firebase.google.com/docs/auth/admin/manage-users
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
+        console.log(cred);
 
-      // Add a new document in collection "users", meaning add a new user
-      db.collection("users").doc(cred.user.uid).set({
-          username: username,
-          email: email,
-          photoUrl: "url...."
-      })
-      .then(function() {
-          console.log("Document successfully written!");
-      })
-      .catch(function(error) {
-          console.error("Error writing document: ", error);
+        // Add a new document in collection "users", meaning add a new user
+        db.collection("users").doc(cred.user.uid).set({
+            username: username,
+            email: email,
+            photoUrl: "url...."
+        })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
+
+        // Make sign up pop up window go away
+        $('#signUpModal').modal('hide');
+        return false;
       });
 
-      // Make sign up pop up window go away
-      $('#signUpModal').modal('hide');
-      return false;
-    });
-
+    }else{
+      passalert.classList.remove("hide")
+    }
   }else{
-    passalert.classList.remove("hide")
+    useralert.classList.remove("hide")
   }
 }
 
