@@ -1,4 +1,3 @@
-
 /**
 * auth.js handles user every auth thing. Sign In, Sign Up, Sign out
 */
