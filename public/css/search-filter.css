@@ -3,8 +3,27 @@
   top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
 }
 
-.search-filter > .h1 {
-  color: white;
+.search-filter > .search-bar-text {
+  display: inline-block;
+}
+
+.search-filter h1 {
+  position: relative;
+  bottom: 8px;
+}
+
+.search-filter > .dd-menu {
+  display: inline-block;
+}
+
+.search-filter > .go-button {
+  display: inline-block;
+}
+
+.search-filter button {
+  position: relative;
+  bottom: 14px;
 }
