@@ -8,14 +8,6 @@ body {
 
 }
 
-.container-fluid{
-  top:20%;
-}
-
-.row{
-  top:30%;
-  left:60%
-}
 .top_nav {
   float: left;
   /* color: #d35400; */
@@ -112,10 +104,8 @@ body {
   background-color: #000000;
   border-radius: 30px
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> a1ce9eac5c016109319aa6cf849a40b6160268c4
 img{
   max-width: 100%;
+
 }
