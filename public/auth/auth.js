@@ -4,7 +4,7 @@
 // var fname = $('input[id="firstname"]').val();
 //var submitBtn = document.querySelector('input[type="button"]');
 // document.getElementById('signupbtn').addEventListener('click', toggleSignUp, false);
-
+const db = firebase.firestore();
 function handleSignIn()
 {
   console.log('sign in/out button clicked');
@@ -40,14 +40,29 @@ function handleSignUp()
   }
   if(zxcvbn(password).score >= 3){
     passalert.classList.add("hide")
-    console.log('fname = ' + fname);
+    console.log('username = ' + username);
+    // another way to create user: https://firebase.google.com/docs/auth/admin/manage-users
     firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
       console.log(cred);
+
+      // Add a new document in collection "users", meaning add a new user
+      db.collection("users").doc(cred.user.uid).set({
+          username: username,
+          email: email,
+          photoUrl: "url...."
+      })
+      .then(function() {
+          console.log("Document successfully written!");
+      })
+      .catch(function(error) {
+          console.error("Error writing document: ", error);
+      });
 
       // Make sign up pop up window go away
       $('#signUpModal').modal('hide');
       return false;
     });
+
   }else{
     passalert.classList.remove("hide")
   }
@@ -67,7 +82,7 @@ function signout()
 function profile()
 {
   console.log('home sign up(profile) clicked');
-  // TODO: create a user profile
+  // TODO: create a user profile. This should direct to a new page
 
 }
 
@@ -122,11 +137,21 @@ function initApp() {
       var isAnonymous = user.isAnonymous;
       var uid = user.uid;
       var providerData = user.providerData;
+
       console.log('user logged in with email = ' + email);
+      const mypost = db.collection('users').doc(uid);
+      mypost.onSnapshot(doc => {
+              const data = doc.data();
+              document.getElementById('home-signin').textContent = 'Sign Out';
+              var greeting = 'Hi, ' + data.username;
+              document.getElementById('home-signup').textContent = greeting;
+              // document.getElementById("display").innerHTML = data.major;
+            })
+
       // [START_EXCLUDE]
       //console.log(document.getElementById('home-signin').textContent);
-      document.getElementById('home-signin').textContent = 'Sign Out';
-      document.getElementById('home-signup').textContent = email;
+      // document.getElementById('home-signin').textContent = 'Sign Out';
+      // document.getElementById('home-signup').textContent = email;
 
       // To avoid window pop up since already signed in
       $('#home-signin').attr('data-target','#disabled');

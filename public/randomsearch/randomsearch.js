@@ -39,23 +39,87 @@ document.addEventListener("DOMContentLoaded", event => {
 //     console.error("Error adding document: ", error);
 // });
 
+const storageRef = firebase.storage().ref(); // global const
 
 function uploadFile(files){
-  const storageRef = firebase.storage().ref();
-  const logoRef = storageRef.child('logo.jpg');
+  // const storageRef = firebase.storage().ref();
+  const logoRef = storageRef.child('images/test2.jpg');
 
+  // upload file from local folder
   const file = files.item(0);
   const task = logoRef.put(file);
   task.then(snapshot => {
-    console.log(snapshot); // shows success
+    console.log(snapshot); // shows success upload cred
+    // Get the download URL
+    logoRef.getDownloadURL().then(function(url) {
+      // Insert url into an <img> tag to display
+      console.log('download url: ');
+      console.log(url);
+      document.getElementById("imgID").src = url;
+    }).catch(function(error) {
+          // A full list of error codes is available at
+          // https://firebase.google.com/docs/storage/web/handle-errors
+          switch (error.code) {
+            case 'storage/object-not-found':
+              alert("File does not exist in firebase storage");
+              break;
 
-    const downloadUrl = snapshot.getDownloadURL().subscribe(url => {
-      const Url = url;
-      this.url = url;
-      console.log('Url: ' + Url);
+            case 'storage/unauthorized':
+              albert("User doesn't have permission to access the object")
+              break;
+
+            case 'storage/canceled':
+              // User canceled the upload
+              break;
+
+            case 'storage/unknown':
+              // Unknown error occurred, inspect the server response
+              break;
+          }
+        });
     })
-    // document.querySelector('#imgUpload').setAttribute('src', url);
-  })
 
+}
+
+document.getElementById('listall').addEventListener('click', handlelistall, false);
+
+function handlelistall()
+{
+    console.log('listall clicked');
+    var allUrls = [];
+    // Create a reference under which you want to list
+    var listRef = storageRef.child('images');
+    // Find all the prefixes and items.
+    listRef.listAll().then(function(res) {
+      res.items.forEach(function(itemRef) {
+          // All the items under listRef.
+          // console.log('list all: ');
+          // console.log(itemRef.location);
+          itemRef.getDownloadURL().then(function(url) {
+            // console.log('url: ' + url); // url is string
+            allUrls.push(url);
+            if (allUrls.length === res.items.length){
+                // console.log('allUrls size = ' + allUrls.length);
+                random1 = Math.floor(Math.random() * allUrls.length);
+                random2 = Math.floor(Math.random() * allUrls.length);
+                while(random1 === random2){
+                  random2 = Math.floor(Math.random() * allUrls.length);
+                }
+                // console.log(allUrls[random1]);
+                // console.log(allUrls[random2]);
+                // set the two random display images
+                document.getElementById("imgID").src = allUrls[random1];
+                document.getElementById("imgID2").src = allUrls[random2];
+          }
+
+          }).catch(function(error){alert(error)});
+
+
+      });
+
+
+    }).catch(function(error) {
+      albert(error);
+    });
 
 }
