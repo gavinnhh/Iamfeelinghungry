@@ -1,5 +1,3 @@
-
-
 // function handleRandomSearch()
 // {
 //   console.log("random search clicked");
@@ -11,21 +9,22 @@
 // document.getElementById('randomsearchbtn').addEventListener('click', handleRandomSearch, false);
 // const app = firebase.app();
 // console.log(app);
-const db = firebase.firestore();
+
 // console.log(db);
 
-document.addEventListener("DOMContentLoaded", event => {
-  const mypost = db.collection('posts').doc('firstpost');
-  mypost.onSnapshot(doc => {
-          const data = doc.data();
-          console.log(data.name);
-          console.log(data.SID);
-          console.log(data.major);
-          document.getElementById("display").innerHTML = data.major;
-        })
+// document.addEventListener("DOMContentLoaded", event => {
+//   const mypost = db.collection('posts').doc('firstpost');
+//   mypost.onSnapshot(doc => {
+//           const data = doc.data();
+//           console.log(data.name);
+//           console.log(data.SID);
+//           console.log(data.major);
+//           document.getElementById("display").innerHTML = data.major;
+//         })
+//
+//
+// });
 
-
-});
 /*Below is how to add stuff into firestore*/
 // db.collection("posts").add({
 //     name: "Ada",
@@ -41,45 +40,45 @@ document.addEventListener("DOMContentLoaded", event => {
 
 const storageRef = firebase.storage().ref(); // global const
 
-function uploadFile(files){
-  // const storageRef = firebase.storage().ref();
-  const logoRef = storageRef.child('images/test2.jpg');
-
-  // upload file from local folder
-  const file = files.item(0);
-  const task = logoRef.put(file);
-  task.then(snapshot => {
-    console.log(snapshot); // shows success upload cred
-    // Get the download URL
-    logoRef.getDownloadURL().then(function(url) {
-      // Insert url into an <img> tag to display
-      console.log('download url: ');
-      console.log(url);
-      document.getElementById("imgID").src = url;
-    }).catch(function(error) {
-          // A full list of error codes is available at
-          // https://firebase.google.com/docs/storage/web/handle-errors
-          switch (error.code) {
-            case 'storage/object-not-found':
-              alert("File does not exist in firebase storage");
-              break;
-
-            case 'storage/unauthorized':
-              albert("User doesn't have permission to access the object")
-              break;
-
-            case 'storage/canceled':
-              // User canceled the upload
-              break;
-
-            case 'storage/unknown':
-              // Unknown error occurred, inspect the server response
-              break;
-          }
-        });
-    })
-
-}
+// function uploadFile(files){
+//   // const storageRef = firebase.storage().ref();
+//   const logoRef = storageRef.child('images/test2.jpg');
+//
+//   // upload file from local folder
+//   const file = files.item(0);
+//   const task = logoRef.put(file);
+//   task.then(snapshot => {
+//     console.log(snapshot); // shows success upload cred
+//     // Get the download URL
+//     logoRef.getDownloadURL().then(function(url) {
+//       // Insert url into an <img> tag to display
+//       console.log('download url: ');
+//       console.log(url);
+//       document.getElementById("imgID").src = url;
+//     }).catch(function(error) {
+//           // A full list of error codes is available at
+//           // https://firebase.google.com/docs/storage/web/handle-errors
+//           switch (error.code) {
+//             case 'storage/object-not-found':
+//               alert("File does not exist in firebase storage");
+//               break;
+//
+//             case 'storage/unauthorized':
+//               albert("User doesn't have permission to access the object")
+//               break;
+//
+//             case 'storage/canceled':
+//               // User canceled the upload
+//               break;
+//
+//             case 'storage/unknown':
+//               // Unknown error occurred, inspect the server response
+//               break;
+//           }
+//         });
+//    })
+//
+//}
 
 document.getElementById('listall').addEventListener('click', handlelistall, false);
 
