@@ -122,6 +122,50 @@ function handleResetpwbtn()
   return false;
 }
 
+function handleGoogleSigninbtn()
+{
+    console.log('Sign in with google clicked!');
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // auth2 is initialized with gapi.auth2.init() and a user is signed in.
+        var displayName = user.displayName;
+        var email = user.email;
+        console.log('display name = ' + displayName);
+
+        // add a new user into database
+        db.collection("users").doc(user.uid).set({
+            username: displayName,
+            email: email,
+            photoUrl: "url...."
+        })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
+
+    }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+    });
+
+    // Make sign in pop up window go away
+    $('#signInModal').modal('hide');
+    return false;
+
+}
+
 function initApp() {
   // Listening for auth state changes.
   // [START authstatelistener]
@@ -139,14 +183,15 @@ function initApp() {
       var providerData = user.providerData;
 
       console.log('user logged in with email = ' + email);
+
       const mypost = db.collection('users').doc(uid);
       mypost.onSnapshot(doc => {
               const data = doc.data();
-              document.getElementById('home-signin').textContent = 'Sign Out';
               var greeting = 'Hi, ' + data.username;
               document.getElementById('home-signup').textContent = greeting;
+              document.getElementById('home-signin').textContent = 'Sign Out';
               // document.getElementById("display").innerHTML = data.major;
-            })
+      })
 
       // [START_EXCLUDE]
       //console.log(document.getElementById('home-signin').textContent);
@@ -178,6 +223,7 @@ function initApp() {
   document.getElementById('noAccountSignup').addEventListener('click', handleNoAccountSignup, false);
   document.getElementById('forgotpw').addEventListener('click', handleForgotpw, false);
   document.getElementById('resetpwbtn').addEventListener('click', handleResetpwbtn, false);
+  document.getElementById('siginbtnwithgoogle').addEventListener('click', handleGoogleSigninbtn, false);
 
   // document.getElementById('password-reset').addEventListener('click', sendPasswordReset, false);
 }

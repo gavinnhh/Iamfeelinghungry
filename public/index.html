@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-
+<!-- Compiled and minified CSS -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"> -->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,8 +19,7 @@
   <link rel="stylesheet" type="text/css" href="css/dropdown.css">
   <link rel="stylesheet" type="text/css" href="css/search-filter.css">
 
-
-  <!-- to get the search icon -->
+  <!-- to get the smily face icon -->
   <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
   <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
   <title>I'M FEELING HUNGRY</title>
@@ -31,7 +31,7 @@
   <script defer src="/__/firebase/6.6.0/firebase-database.js"></script>
   <script defer src="/__/firebase/6.6.0/firebase-messaging.js"></script>
   <script defer src="/__/firebase/6.6.0/firebase-storage.js"></script>
-  <!-- initialize the SDK after all desired features are loaded -->
+
   <script defer src="/__/firebase/init.js"></script>
 
 
@@ -71,12 +71,23 @@
             <div class="form-group">
               <input id="siginbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign In">
             </div>
+
+            <div class="form-group">
+              <!-- <i class="fa fa-google" aria-hidden="true"></i> -->
+              <!-- <i class="fab fa-google-plus-g"></i> -->
+              <button id="siginbtnwithgoogle" class="btn btn-block" type="button" name="button"><img src="googleicon.png" alt="" width="20" height="20">&nbsp;&nbsp; Sign in with Google</button>
+
+              <!-- <img src="googleicon.png" alt="" width="20" height="20">
+              <input id="siginbtnwithgoogle" type="button" class="btn btn-block btn-color" value="Sign in with Google"> -->
+            </div>
+
           </form>
         </div>
         <div class="modal-footer">
           <span style="font-family:helvetica" class="txt">Don’t have an account?</span>
           <button id="noAccountSignup" type="button" class="btn btn-default" style="color: gray; font-size: 12px;" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
         </div>
+
       </div>
     </div>
   </div>
@@ -182,7 +193,7 @@
   </div>
   <div class="dd-menu">
     <select multiple id="select" class="dropdown-content">
-      <option data-description="num1">Number 1x</option>
+      <option data-description="num1">Number 1</option>
       <option data-description="num3">Number 3</option>
       <option data-description="num2">Number 2</option>
       <option data-description="num4">Number 4</option>
@@ -260,6 +271,6 @@ tail.select('#select', {
 <script src="auth/passwordmeter.js"></script>
 <script src="auth/badwords.js"></script>
 <script src="bower_components/zxcvbn/dist/zxcvbn.js"></script>
-<!-- <script src="randomsearch/randomsearch.js"></script> -->
+
 </body>
 </html>
