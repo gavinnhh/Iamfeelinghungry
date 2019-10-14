@@ -81,6 +81,7 @@ const storageRef = firebase.storage().ref(); // global const
 //}
 
 document.getElementById('listall').addEventListener('click', handlelistall, false);
+document.getElementById('home').addEventListener('click', handlelHome, false);
 
 function handlelistall()
 {
@@ -121,4 +122,9 @@ function handlelistall()
       albert(error);
     });
 
+}
+
+function handlelHome(){
+  console.log('home clicked from random search');
+  window.location.href = "../index.html";
 }

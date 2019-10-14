@@ -26,6 +26,11 @@ body {
     left: 1%;
 }
 
+#siginbtnwithgoogle{
+  border: 1px solid grey;
+}
+
+
 .top_nav {
   /* float: left; */
   /* color: #d35400; */
@@ -36,7 +41,7 @@ body {
   font-size: 17px;
   font-family:helvetica;
   float: right;
-  
+
 }
 
 .title{
