@@ -164,11 +164,11 @@ function handleSetting(){
   window.location.href = "../profile/profile.html";
 }
 
-function handleHome()
-{
-  console.log('Home is clicked');
-  window.location.href = "index.html";
-}
+// function handleHome()
+// {
+//   console.log('Home is clicked');
+//   window.location.href = "index.html";
+// }
 function initApp() {
   // Listening for auth state changes.
   // [START authstatelistener]
@@ -230,7 +230,7 @@ function initApp() {
   document.getElementById('resetpwbtn').addEventListener('click', handleResetpwbtn, false);
   document.getElementById('siginbtnwithgoogle').addEventListener('click', handleGoogleSigninbtn, false);
   document.getElementById('setting').addEventListener('click', handleSetting, false);
-  document.getElementById('home').addEventListener('click', handleHome, false);
+  // document.getElementById('home').addEventListener('click', handleHome, false);
   // document.getElementById('password-reset').addEventListener('click', sendPasswordReset, false);
 }
 
