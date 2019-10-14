@@ -104,7 +104,8 @@
   background-color: transparent;
 }
 .tail-select input[type="text"]:focus{
-  color: #28A745;
+  /* color: #28A745; */
+  color: black;
   border-color: #28A745;
   background-color: transparent;
 }
@@ -217,24 +218,7 @@
 
 /* @start DROPDOWN */
 .tail-select .select-dropdown{
-<<<<<<< HEAD
-    top: 100%;
-    left: 0;
-    color: #343a40;
-    width: 100%;
-    margin: 0.125rem 0 0;
-    padding: 0;
-    z-index: 27;
-    display: none;
-    position: absolute;
-    background-color: transparent;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.15);
-    border-radius: 0.25rem;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-=======
+  overflow: auto;
   top: 100%;
   left: 0;
   color: #343a40;
@@ -254,7 +238,6 @@
 }
 .tail-select:hover .select-dropdown {
   display: block;
->>>>>>> 3f998a87902658019fcd86273c67336342e5e801
 }
 .tail-select .select-dropdown .dropdown-search{
   width: 100%;
@@ -366,7 +349,9 @@
   margin: 0;
   padding: 0;
   display: block;
-  font-size: 10px;
+  font-weight: bold;
+  font-family: helvetica;
+  font-size: 15px;
   text-align: left;
   line-height: 14px;
   vertical-align: top;
