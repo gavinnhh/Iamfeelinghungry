@@ -19,16 +19,24 @@ body {
  padding: 10px;
 }
 
+#home{
+  position:absolute;
+    transition: .5s ease;
+    top: 1.5%;
+    left: 1%;
+}
+
 .top_nav {
-  float: left;
+  /* float: left; */
   /* color: #d35400; */
   color: gray;
   text-align: right;
-  padding: 14px 16px;
+  padding: 10px 12px;
   text-decoration: none;
   font-size: 17px;
   font-family:helvetica;
   float: right;
+  
 }
 
 .title{

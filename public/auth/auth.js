@@ -5,8 +5,7 @@
 //var submitBtn = document.querySelector('input[type="button"]');
 // document.getElementById('signupbtn').addEventListener('click', toggleSignUp, false);
 const db = firebase.firestore();
-function handleSignIn()
-{
+function handleSignIn(){
   console.log('sign in/out button clicked');
   var email = document.getElementById('name/email').value;
   var password = document.getElementById('signin-password').value;
@@ -22,8 +21,7 @@ function handleSignIn()
   return false;
 }
 
-function handleSignUp()
-{
+function handleSignUp(){
   console.log('sign up clicked');
   var fname = document.getElementById('firstname').value;
   var lname = document.getElementById('lastname').value;
@@ -68,8 +66,7 @@ function handleSignUp()
   }
 }
 
-function signout()
-{
+function signout(){
   console.log('home sign in(signout) clicked');
   // var getValue = $(this).attr("data-target");
   // console.log(getValue);
@@ -79,29 +76,26 @@ function signout()
   }
 }
 
-function profile()
-{
+function profile(){
   console.log('home sign up(profile) clicked');
   // TODO: create a user profile. This should direct to a new page
+  //window.location.href = "../profile/profile.html";
 
 }
 
-function handleNoAccountSignup()
-{
+function handleNoAccountSignup(){
   // This is to hide the sign in window when clicking sign up in this sign in window
   $('#signInModal').modal('hide');
   return false;
 }
 
-function handleForgotpw()
-{
+function handleForgotpw(){
   $('#signInModal').modal('hide');
   return false;
 }
 
 // handleResetpwbtn will send an email to the spicified email
-function handleResetpwbtn()
-{
+function handleResetpwbtn(){
   var email = document.getElementById('sendemail').value;
   firebase.auth().sendPasswordResetEmail(email).then(function() {
     alert('Password Reset Email Sent!');
@@ -122,8 +116,7 @@ function handleResetpwbtn()
   return false;
 }
 
-function handleGoogleSigninbtn()
-{
+function handleGoogleSigninbtn(){
     console.log('Sign in with google clicked!');
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -166,6 +159,16 @@ function handleGoogleSigninbtn()
 
 }
 
+function handleSetting(){
+  console.log('handleSetting is clicked');
+  window.location.href = "../profile/profile.html";
+}
+
+function handleHome()
+{
+  console.log('Home is clicked');
+  window.location.href = "index.html";
+}
 function initApp() {
   // Listening for auth state changes.
   // [START authstatelistener]
@@ -189,7 +192,8 @@ function initApp() {
               const data = doc.data();
               var greeting = 'Hi, ' + data.username;
               document.getElementById('home-signup').textContent = greeting;
-              document.getElementById('home-signin').textContent = 'Sign Out';
+              document.getElementById('home-signin').textContent = 'Sign out';
+              document.getElementById('setting').style.visibility = 'visible';
               // document.getElementById("display").innerHTML = data.major;
       })
 
@@ -204,6 +208,7 @@ function initApp() {
       // [END_EXCLUDE]
     } else {
       console.log('Currently no user signed in/up');
+      document.getElementById('setting').style.visibility = 'hidden';
       // User is signed out. So return Sign In and Sign Up on home page
       document.getElementById('home-signin').textContent = 'Sign In';
       document.getElementById('home-signup').textContent = 'Sign Up';
@@ -219,12 +224,13 @@ function initApp() {
   document.getElementById('siginbtn').addEventListener('click', handleSignIn, false);
   document.getElementById('signupbtn').addEventListener('click', handleSignUp, false);
   document.getElementById('home-signin').addEventListener('click', signout, false);
-  document.getElementById('home-signup').addEventListener('click', profile, false);
+  // document.getElementById('home-signup').addEventListener('click', profile, false);
   document.getElementById('noAccountSignup').addEventListener('click', handleNoAccountSignup, false);
   document.getElementById('forgotpw').addEventListener('click', handleForgotpw, false);
   document.getElementById('resetpwbtn').addEventListener('click', handleResetpwbtn, false);
   document.getElementById('siginbtnwithgoogle').addEventListener('click', handleGoogleSigninbtn, false);
-
+  document.getElementById('setting').addEventListener('click', handleSetting, false);
+  document.getElementById('home').addEventListener('click', handleHome, false);
   // document.getElementById('password-reset').addEventListener('click', sendPasswordReset, false);
 }
 
