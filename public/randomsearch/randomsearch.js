@@ -113,7 +113,7 @@ function loadImages(){
 
 
   }).catch(function(error) {
-    albert(error);
+    alert("You have no access at this point");
   });
 
 }
