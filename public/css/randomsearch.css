@@ -21,9 +21,9 @@ body {
   float: right;
 }
 
-.title{
+.foodfight{
   position: absolute;
-  top: 15%;
+  top: 8%;
   left: 50%;
   transform: translate(-50%, -50%);
 
@@ -92,9 +92,8 @@ body {
 }
 
 .buttonbottom{
-  position: absolute;
+  position: relative;
   bottom: 10%;
-  left: 46.5%;
 }
 
 #left{
@@ -108,5 +107,5 @@ body {
 
 img{
   max-width: 100%;
-
+  object-fit: cover;
 }

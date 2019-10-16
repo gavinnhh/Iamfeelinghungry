@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-<!-- Compiled and minified CSS -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"> -->
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +20,8 @@
   <link rel="stylesheet" type="text/css" href="css/scroll-bar.css">
 
 
-  <!-- to get the smily face icon -->
+
+  <!-- to get the search icon -->
   <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
   <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
   <title>I'M FEELING HUNGRY</title>
@@ -33,7 +33,7 @@
   <script defer src="/__/firebase/6.6.0/firebase-database.js"></script>
   <script defer src="/__/firebase/6.6.0/firebase-messaging.js"></script>
   <script defer src="/__/firebase/6.6.0/firebase-storage.js"></script>
-
+  <!-- initialize the SDK after all desired features are loaded -->
   <script defer src="/__/firebase/init.js"></script>
 
 
@@ -43,11 +43,10 @@
 
   <div class="top_nav">
     <!-- Sign-in button -->
-
     <button id="home" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal"><i class="fas fa-home"></i>&nbsp;Home</button>
-    <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign In</button>
+    <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign in</button>
     <!-- Sign-up button -->
-    <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+    <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign up</button>
     <button id="setting" type="button" class="btn btn-default" style="color: gray;"><i class="fas fa-cog"></i></button>
 
   </div>
@@ -75,7 +74,7 @@
               <button id="forgotpw" type="button" class="btn btn-default" style="color: #00ccff;font-size: 12px;" data-toggle="modal" data-target="#resetpwModal">Forgot Password?</button>
             </div>
             <div class="form-group">
-              <input id="siginbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign In">
+              <input id="siginbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign in">
             </div>
 
             <div class="form-group">
@@ -282,6 +281,6 @@ tail.select('#select', {
 <script src="auth/passwordmeter.js"></script>
 <script src="auth/badwords.js"></script>
 <script src="bower_components/zxcvbn/dist/zxcvbn.js"></script>
-
+<!-- <script src="randomsearch/randomsearch.js"></script> -->
 </body>
 </html>
