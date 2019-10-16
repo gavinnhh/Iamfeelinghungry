@@ -92,9 +92,8 @@ body {
 }
 
 .buttonbottom{
-  position: absolute;
+  position: relative;
   bottom: 10%;
-  left: 46.5%;
 }
 
 #left{

@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-
+<!-- Compiled and minified CSS -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"> -->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"> -->
-  <link rel="icon" type="image/png" href="test-image-cover.png">
+  <link rel="icon" type="image/png" href="../test-image-cover.png">
   <!--Bootstrap core CSS-->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
   <!-- <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/custom.css"> -->
-  <link rel="stylesheet" type="text/css" href="css/custom.css">
-  <link rel="stylesheet" type="text/css" href="css/switch.css">
-  <link rel="stylesheet" type="text/css" href="css/signin.css">
-  <link rel="stylesheet" type="text/css" href="css/signup.css">
-  <!-- Dropdown menu -->
-  <link rel="stylesheet" type="text/css" href="css/dropdown.css">
-  <link rel="stylesheet" type="text/css" href="css/search-filter.css">
+  <link rel="stylesheet" type="text/css" href="../css/custom.css">
+  <link rel="stylesheet" type="text/css" href="../css/recipe.css">
+  <link rel="stylesheet" type="text/css" href="../css/switch.css">
+  <link rel="stylesheet" type="text/css" href="../css/signin.css">
+  <link rel="stylesheet" type="text/css" href="../css/signup.css">
 
-
-  <!-- to get the search icon -->
+  <!-- to get the smily face icon -->
   <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
   <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
-  <title>I'M FEELING HUNGRY</title>
+  <title>Recipe</title>
 
   <!-- update the version number as needed -->
   <script defer src="/__/firebase/6.6.0/firebase-app.js"></script>
@@ -31,7 +29,7 @@
   <script defer src="/__/firebase/6.6.0/firebase-database.js"></script>
   <script defer src="/__/firebase/6.6.0/firebase-messaging.js"></script>
   <script defer src="/__/firebase/6.6.0/firebase-storage.js"></script>
-  <!-- initialize the SDK after all desired features are loaded -->
+
   <script defer src="/__/firebase/init.js"></script>
 
 
@@ -41,9 +39,12 @@
 
   <div class="top_nav">
     <!-- Sign-in button -->
+    <button id="home" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal"><i class="fas fa-home"></i>&nbsp;Home</button>
     <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign In</button>
     <!-- Sign-up button -->
     <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+    <button id="setting" type="button" class="btn btn-default" style="color: gray;"><i class="fas fa-cog"></i></button>
+
   </div>
 
   <!-- Sign-in window -->
@@ -71,12 +72,24 @@
             <div class="form-group">
               <input id="siginbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign In">
             </div>
+
+            <div class="form-group">
+              <!-- <i class="fa fa-google" aria-hidden="true"></i> -->
+              <!-- <i class="fab fa-google-plus-g"></i> -->
+              <button id="siginbtnwithgoogle" class="btn btn-block" type="button" name="button">
+                <img src="googleicon.png" alt="" width="20" height="20">&nbsp;&nbsp;&nbsp;&nbsp;Sign in with Google</button>
+
+              <!-- <img src="googleicon.png" alt="" width="20" height="20">
+              <input id="siginbtnwithgoogle" type="button" class="btn btn-block btn-color" value="Sign in with Google"> -->
+            </div>
+
           </form>
         </div>
         <div class="modal-footer">
           <span style="font-family:helvetica" class="txt">Don’t have an account?</span>
           <button id="noAccountSignup" type="button" class="btn btn-default" style="color: gray; font-size: 12px;" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
         </div>
+
       </div>
     </div>
   </div>
@@ -152,46 +165,21 @@
           </div>
         </form>
       </div>
-
     </div>
   </div>
 </div>
 
-
 <div class="title">
-  <p>I'M FEELING HUNGRY</p>
+  <p id = "name">Recipe name</p>
 </div>
-
-<div class="search-box" >
-  <!-- <input id="randomsearchbtn" type="button"  name="" class="search-txt" onclick="window.location='randomsearch/randomsearchresults.html'" value="I'M FEELING RANDOM"/> -->
-  <input id="randomsearchbtn" type="button"  name="" class="search-txt" onclick="window.location='randomsearch/randomsearch.html'" value="I'M FEELING RANDOM"/>
-
-  <!-- <input id="randomsearchbtn" type="button"  name="" class="search-txt" value="I'M FEELING RANDOM"/> -->
-  <div class="search-btn" href="">
-    <!-- fas fa-search is the search icon -->
-    <!-- <i class="fas fa-search"></i> -->
-    <i class="fas fa-grin-tongue"></i>
+</br></br></br></br></br></br></br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <img id="imgID" src="../testleft.jpg" class="rounded-corners mx-auto d-block">
+    </div>
   </div>
-</a>
 </div>
-
-<!-- Some search filters  -->
-<div class="search-filter">
-  <div class="search-bar">
-    <h1>I'm feeling
-      <select multiple id="select" class="dropdown-content">
-        <option data-description="num1">Number 1x</option>
-        <option data-description="num2">Number 2</option>
-        <option data-description="num3">Number 3</option>
-        <option data-description="num4">Number 4</option>
-        <option data-description="num5">Number 5</option>
-        <option data-description="num6">Number 6</option>
-      </select>
-    </h1>
-  </div>
-  <div class="move-container mt-2"></div>
-</div>
-
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <!-- <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase.js"></script> -->
@@ -218,14 +206,6 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-// for future js coding, make auth and firestore reference, meaning create variables
-// auth: handles any sign in, sign out and sign up
-// db:
-// const auth = firebase.auth();
-// const db = firebase.firestore();
-
-// Material Select Initialization
-
 </script>
 
 <!--Placed at the end of the page so that the pages load faster-->
@@ -233,24 +213,8 @@ firebase.initializeApp(firebaseConfig);
 <!-- Dropdown menu -->
 <!-- <script src="https://cpde.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/propper.js/1.14.7/umd/popper.min.js"></script> -->
-<script src="js/dropdown.js"></script>
-<script>
-tail.select('#select', {
-  search: true,
-  descriptions: true,
-  multilimit: 15,
-  hideSelected: true,
-  hideDisabled: true,
-  multiShowCount: false,
-  multiContainer: '.move-container'
-});
-</script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="profile.js"></script>
 
-<script src="js/bootstrap.min.js"></script>
-<script src="auth/auth.js"></script>
-<script src="auth/passwordmeter.js"></script>
-<script src="auth/badwords.js"></script>
-<script src="bower_components/zxcvbn/dist/zxcvbn.js"></script>
-<!-- <script src="randomsearch/randomsearch.js"></script> -->
 </body>
 </html>
