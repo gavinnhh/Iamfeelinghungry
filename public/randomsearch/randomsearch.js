@@ -79,49 +79,52 @@ const storageRef = firebase.storage().ref(); // global const
 //    })
 //
 //}
-
-document.getElementById('listall').addEventListener('click', handlelistall, false);
-document.getElementById('home').addEventListener('click', handlelHome, false);
-
-function handlelistall()
-{
-    console.log('listall clicked');
-    var allUrls = [];
-    // Create a reference under which you want to list
-    var listRef = storageRef.child('images');
-    // Find all the prefixes and items.
-    listRef.listAll().then(function(res) {
-      res.items.forEach(function(itemRef) {
-          // All the items under listRef.
-          // console.log('list all: ');
-          // console.log(itemRef.location);
-          itemRef.getDownloadURL().then(function(url) {
-            // console.log('url: ' + url); // url is string
-            allUrls.push(url);
-            if (allUrls.length === res.items.length){
-                // console.log('allUrls size = ' + allUrls.length);
-                random1 = Math.floor(Math.random() * allUrls.length);
+function loadImages(){
+  var allUrls = [];
+  // Create a reference under which you want to list
+  var listRef = storageRef.child('images');
+  // Find all the prefixes and items.
+  listRef.listAll().then(function(res) {
+    res.items.forEach(function(itemRef) {
+        // All the items under listRef.
+        // console.log('list all: ');
+        // console.log(itemRef.location);
+        itemRef.getDownloadURL().then(function(url) {
+          // console.log('url: ' + url); // url is string
+          allUrls.push(url);
+          if (allUrls.length === res.items.length){
+              // console.log('allUrls size = ' + allUrls.length);
+              random1 = Math.floor(Math.random() * allUrls.length);
+              random2 = Math.floor(Math.random() * allUrls.length);
+              while(random1 === random2){
                 random2 = Math.floor(Math.random() * allUrls.length);
-                while(random1 === random2){
-                  random2 = Math.floor(Math.random() * allUrls.length);
-                }
-                // console.log(allUrls[random1]);
-                // console.log(allUrls[random2]);
-                // set the two random display images
-                document.getElementById("imgID").src = allUrls[random1];
-                document.getElementById("imgID2").src = allUrls[random2];
-          }
+              }
+              // console.log(allUrls[random1]);
+              // console.log(allUrls[random2]);
+              // set the two random display images
+              document.getElementById("imgID").src = allUrls[random1];
+              document.getElementById("imgID2").src = allUrls[random2];
+        }
 
-          }).catch(function(error){alert(error)});
+        }).catch(function(error){alert(error)});
 
 
-      });
-
-
-    }).catch(function(error) {
-      albert(error);
     });
 
+
+  }).catch(function(error) {
+    albert(error);
+  });
+
+}
+
+loadImages(); // load images when first loading the website
+document.getElementById('reroll').addEventListener('click', handleReroll, false);
+document.getElementById('home').addEventListener('click', handlelHome, false);
+
+function handleReroll()
+{
+    loadImages();
 }
 
 function handlelHome(){

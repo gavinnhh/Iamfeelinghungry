@@ -10,8 +10,8 @@
   <!--Bootstrap core CSS-->
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <!-- <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/custom.css"> -->
-  <link rel="stylesheet" type="text/css" href="../css/custom.css">
   <link rel="stylesheet" type="text/css" href="../css/randomsearch.css">
+  <link rel="stylesheet" type="text/css" href="../css/custom.css">
   <link rel="stylesheet" type="text/css" href="../css/switch.css">
   <link rel="stylesheet" type="text/css" href="../css/signin.css">
   <link rel="stylesheet" type="text/css" href="../css/signup.css">
@@ -36,9 +36,9 @@
 
   <div class="top_nav">
     <button id="home" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal"><i class="fas fa-home"></i>&nbsp;Home</button>
-    <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign In</button>
+    <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign in</button>
     <!-- Sign-up button -->
-    <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+    <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign up</button>
     <button id="setting" type="button" class="btn btn-default" style="color: gray;"><i class="fas fa-cog"></i></button>
 
   </div>
@@ -126,7 +126,7 @@
             <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="required">
           </div> -->
           <div class="form-group">
-            <input id="signupbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign Up">
+            <input id="signupbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign up">
           </div>
         </form>
       </div>
@@ -164,39 +164,48 @@
   <p>Food Fight!</p>
 </div>
 
-</br></br></br></br></br></br></br>
+</br></br></br></br></br>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-4 offset-md-1 text-center" id="left" >
       <!-- Once click the image, this link brings the full receipe page  -->
-      <!-- <a href="//LINK"> -->
+
         <h3>Test image left</h3>
+        <a href="//LINK">
         <div class= "imagecontainer">
-          <img id="imgID" src="../testleft.jpg" alt="test left" class="rounded-corners mx-auto d-block"  width="653" height="400"/>
+          <div class="loader"></div>
+          <img id="imgID" src="../loader.gif" alt="test left" class="rounded-corners mx-auto d-block"  width="653" height="400"/>
           <div class= "overlay">
             <div class="overlaytext">Test</div>
           </div>
         </div>
+      </a>
       </div>
       <div class="centertext textFont" style= "font-size: 72px";>
         <p>VS</p>
       </div>
       <div class="col-md-4 offset-md-2 text-center" id="right">
         <h3>Test image right</h3>
-        <!-- <a href="//LINK"> -->
+        <a href="//LINK">
           <div class= "imagecontainer">
-            <img id="imgID2" src="../testright.jpg" alt="test right" class="rounded-corners mx-auto d-block" width="653" height="400"/>
+            <img id="imgID2" src="../loader.gif" alt="test right" class="rounded-corners mx-auto d-block" width="653" height="400"/>
             <div class= "overlay">
               <div class="overlaytext">Test</div>
             </div>
           </div>
+        </a>
         </div>
       </div>
     </div>
     <!-- id="reroll" -->
+<<<<<<< HEAD
     <div class="col-md-6 mx-auto text-center">
       <button id="listall" type="button" class="textFont buttonbottom btn btn-primary btn-lg">I'm still hungry</button>
     </div>
+=======
+    <button id="reroll" type="button" style= "text-align: center" class="textFont buttonbottom btn btn-primary btn-lg">I'm still hungry</button>
+
+>>>>>>> bb0a35843e70cc6785047b7e35104d05993ebe87
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-auth.js"></script>
