@@ -14,6 +14,12 @@
   <link rel="stylesheet" type="text/css" href="css/switch.css">
   <link rel="stylesheet" type="text/css" href="css/signin.css">
   <link rel="stylesheet" type="text/css" href="css/signup.css">
+  <!-- Dropdown menu -->
+  <link rel="stylesheet" type="text/css" href="css/dropdown.css">
+  <link rel="stylesheet" type="text/css" href="css/search-filter.css">
+  <link rel="stylesheet" type="text/css" href="css/scroll-bar.css">
+
+
 
   <!-- to get the search icon -->
   <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
@@ -29,15 +35,20 @@
   <script defer src="/__/firebase/6.6.0/firebase-storage.js"></script>
   <!-- initialize the SDK after all desired features are loaded -->
   <script defer src="/__/firebase/init.js"></script>
+
+
 </head>
 
 <body>
 
   <div class="top_nav">
     <!-- Sign-in button -->
-    <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign In</button>
+    <button id="home" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal"><i class="fas fa-home"></i>&nbsp;Home</button>
+    <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign in</button>
     <!-- Sign-up button -->
-    <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+    <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign up</button>
+    <button id="setting" type="button" class="btn btn-default" style="color: gray;"><i class="fas fa-cog"></i></button>
+
   </div>
 
   <!-- Sign-in window -->
@@ -63,128 +74,160 @@
               <button id="forgotpw" type="button" class="btn btn-default" style="color: #00ccff;font-size: 12px;" data-toggle="modal" data-target="#resetpwModal">Forgot Password?</button>
             </div>
             <div class="form-group">
-              <input id="siginbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign In">
+              <input id="siginbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign in">
+            </div>
+
+            <div class="form-group">
+              <!-- <i class="fa fa-google" aria-hidden="true"></i> -->
+              <!-- <i class="fab fa-google-plus-g"></i> -->
+              <button id="siginbtnwithgoogle" class="btn btn-block" type="button" name="button">
+                <img src="googleicon.png" alt="" width="20" height="20">&nbsp;&nbsp;&nbsp;&nbsp;Sign in with Google</button>
+
+                <!-- <img src="googleicon.png" alt="" width="20" height="20">
+                <input id="siginbtnwithgoogle" type="button" class="btn btn-block btn-color" value="Sign in with Google"> -->
+              </div>
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <span style="font-family:helvetica" class="txt">Don’t have an account?</span>
+            <button id="noAccountSignup" type="button" class="btn btn-default" style="color: gray; font-size: 12px;" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Sign-up window -->
+    <div id="signUpModal" class="modal fade signup">
+      <div class="modal-dialog modal-login">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Sign Up</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          </div>
+          <div class="modal-body">
+            <form action="/" method="GET">
+              <div class="form-group">
+                <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
+                <input type="text" id="firstname" name="firstname" class="form-control" placeholder="First Name" required="required">
+              </div>
+              <div class="form-group">
+                <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
+                <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last Name" required="required">
+              </div>
+              <div class="form-group">
+                <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="required">
+                <div class="alert alert-warning alert-custom hide" role="alert" id="user-alert-message">
+                  Invalid Username, please pick a new one.
+                </div>
+              </div>
+              <div class="form-group">
+                <span style="position:absolute;left:12px;top:12px;" class="fa fa-envelope"></span>
+                <input type="text" id="email" name="email" class="form-control" placeholder="Email" required="required">
+              </div>
+              <div class="form-group">
+                <span style="position:absolute;left:12px;top:12px;" class="fa fa-lock"></span>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="required">
+                <meter max="4" id="password-strength-meter"></meter>
+                <p id="password-strength-text"></p>
+                <div class="alert hide alert-warning alert-custom" role="alert" id="pass-alert-message">
+                  Password is not strong enough, please pick a new one.
+                </div>
+              </div>
+              <!-- <div class="form-group">
+              <span style="position:absolute;left:12px;top:12px;" class="fa fa-lock"></span>
+              <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="required">
+            </div> -->
+            <div class="form-group">
+              <input id="signupbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign Up">
             </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <span style="font-family:helvetica" class="txt">Don’t have an account?</span>
-          <button id="noAccountSignup" type="button" class="btn btn-default" style="color: gray; font-size: 12px;" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Sign-up window -->
-  <div id="signUpModal" class="modal fade signup">
+  <!-- Forgot/resetpwModal Sassword -->
+  <div id="resetpwModal" class="modal fade resetpwModal">
     <div class="modal-dialog modal-login">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Sign Up</h4>
+          <h4 class="modal-title">Forgot Password</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
         </div>
         <div class="modal-body">
           <form action="/" method="GET">
             <div class="form-group">
               <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
-              <input type="text" id="firstname" name="firstname" class="form-control" placeholder="First Name" required="required">
+              <input type="text" id="sendemail" name="sendemail" class="form-control" placeholder="E-mail Address" required="required">
             </div>
+
             <div class="form-group">
-              <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
-              <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last Name" required="required">
+              <input id="resetpwbtn" type="button" class="btn btn-block btn-lg btn-color" value="Reset Password">
             </div>
-            <div class="form-group">
-              <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
-              <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="required">
-              <div class="alert alert-warning alert-custom hide" role="alert" id="user-alert-message">
-                Invalid Username, please pick a new one.
-              </div>
-            </div>
-            <div class="form-group">
-              <span style="position:absolute;left:12px;top:12px;" class="fa fa-envelope"></span>
-              <input type="text" id="email" name="email" class="form-control" placeholder="Email" required="required">
-            </div>
-            <div class="form-group">
-              <span style="position:absolute;left:12px;top:12px;" class="fa fa-lock"></span>
-              <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="required">
-              <meter max="4" id="password-strength-meter"></meter>
-              <p id="password-strength-text"></p>
-              <div class="alert hide alert-warning alert-custom" role="alert" id="pass-alert-message">
-                Password is not strong enough, please pick a new one.
-              </div>
-            </div>
-            <!-- <div class="form-group">
-            <span style="position:absolute;left:12px;top:12px;" class="fa fa-lock"></span>
-            <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="required">
-          </div> -->
-          <div class="form-group">
-            <input id="signupbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign Up">
-          </div>
-        </form>
+          </form>
+        </div>
+
       </div>
     </div>
   </div>
-</div>
 
-<!-- Forgot/resetpwModal Sassword -->
-<div id="resetpwModal" class="modal fade resetpwModal">
-  <div class="modal-dialog modal-login">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Forgot Password</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-      </div>
-      <div class="modal-body">
-        <form action="/" method="GET">
-          <div class="form-group">
-            <span style="position:absolute;left:12px;top:12px;" class="fa fa-user"></span>
-            <input type="text" id="sendemail" name="sendemail" class="form-control" placeholder="E-mail Address" required="required">
-          </div>
 
-          <div class="form-group">
-            <input id="resetpwbtn" type="button" class="btn btn-block btn-lg btn-color" value="Reset Password">
-          </div>
-        </form>
-      </div>
-
-    </div>
+  <div class="title">
+    <p>I'M FEELING HUNGRY</p>
   </div>
-</div>
 
+  <div class="search-box" >
+    <!-- <input id="randomsearchbtn" type="button"  name="" class="search-txt" onclick="window.location='randomsearch/randomsearchresults.html'" value="I'M FEELING RANDOM"/> -->
+    <input id="randomsearchbtn" type="button"  name="" class="search-txt" onclick="window.location='randomsearch/randomsearch.html'" value="I'M FEELING RANDOM"/>
 
-<div class="title">
-  <p>I'M FEELING HUNGRY</p>
-</div>
-
-<div class="search-box">
-  <input type="text" name="" class="search-txt" placeholder="What do you want to eat"/>
-  <a class="search-btn" href="#">
-    <!-- fas fa-search is the search icon -->
-    <i class="fas fa-search"></i>
+    <!-- <input id="randomsearchbtn" type="button"  name="" class="search-txt" value="I'M FEELING RANDOM"/> -->
+    <div class="search-btn" href="">
+      <!-- fas fa-search is the search icon -->
+      <!-- <i class="fas fa-search"></i> -->
+      <i class="fas fa-grin-tongue"></i>
+    </div>
   </a>
 </div>
 
 <!-- Some search filters  -->
-<div class="center">
-  <input type="checkbox" name="gluten_free" value="">
-  <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2"> Gluten Free</p>
-
-  <br>
-  <input type="checkbox" name="chinese_food" value="">
-  <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Chinese Food</p>
-  <br>
-  <input type="checkbox" name="mexican_food" value="">
-  <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Mexican Food</p>
-  <br>
-  <input type="checkbox" name="low_carb" value="">
-  <p style="font-size:23px; display:inline; font-family: helvetica; color:#d2dae2">Low Carb</p>
-
+<div class="search-filter">
+  <div class="search-bar-text">
+    <h1 class="label-text">I'm feeling</h1>
+  </div>
+  <div class="dd-menu">
+    <select multiple id="select" class="dropdown-content">
+      <option data-description="num1">Number 1</option>
+      <option data-description="num3">Number 3</option>
+      <option data-description="num2">Number 2</option>
+      <option data-description="num4">Number 4</option>
+      <option data-description="num5">Number 5</option>
+      <option data-description="num6">Number 6</option>
+      <option data-description="num7">Number 7</option>
+      <option data-description="num7">Number 7</option>
+      <option data-description="num8">Number 8</option>
+      <option data-description="num9">Number 9</option>
+      <option data-description="num10">Number 10</option>
+      <option data-description="num11">Number 11</option>
+    </select>
+  </div>
+  <div class="go-button">
+    <button id="go" type="button" class="go-button btn btn-success">GO</button>
+  </div>
+  <!-- <div class="search-tags-container move-container mt-2"></div> -->
 </div>
+<div class="search-tags-container move-container mt-2"></div>
+
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
+<!-- <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase.js"></script> -->
 <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-storage.js"></script>
 <!-- TODO: Add SDKs for Firebase products that you want to use
 https://firebase.google.com/docs/web/setup#available-libraries -->
 
@@ -196,8 +239,8 @@ var firebaseConfig = {
   authDomain: "i-am-feeling-hungry.firebaseapp.com",
   databaseURL: "https://i-am-feeling-hungry.firebaseio.com",
   projectId: "i-am-feeling-hungry",
-  // storageBucket: "i-am-feeling-hungry.appspot.com",
-  // messagingSenderId: "478024235219",
+  storageBucket: "i-am-feeling-hungry.appspot.com",
+  messagingSenderId: "478024235219",
   appId: "1:478024235219:web:213bcfd5fbd09a78"
 };
 
@@ -209,14 +252,35 @@ firebase.initializeApp(firebaseConfig);
 // const auth = firebase.auth();
 // const db = firebase.firestore();
 
+// Material Select Initialization
+
 </script>
 
 <!--Placed at the end of the page so that the pages load faster-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Dropdown menu -->
+<!-- <script src="https://cpde.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/propper.js/1.14.7/umd/popper.min.js"></script> -->
+
+<!-- Javascript for dropdown -->
+<script src="js/dropdown.js"></script>
+<script>
+tail.select('#select', {
+  search: true,
+  descriptions: true,
+  multilimit: 15,
+  hideSelected: true,
+  hideDisabled: true,
+  multiShowCount: false,
+  multiContainer: '.move-container'
+});
+</script>
+
 <script src="js/bootstrap.min.js"></script>
 <script src="auth/auth.js"></script>
 <script src="auth/passwordmeter.js"></script>
 <script src="auth/badwords.js"></script>
 <script src="bower_components/zxcvbn/dist/zxcvbn.js"></script>
+<!-- <script src="randomsearch/randomsearch.js"></script> -->
 </body>
 </html>

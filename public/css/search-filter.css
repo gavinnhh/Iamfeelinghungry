@@ -1,0 +1,49 @@
+.search-filter {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.search-filter > .search-bar-text {
+  display: inline-block;
+}
+
+.search-filter h1 {
+  position: relative;
+  bottom: 6px;
+  font-weight: bold;
+  font-family: helvetica;
+}
+
+.search-filter > .dd-menu {
+  display: inline-block;
+}
+
+.search-filter > .go-button {
+  display: inline-block;
+}
+
+.search-filter button {
+  position: relative;
+  bottom: 14px;
+}
+
+.scroll-bar {
+  overflow-y:scroll;
+  position:absolute;
+  padding:0 7px 0 0;
+  width: calc(100% + 17px);
+  height:100%;
+  border:0;
+}
+
+.search-tags-container {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 82%;
+  left: 38%;
+  transform: translate(-50%, -50%);
+}

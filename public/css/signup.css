@@ -1,5 +1,5 @@
 .signup {
-  padding-top: 10%;
+  padding-top: 4%;
 }
 .modal-login {
   color: #636363;
@@ -82,11 +82,11 @@
 }
 meter {
   /* Reset the default appearance */
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
      -moz-appearance: none;
           appearance: none;
 
-  margin: 0 auto 1em;
+  margin: 1 auto 1em;
   width: 100%;
   height: 0.5em;
 
@@ -103,7 +103,7 @@ meter::-webkit-meter-bar {
 meter[value="1"]::-webkit-meter-optimum-value { background: red; }
 meter[value="2"]::-webkit-meter-optimum-value { background: yellow; }
 meter[value="3"]::-webkit-meter-optimum-value { background: orange; }
-meter[value="4"]::-webkit-meter-optimum-value { background: green; }
+meter[value="4"]::-webkit-meter-optimum-value { background: green; } /* grident green: #00ff00 */
 
 /* Gecko based browsers */
 meter[value="1"]::-moz-meter-bar { background: red; }
