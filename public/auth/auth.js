@@ -193,6 +193,7 @@ function initApp() {
               var greeting = 'Hi, ' + data.username;
               document.getElementById('home-signup').textContent = greeting;
               document.getElementById('home-signin').textContent = 'Sign out';
+              // document.getElementById('setting').textContent = 'my profile';
               document.getElementById('setting').style.visibility = 'visible';
               // document.getElementById("display").innerHTML = data.major;
       })
