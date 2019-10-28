@@ -2,7 +2,6 @@
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 <!-- Compiled and minified CSS -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"> -->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,16 +10,16 @@
   <!--Bootstrap core CSS-->
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <!-- <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/custom.css"> -->
-  <link rel="stylesheet" type="text/css" href="../css/custom.css">
-  <link rel="stylesheet" type="text/css" href="../css/switch.css">
-  <link rel="stylesheet" type="text/css" href="../css/signin.css">
-  <link rel="stylesheet" type="text/css" href="../css/signup.css">
+  <!-- <link rel="stylesheet" type="text/css" href="../css/custom.css"> -->
+  <link rel="stylesheet" type="text/css" href="../css/profile.css">
+  <!-- <link rel="stylesheet" type="text/css" href="../css/switch.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="../css/signin.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="../css/signup.css"> -->
   <!-- Dropdown menu -->
-  <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
-  <link rel="stylesheet" type="text/css" href="../css/search-filter.css">
+  <!-- <link rel="stylesheet" type="text/css" href="../css/dropdown.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="../css/search-filter.css"> -->
 
   <!-- to get the smily face icon -->
-  <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
   <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
   <title>My profile</title>
 
@@ -31,22 +30,170 @@
   <script defer src="/__/firebase/6.6.0/firebase-database.js"></script>
   <script defer src="/__/firebase/6.6.0/firebase-messaging.js"></script>
   <script defer src="/__/firebase/6.6.0/firebase-storage.js"></script>
-
   <script defer src="/__/firebase/init.js"></script>
 
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
 
+
   <div class="top_nav">
     <!-- Sign-in button -->
-    <button id="home" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal"><i class="fas fa-home"></i>&nbsp;Home</button>
-    <button id="signout" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal">Sign out</button>
-
+    <button id="home" type="button" class="btn" style="color: gray;" ><i class="fas fa-home"></i>&nbsp;Home</button>
+    <button id="signout" type="button" class="btn" style="color: gray;" >Sign out</button>
   </div>
 
+  <br><br><br><br>
 
+  <!-- <div class="container"> -->
+  <!-- row starts -->
+	<div class="row">
+
+  	<div class="column left">
+
+      <div class="container">
+        <!-- col-md-3 used to prevent edit and upload button stretch too much -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img id="profileImgId" src="../load_user.gif" class="user" >
+          <h4>...</h4>
+          <!-- Custom bootstrap upload file the attribute: for points to the control "profileUpload" -->
+                    <label id="profileUploadBtn" for="profileUpload" class="btn btn-info btn-block rounded-pill shadow">
+                      <i class="fa fa-upload mr-2"></i>Change photo ...
+                      <input id="profileUpload" type="file" style="display:none;" onchange="loadProfile(this.files)" accept="image/*">
+                    </label>
+                    <!-- End -->
+        </div>
+        <br>
+        <label for="">User Name</label>
+        <br>
+        <label for="">First Name</label>
+        <br>
+        <label for="">Last Name</label>
+        <br>
+        <label for="">Email</label>
+        <br><br>
+        <button class="btn btn-info btn-block rounded-pill shadow">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          Edit Profile</button>
+        <hr>
+      </div>
+
+      </div>
+    </div>
+<div class="column middle" style="background-color: transparent;">
+  <p>
+    Red Wing <br>
+Here's where they make the good work shoes
+in the long brick buildings beside the road.
+Shoes whose stitched, crepe-wedge soles
+and full-grain, oil-resistant leathers
+bless tiny bones in the ankles and feet, shoes
+of carpenters balanced on roof beams,
+electricians, farmers, iron workers, welders -
+cuffs frayed with sparks from the torch.
+At shift's end the socks emerge tinged
+pale orange, tops of the arches crisscrossed
+with lace marks, propped up in front
+of the six o'clock news. Here's to the sweet
+breath of pond mist filling the lungs of summer.
+Here's to baked beans and twelve hours off.
+Here's to dust from the trucker's shoe, dust
+he stepped into three states back.
+Here's to shingles, aluminum flashing,
+wall studs, rafters, ten-penny nails,
+here's to tomatoes, onions and corn,
+here's squatting down and here's reaching over,
+here's to the ones who showed up.
+—Joseph Millar<br><br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+    Posts Here<br>
+  </p>
+</div>
+<!-- column right start -->
+<div class="column right">
+  <!-- <p> Add a new recipe here</p> -->
+  <div class="add_label" >
+    <span style="font-size: 15px" class="label label-primary rounded-pill">Add a new recipe here</span>
+  </div>
+  <hr>
+  <!-- <div class="file-upload-wrapper">
+  <input type="file" id="input-file-now" class="file-upload" />
+</div> -->
+
+<div id="drop-zone">
+    Drop files here...
+    <label for="fileUpload" class="file-upload btn btn-info rounded-pill">
+      Or click here
+      <input id="fileUpload" style="display:none" type="file">
+      <img id="imgUpload" src="" alt="" width="100vw">
+    </label>
+</div>
+
+</div>
+<!-- column right end -->
+
+</div>
+<!-- row ends -->
+
+
+  <!-- <div class="file-upload-wrapper">
+  <input type="file" id="input-file-now-custom-1" class="file-upload" data-default-file="https://mdbootstrap.com/img/Photos/Others/images/89.jpg" />
+ </div> -->
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <!-- <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase.js"></script> -->

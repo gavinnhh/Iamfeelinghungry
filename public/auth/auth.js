@@ -16,6 +16,7 @@ function handleSignIn(){
     alert(error);
   });
 
+  
   // Make sign in pop up window go away
   $('#signInModal').modal('hide');
   return false;
@@ -42,6 +43,8 @@ function handleSignUp(){
 
         // Add a new document in collection "users", meaning add a new user
         db.collection("users").doc(cred.user.uid).set({
+            firstname: fname,
+            lastname: lname,
             username: username,
             email: email,
             photoUrl: "url...."
