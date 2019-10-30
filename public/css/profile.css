@@ -71,6 +71,17 @@ border:2px solid #03b1ce ;}
 .middle{
   width:50%;
 }
+
+.view input {
+  border:0;
+  background:0;
+  outline:none !important;
+}
+/* to set background color of text input box */
+/* input[type="text"], textarea {
+  background-color :transparent;
+
+} */
 /* to make the choose file look better when upload a file */
 /* .file-upload input[type='file'] {
   display: none;
@@ -93,6 +104,24 @@ border:2px solid #03b1ce ;}
 
   object-fit: cover;
 }
+
+/* used for the edit profile modal */
+/* div.modal div.modal-backdrop {
+    z-index: 0;
+} */
+/* p1 {
+    display: inline-block;
+    background-color:#ffffff;
+    border-radius: 2px;
+} */
+
+
+input{
+  background-color:transparent;
+  border-color:transparent;
+  border-radius: 3px;
+}
+
 
 #drop-zone {
     /*Sort of important*/
