@@ -22,6 +22,8 @@
 .result-col1 {
   width: 25%;
   height: auto;
+  background-color: white;
+  word-wrap: break-word;
 }
 
 .result-col2 {
