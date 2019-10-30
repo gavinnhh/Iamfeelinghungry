@@ -43,7 +43,7 @@
     <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign In</button>
     <!-- Sign-up button -->
     <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign Up</button>
-    <button id="setting" type="button" class="btn btn-default" style="color: gray;"><i class="fas fa-cog"></i></button>
+    <button id="setting" type="button" class="btn btn-default" style="color: gray; visibility: hidden"><i class="fas fa-cog"></i></button>
 
   </div>
 
@@ -175,8 +175,17 @@
 </br></br></br></br></br></br></br>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <img id="imgID" src="../testleft.jpg" class="rounded-corners mx-auto d-block">
+    <div class="col-md-6 offset-md-3 text-center mx-auto d-block">
+      <img id="imgID" src="../testleft.jpg" class="rounded-corners" width="600" height="350">
+      <p id = "tags" class="textFont"> tags</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class= "col-md-7 mx-auto d-block">
+      <p class= "textFont text-md-left" style= "font-size: 25px";>Ingredients</p>
+      <p id= "ingList" class= "textFont text-md-left">Place holder for ingredients list</p>
+      <p class= "textFont text-md-left" style= "font-size: 25px";>Directions</p>
+      <p id= "dirList" class= "textFont text-md-left">Place holder for Directions list</p>
     </div>
   </div>
 </div>
