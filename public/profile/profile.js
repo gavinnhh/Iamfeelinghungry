@@ -37,8 +37,12 @@ firebase.auth().onAuthStateChanged(function(user) {
             document.getElementsByTagName("h4")[0].innerHTML= data.username;
             console.log("photoUrl: " + data.photoUrl);
             // TODO: load profile image
-
             document.getElementById("profileImgId").src = data.photoUrl;
+            // load username firstname lastname and email
+            document.getElementById('profile_username').value = data.username;
+            document.getElementById('profile_fname').value = data.firstname;
+            document.getElementById('profile_lname').value = data.lastname;
+            document.getElementById('profile_email').value = data.email;
     });
   }
 
@@ -132,3 +136,107 @@ function updateProfileImage(files, username){
           });
      })
 }
+
+// update the changed name in the database and UI
+function updateProfileInfo(){
+  console.log("set save back to edit profile");
+  document.getElementById("editprofile").innerText = "Edit profile";
+  document.getElementById("profile_username").style.backgroundColor = "transparent";
+  document.getElementById('profile_username').setAttribute('readonly', true);
+  document.getElementById("profile_fname").style.backgroundColor = "transparent";
+  document.getElementById('profile_fname').setAttribute('readonly', true);
+  document.getElementById("profile_lname").style.backgroundColor = "transparent";
+  document.getElementById('profile_lname').setAttribute('readonly', true);
+
+  //TODO: update the changed new name in the database
+  console.log('updating new names...');
+  var newusername = document.getElementById("profile_username").value;
+  var newfirstname = document.getElementById("profile_fname").value;
+  var newlastname = document.getElementById("profile_lname").value;
+  console.log(newusername + " " + newfirstname + " " + newlastname);
+
+  // *update user profile names starts*
+  // first download the url first
+  var user = firebase.auth().currentUser;
+  // update the current user photoUrl
+  var updateNames = db.collection("users").doc(user.uid);
+  // Set the "PhotoUrl" field of the the document user.uid
+  return updateNames.update({
+      username: newusername,
+      firstname: newfirstname,
+      lastname: newlastname
+  })
+  .then(function() {
+      console.log("names successfully updated!");
+  })
+  .catch(function(error) {
+      // The document probably doesn't exist.
+      console.error("Error updating names: ", error);
+  });
+  // *update user profile names ends*
+
+}
+
+function handleEditProfile(){
+  console.log("editprofile clicked");
+
+  // document.getElementById('cancelEdit').style.visibility = 'visible';
+  // another way to toggle show/hidden
+  var x = document.getElementById("cancelEdit");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+
+  }
+  if(document.getElementById("editprofile").innerText === "Save"){
+    //document.getElementById("editprofile").innerText = "Edit profile";
+    updateProfileInfo();
+
+  }else{
+    document.getElementById("editprofile").innerText= "Save";
+    document.getElementById("profile_username").style.backgroundColor = "white";
+    document.getElementById('profile_username').removeAttribute('readonly');
+    document.getElementById("profile_fname").style.backgroundColor = "white";
+    document.getElementById('profile_fname').removeAttribute('readonly');
+    document.getElementById("profile_lname").style.backgroundColor = "white";
+    document.getElementById('profile_lname').removeAttribute('readonly');
+  }
+
+}
+
+function handleCancelEdit(){
+  console.log("Cancel clicked");
+
+  var x = document.getElementById("cancelEdit");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  //TODO: make sure the original name is loaded
+  // first load names stuff
+  var user = firebase.auth().currentUser;
+  if (user) {
+    const mypost = db.collection('users').doc(user.uid);
+    mypost.onSnapshot(doc => {
+            const data = doc.data();
+            // load username firstname lastname and email
+            document.getElementById('profile_username').value = data.username;
+            document.getElementById('profile_fname').value = data.firstname;
+            document.getElementById('profile_lname').value = data.lastname;
+    });
+  }
+  // document.getElementById('cancelEdit').style.visibility = 'hidden';
+  document.getElementById("editprofile").innerText= "Edit profile";
+  document.getElementById("profile_username").style.backgroundColor = "transparent";
+  document.getElementById('profile_username').setAttribute('readonly', true);
+  document.getElementById("profile_fname").style.backgroundColor = "transparent";
+  document.getElementById('profile_fname').setAttribute('readonly', true);
+  document.getElementById("profile_lname").style.backgroundColor = "transparent";
+  document.getElementById('profile_lname').setAttribute('readonly', true);
+}
+
+// document.getElementById('cancelEdit').style.visibility = 'hidden';
+document.getElementById('editprofile').addEventListener('click', handleEditProfile, false);
+document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);

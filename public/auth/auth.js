@@ -16,7 +16,7 @@ function handleSignIn(){
     alert(error);
   });
 
-  
+
   // Make sign in pop up window go away
   $('#signInModal').modal('hide');
   return false;
@@ -129,14 +129,20 @@ function handleGoogleSigninbtn(){
         var user = result.user;
         // auth2 is initialized with gapi.auth2.init() and a user is signed in.
         var displayName = user.displayName;
+        var fullnames = displayName.split(" ");
+        var username = fullnames[0];
+        var firstname = fullnames[0];
+        var lastname = fullnames[1];
         var email = user.email;
-        console.log('display name = ' + displayName);
-
+        var imgUrl = user.photoURL;
+      
         // add a new user into database
         db.collection("users").doc(user.uid).set({
-            username: displayName,
+            username: username,
+            firstname: firstname,
+            lastname:lastname,
             email: email,
-            photoUrl: "url...."
+            photoUrl: imgUrl
         })
         .then(function() {
             console.log("Document successfully written!");
