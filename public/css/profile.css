@@ -123,6 +123,8 @@ input{
 }
 
 
+/* column right: drop zone starts */
+
 #drop-zone {
     /*Sort of important*/
     width: 220px;
