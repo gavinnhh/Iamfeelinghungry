@@ -1,0 +1,179 @@
+body {
+
+ /* background: #e67e22; */
+ /* background: "background.jpg"; */
+ background-image: linear-gradient(to right, #33ccff , #33cc33);
+
+}
+
+#home{
+  position:absolute;
+    transition: .5s ease;
+    top: 1.5%;
+    left: 1%;
+}
+
+.top_nav {
+  /* float: left; */
+  /* color: #d35400; */
+  color: transparent;
+  text-align: right;
+  padding: 10px 12px;
+  text-decoration: none;
+  font-size: 17px;
+  font-family:helvetica;
+  float: right;
+
+}
+input.hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+#profile-image1 {
+cursor: pointer;
+width: 100px;
+height: 100px;
+border:2px solid #03b1ce ;}
+.tital{ font-size:16px; font-weight:500;}
+.bot-border{ border-bottom:1px #f8f8f8 solid;  margin:5px 0  5px 0
+}
+/* then whole row background */
+.row{
+  background-color: transparent;
+}
+
+.panel-heading{
+  background-color: #00ffff;
+}
+.panel{
+  background:  #00ffff;
+}
+.box{
+  background-color: transparent
+}
+.box-body{
+  background-color:transparent
+}
+
+/* Create three unequal columns that floats next to each other */
+.column{
+  /* float: left; */
+  padding: 30px;
+}
+.left{
+  width:25%;
+}
+
+.right{
+  width:25%;
+}
+.middle{
+  width:50%;
+}
+
+.view input {
+  border:0;
+  background:0;
+  outline:none !important;
+}
+/* to set background color of text input box */
+/* input[type="text"], textarea {
+  background-color :transparent;
+
+} */
+/* to make the choose file look better when upload a file */
+/* .file-upload input[type='file'] {
+  display: none;
+} */
+
+
+/* .custom-file-label.rounded-pill {
+  border-radius: 50rem;
+}
+
+.custom-file-label.rounded-pill::after {
+  border-radius: 0 50rem 50rem 0;
+} */
+
+.user {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+
+  object-fit: cover;
+}
+
+/* used for the edit profile modal */
+/* div.modal div.modal-backdrop {
+    z-index: 0;
+} */
+/* p1 {
+    display: inline-block;
+    background-color:#ffffff;
+    border-radius: 2px;
+} */
+
+
+input{
+  background-color:transparent;
+  border-color:transparent;
+  border-radius: 3px;
+}
+
+
+/* column right: drop zone starts */
+
+#drop-zone {
+    /*Sort of important*/
+    width: 220px;
+    /*Sort of important*/
+    height: 200px;
+    position:absolute;
+    left:80%;
+    top:25px;
+    /* margin-leftL: set the marigin to the left column border */
+    margin-left:-205px;
+    border: 2px dashed rgba(0,0,0,.3);
+    border-radius: 20px;
+    font-family: Arial;
+    text-align: center;
+    position: relative;
+    line-height: 80px;
+    font-size: 15px;
+    color: rgba(0,0,0,.3);
+}
+
+#drop-zone input {
+        /*Important*/
+        position: absolute;
+        /*Important*/
+        cursor: pointer;
+        left: 0px;
+        top: 0px;
+        /*Important This is only comment out for demonstration purposes.
+        opacity:0; */
+    }
+    /*If you dont want the button*/
+#clickHere {
+    position: absolute;
+    cursor: pointer;
+    left: 80%;
+    top: 40%;
+    margin-left: -100px;
+    margin-top: 20px;
+    line-height: 26px;
+    color: gray;
+    font-size: 12px;
+    width: 100px;
+    height: 26px;
+    border-radius: 4px;
+    background-color: #3b85c3;
+
+}
+
+/* input[type="checkbox"]:checked + label {
+  color: yellow;
+  font-weight: bold;
+} */

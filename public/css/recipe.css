@@ -18,3 +18,14 @@
 img{
   max-width: 100%;
 }
+
+.textFont{
+  padding: 10px;
+  font-weight: bold;
+  font-family: helvetica;
+  color: white;
+}
+p{
+  margin:0px;
+  padding:0px;
+}
