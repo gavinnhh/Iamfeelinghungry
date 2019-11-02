@@ -177,3 +177,58 @@ input{
   color: yellow;
   font-weight: bold;
 } */
+
+/* file upload css*/
+/* #dragandrophandler {
+    border: 2px dotted #0B85A1;
+    width: 400px;
+    color: #92AAB0;
+    text-align: left;
+    vertical-align: middle;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+    font-size: 200%;
+} */
+
+#drop-zone {
+    position: relative;
+    left: 65%;
+    width: 300px;
+    height: 240px;
+    text-align: center;
+    padding: 86px 0 0;
+    outline: 2px dashed #92b0b3;
+    outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    font-size: 1.25rem;
+    background-color: #c8dadf;
+    /* position: relative; */
+    /* padding: 100px 20px; */
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+input[type=file] {
+    display: block;
+}
+
+#drop-zone .drop-zone-caption {
+    font-size: 20px;
+    font-weight: 600;
+    color: #919fa9;
+    margin: 0 0 14px;
+}
+
+.btn.btn-primary {
+    background-color: #00a8ff;
+    border-color: #00a8ff;
+}
