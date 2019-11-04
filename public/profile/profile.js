@@ -7,7 +7,7 @@ document.getElementById('signout_from_profile').addEventListener('click', handle
 // document.getElementById('cancelEdit').style.visibility = 'hidden';
 document.getElementById('editprofile').addEventListener('click', handleEditProfile, false);
 document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
-document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
+//document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
 //document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
 
 
@@ -266,11 +266,6 @@ function handleCancelEdit(){
   document.getElementById('profile_lname').setAttribute('readonly', true);
 }
 
-
-// document.getElementById('cancelEdit').style.visibility = 'hidden';
-document.getElementById('editprofile').addEventListener('click', handleEditProfile, false);
-document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
-
 // file uplaod js starts here <--------------------------
 
 //drag and drop handler-------------------------
@@ -414,7 +409,8 @@ function formatBytes(bytes, decimals) {
     var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     var i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-  
+  }
+
 function handleAddPosts(){
   console.log("handleAddPosts clicked");
 }
