@@ -187,27 +187,15 @@
 
 <!-- column right start -->
 <div class="column right">
-  <!-- <p> Add a new recipe here</p> -->
-  <div class="add_label" >
-    <span style="font-size: 15px" class="label label-primary rounded-pill"><i class="fas fa-plus"></i>&nbsp;Add a new recipe here</span>
-  </div>
-  <hr>
-  <!-- <div class="file-upload-wrapper">
-  <input type="file" id="input-file-now" class="file-upload" />
-</div> -->
-
-<div id="drop-zone">
-    Drop files here...
-    <label for="fileUpload" class="file-upload btn btn-info rounded-pill">
-      Or click here
-      <input id="fileUpload" style="display:none" type="file">
-      <img id="imgUpload" src="" alt="" width="100vw">
-    </label>
-</div>
-
-<br><br>
-<button id="addpost" type="button" class="btn btn-info btn-block rounded-pill" name="button">Add My Post</button>
-
+  <form class="contaier" method="post" action="" enctype="multipart/form-data">
+    <div id="drop-zone">
+      <div class="drop-zone-caption">Drag & Drop Files Here</div>
+      <span class="btn btn-primary btn-file" style="position: relative">
+        <span>Choose files</span>
+        <input type="file"id="drop-zone-file" name="files[]" multiple>
+      </span>
+    </div>
+  </form>
 </div>
 <!-- column right end -->
 
