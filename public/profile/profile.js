@@ -7,7 +7,7 @@ document.getElementById('signout_from_profile').addEventListener('click', handle
 // document.getElementById('cancelEdit').style.visibility = 'hidden';
 document.getElementById('editprofile').addEventListener('click', handleEditProfile, false);
 document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
-document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
+// document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
 //document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
 
 
@@ -267,9 +267,7 @@ function handleCancelEdit(){
 }
 
 
-// document.getElementById('cancelEdit').style.visibility = 'hidden';
-document.getElementById('editprofile').addEventListener('click', handleEditProfile, false);
-document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
+
 
 // file uplaod js starts here <--------------------------
 
@@ -414,10 +412,10 @@ function formatBytes(bytes, decimals) {
     var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     var i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-  
-function handleAddPosts(){
-  console.log("handleAddPosts clicked");
 }
+// function handleAddPosts(){
+//   console.log("handleAddPosts clicked");
+// }
 
 function createOnePost(Title, foodUrl){
   var post_div = document.createElement("div");
@@ -462,15 +460,13 @@ function handleViewMore(){
   console.log(listButtons);
 }
 
-function handleAddPosts(){
-  console.log("addpost clicked");
-  var post_div = createOnePost(); // create a post
-  document.getElementById('mypostslists').appendChild(post_div);
-
-
-  // var singlePost = document.getElementById("mySinglePost").lastChild;
-  // // Copy the <mySinglePost> element and its child nodes
-  // var mySinglePost_clone = mySinglePost.cloneNode(true);
-  // console.log("clone...");
-  // document.getElementById("mypostslists").appendChild(mySinglePost_clone);
-}
+// function handleAddPosts(){
+//   console.log("addpost clicked");
+//   var post_div = createOnePost(); // create a post
+//   document.getElementById('mypostslists').appendChild(post_div);
+//   // var singlePost = document.getElementById("mySinglePost").lastChild;
+//   // // Copy the <mySinglePost> element and its child nodes
+//   // var mySinglePost_clone = mySinglePost.cloneNode(true);
+//   // console.log("clone...");
+//   // document.getElementById("mypostslists").appendChild(mySinglePost_clone);
+// }
