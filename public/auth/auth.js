@@ -31,7 +31,7 @@ function handleSignUp(){
   var password = document.getElementById('password').value;
   var passalert = document.getElementById('pass-alert-message');
   var useralert = document.getElementById('user-alert-message');
-
+  var allPostsIDsArray = [];
   if(!(profanityRegex.test(username))){
     useralert.classList.add("hide")
     if(zxcvbn(password).score >= 3){
@@ -43,11 +43,12 @@ function handleSignUp(){
 
         // Add a new document in collection "users", meaning add a new user
         db.collection("users").doc(cred.user.uid).set({
+            allPostsIDs:allPostsIDsArray,
             firstname: fname,
             lastname: lname,
             username: username,
             email: email,
-            photoUrl: "url...."
+            photoUrl: "../load_user.gif"
         })
         .then(function() {
             console.log("Document successfully written!");
@@ -135,9 +136,10 @@ function handleGoogleSigninbtn(){
         var lastname = fullnames[1];
         var email = user.email;
         var imgUrl = user.photoURL;
-      
+        var allPostsIDsArray = [];
         // add a new user into database
         db.collection("users").doc(user.uid).set({
+            allPostsIDs:allPostsIDsArray,
             username: username,
             firstname: firstname,
             lastname:lastname,

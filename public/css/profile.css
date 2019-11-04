@@ -59,18 +59,33 @@ border:2px solid #03b1ce ;}
 /* Create three unequal columns that floats next to each other */
 .column{
   /* float: left; */
-  padding: 30px;
+  padding: 40px;
 }
 .left{
-  width:25%;
+  width:30%;
 }
 
+
 .right{
-  width:25%;
+  width:30%;
 }
 .middle{
-  width:50%;
+  width:40%;
 }
+
+@media screen and (max-width: 910px) {
+  .column {
+    width: 100%;
+  }
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
 
 .view input {
   border:0;
