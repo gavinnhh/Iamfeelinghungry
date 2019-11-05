@@ -1,9 +1,28 @@
 //below two are necessay for communicating with firebase cloud database and storage
-const db = firebase.firestore();
+const db2 = firebase.firestore();
 const storageRef = firebase.storage().ref(); // global const
-
+var listButtons = []; // undefined initially
 document.getElementById('home').addEventListener('click', handleHome, false);
-document.getElementById('signout').addEventListener('click', handleSignout, false);
+document.getElementById('signout_from_profile').addEventListener('click', handleSignout, false);
+// document.getElementById('cancelEdit').style.visibility = 'hidden';
+document.getElementById('editprofile').addEventListener('click', handleEditProfile, false);
+document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
+//document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
+//document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
+
+
+// function loadProfile below means to upload a new profile photo
+// also: new image selcted will be uploaded into firebase storage and
+// new photo url will overwrite the current user's data field: photoUrl
+// once load file is called, that means we want to update profile image
+var loadProfile = function(files) {
+  var image = document.getElementById('profileImgId');
+  image.src = URL.createObjectURL(event.target.files[0]); // get a new photo
+  //TODO: upload the new profile image to the user in database
+  // console.log("image: " + image.src);
+  // store images into profileImages in firebase storage
+  UpdatePhotoUrl(files);
+};
 
 function handleHome(){
   console.log('Navigating to Home');
@@ -18,7 +37,7 @@ function handleSignout(){
     window.location.href = "../index.html";
 }
 
-// initiall load profile image, name and stuff
+// initiall load profile image, name, all the posts and stuff
 firebase.auth().onAuthStateChanged(function(user) {
   // user is a firebase built-in variable, firebase knows user
   var displayName = user.displayName;
@@ -30,8 +49,8 @@ firebase.auth().onAuthStateChanged(function(user) {
   var providerData = user.providerData;
 
   if (user) {
-    const mypost = db.collection('users').doc(uid);
-    mypost.onSnapshot(doc => {
+    const myprofile = db2.collection('users').doc(uid);
+    myprofile.onSnapshot(doc => {
             const data = doc.data();
             // *Important*: data.XXX: XXX is the data field from the database users document
             document.getElementsByTagName("h4")[0].innerHTML= data.username;
@@ -43,32 +62,41 @@ firebase.auth().onAuthStateChanged(function(user) {
             document.getElementById('profile_fname').value = data.firstname;
             document.getElementById('profile_lname').value = data.lastname;
             document.getElementById('profile_email').value = data.email;
+
+            // load all its posts: title and image for the profile page
+            //console.log("size of allPostsIDs = " + data.allPostsIDs.length);
+            var allPosts = data.allPostsIDs;
+            var len = allPosts.length;
+            //console.log("index 0 " + allPosts[0]);
+
+            for(i = 0; i < len; i++){
+              var pid = allPosts[i];
+              const mypost = db2.collection('posts').doc(pid);
+              mypost.onSnapshot(doc => {
+                      const postdata = doc.data();
+                      //var viewMoreBtnId = postdata.title; // maybe not necessary
+                      listButtons[i] = postdata.foodUrl;
+                      var post_div = createOnePost(postdata.title, postdata.foodUrl); // create a post
+                      document.getElementById('mypostslists').appendChild(post_div);
+                      viewMoreButton = post_div.getElementsByTagName("button")[0]; // get the button from the div
+                      viewMoreButton.addEventListener('click', handleViewMore, false);
+              });
+            }
+
+
     });
   }
 
 });
-
-// function loadProfile below means to upload a new profile photo
-// also: new image selcted will be uploaded into firebase storage and
-// new photo url will overwrite the current user's data field: photoUrl
-// once load file is called, that means we want to update profile image
-var loadProfile = function(files) {
-  var image = document.getElementById('profileImgId');
-  image.src = URL.createObjectURL(event.target.files[0]); // get a new photo
-  //TODO: upload the new profile image to the user in database
-  // console.log("image: " + image.src);
-  // store images into profileImages in firebase storage
-  UpdatePhotoUrl(files);
-
-};
+console.log("listButton: " + listButtons);
 
 function UpdatePhotoUrl(files){
   var user = firebase.auth().currentUser;
-  const current_user_profile = db.collection('users').doc(user.uid);
+  const current_user_profile = db2.collection('users').doc(user.uid);
 
   current_user_profile.get().then(function(doc) {
     if (doc.exists) {
-        updateProfileImage(files, doc.data().username);
+        updateProfileImage(files, user.uid);
     } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -99,7 +127,7 @@ function updateProfileImage(files, username){
         // first download the url first
         var user = firebase.auth().currentUser;
         // update the current user photoUrl
-        var updatePhotoUrl = db.collection("users").doc(user.uid);
+        var updatePhotoUrl = db2.collection("users").doc(user.uid);
         // Set the "PhotoUrl" field of the the document user.uid
         return updatePhotoUrl.update({
             photoUrl: url
@@ -159,7 +187,7 @@ function updateProfileInfo(){
   // first download the url first
   var user = firebase.auth().currentUser;
   // update the current user photoUrl
-  var updateNames = db.collection("users").doc(user.uid);
+  var updateNames = db2.collection("users").doc(user.uid);
   // Set the "PhotoUrl" field of the the document user.uid
   return updateNames.update({
       username: newusername,
@@ -218,8 +246,9 @@ function handleCancelEdit(){
   // first load names stuff
   var user = firebase.auth().currentUser;
   if (user) {
-    const mypost = db.collection('users').doc(user.uid);
+    const mypost = db2.collection('users').doc(user.uid);
     mypost.onSnapshot(doc => {
+            //console.log("user id = " + user.uid);
             const data = doc.data();
             // load username firstname lastname and email
             document.getElementById('profile_username').value = data.username;
@@ -236,10 +265,6 @@ function handleCancelEdit(){
   document.getElementById("profile_lname").style.backgroundColor = "transparent";
   document.getElementById('profile_lname').setAttribute('readonly', true);
 }
-
-// document.getElementById('cancelEdit').style.visibility = 'hidden';
-document.getElementById('editprofile').addEventListener('click', handleEditProfile, false);
-document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
 
 // file uplaod js starts here <--------------------------
 
@@ -386,4 +411,64 @@ function formatBytes(bytes, decimals) {
     var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     var i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
+function handleAddPosts(){
+  console.log("handleAddPosts clicked");
+}
+
+function createOnePost(Title, foodUrl){
+  var post_div = document.createElement("div");
+  console.log(post_div);
+
+  var postLabel = document.createElement("label");
+  var postLabeltext = document.createTextNode(Title);
+  postLabel.appendChild(postLabeltext);
+
+  var viewMoreBtn = document.createElement("button");
+  //  var id = viewMoreBtn.id = "viewMoreBtnID";
+  var viewMoreBtnText = document.createTextNode("View detail...");
+  viewMoreBtn.style.backgroundColor = "transparent";
+  viewMoreBtn.style.border = "none";
+  viewMoreBtn.appendChild(viewMoreBtnText);
+  //viewMoreBtn.attachEvent('OnClick', handleAddPosts());
+  //viewMoreBtn.onclick = handleAddPosts(); // this will create infinnite loop
+
+  var elem = document.createElement("img");
+  elem.src = foodUrl;
+  elem.width = "500"
+  elem.style.borderRadius = "5%";
+  elem.style.border = "3px solid white"
+
+  var brtag = document.createElement("br");
+  var hrtag = document.createElement("hr");
+
+  post_div.appendChild(postLabel);
+  post_div.appendChild(viewMoreBtn);
+  post_div.appendChild(brtag);
+  post_div.appendChild(elem);
+  post_div.appendChild(brtag);
+  post_div.appendChild(hrtag);
+
+  return post_div;
+}
+
+// load to recipe web page
+function handleViewMore(){
+  console.log("handleViewMore clicked");
+  window.location.href = "../recipe/recipe.html";
+  console.log(listButtons);
+}
+
+function handleAddPosts(){
+  console.log("addpost clicked");
+  var post_div = createOnePost(); // create a post
+  document.getElementById('mypostslists').appendChild(post_div);
+
+
+  // var singlePost = document.getElementById("mySinglePost").lastChild;
+  // // Copy the <mySinglePost> element and its child nodes
+  // var mySinglePost_clone = mySinglePost.cloneNode(true);
+  // console.log("clone...");
+  // document.getElementById("mypostslists").appendChild(mySinglePost_clone);
 }
