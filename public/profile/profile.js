@@ -261,6 +261,7 @@ obj.on('drop', function (e) {
 
      //We need to send dropped files to firebase
      handleFileUpload(files,obj);
+     document.getElementById('notification').innerHTML = "Ready for Upload!!";
 });
 
 //choose file handler--------------------------
@@ -268,6 +269,7 @@ obj.on('drop', function (e) {
 $('#drop-zone-file').on('change', function (e) {
     var files = $('#drop-zone-file')[0].files;
     handleFileUpload(files, obj);
+    document.getElementById('notification').innerHTML = "Ready for Upload!";
 });
 
 //provent files from being opened in the browser
