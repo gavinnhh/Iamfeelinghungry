@@ -68,7 +68,7 @@ firebase.auth().onAuthStateChanged(function(user) {
             var allPosts = data.allPostsIDs; // get the user's all post ids
             var theWholeDiv = [];
             var len = allPosts.length;
-          
+
             var index = 0;
             allPosts.forEach(pid => {
               const mypost = db2.collection('posts').doc(pid);
@@ -82,8 +82,6 @@ firebase.auth().onAuthStateChanged(function(user) {
                       document.getElementById('mypostslists').appendChild(post_div);
                       //console.log("viewMoreButton.id " + viewMoreButton.id);
                       viewMoreButton.addEventListener('click', function(){handleViewMore(pid)}, false);
-
-
 
               });
             })
