@@ -70,15 +70,16 @@ img {
 
 .user-info {
   position: absolute;
-  bottom: 1%;
-  left: 15%;
-  transform: translate( -50%, -50% );
-  color: white;
+  top: 80%;
+  left: 3%;
+  /* transform: translate( -50%, -50% ); */
+  color: black;
   font-weight: bold;
   word-wrap: break-word;
   visibility: hidden;
-  border-radius: 10px;
   padding: 5px 5px;
+  width: 300px;
+  height: 50px;
 }
 
 .img-div:hover .overlay {
@@ -91,4 +92,20 @@ img {
 
 .img-div:hover img {
   opacity: .5;
+}
+
+.img-div:hover .user-info img {
+  opacity: 1;
+}
+
+.user-info .avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.user-info p {
+  display: inline-block;
+  word-break: break-all;
 }
