@@ -7,6 +7,7 @@ document.getElementById('signout_from_profile').addEventListener('click', handle
 // document.getElementById('cancelEdit').style.visibility = 'hidden';
 document.getElementById('editprofile').addEventListener('click', handleEditProfile, false);
 document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
+// document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
 //document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
 //document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
 document.getElementById('addtags').addEventListener('click', handleAddTags, false);
@@ -58,7 +59,7 @@ firebase.auth().onAuthStateChanged(function(user) {
             const data = doc.data();
             // *Important*: data.XXX: XXX is the data field from the database users document
             document.getElementsByTagName("h4")[0].innerHTML= data.username;
-            console.log("photoUrl: " + data.photoUrl);
+            //console.log("photoUrl: " + data.photoUrl);
             // TODO: load profile image
             document.getElementById("profileImgId").src = data.photoUrl;
             // load username firstname lastname and email
@@ -69,30 +70,32 @@ firebase.auth().onAuthStateChanged(function(user) {
 
             // load all its posts: title and image for the profile page
             //console.log("size of allPostsIDs = " + data.allPostsIDs.length);
-            var allPosts = data.allPostsIDs;
+            var allPosts = data.allPostsIDs; // get the user's all post ids
+            var theWholeDiv = [];
             var len = allPosts.length;
-            //console.log("index 0 " + allPosts[0]);
-
-            for(i = 0; i < len; i++){
-              var pid = allPosts[i];
+          
+            var index = 0;
+            allPosts.forEach(pid => {
               const mypost = db2.collection('posts').doc(pid);
               mypost.onSnapshot(doc => {
                       const postdata = doc.data();
                       //var viewMoreBtnId = postdata.title; // maybe not necessary
-                      listButtons[i] = postdata.foodUrl;
-                      var post_div = createOnePost(postdata.title, postdata.foodUrl); // create a post
-                      document.getElementById('mypostslists').appendChild(post_div);
+                      var post_div = createOnePost(postdata.title, postdata.foodUrl, index); // create a post
+                      index++;
                       viewMoreButton = post_div.getElementsByTagName("button")[0]; // get the button from the div
-                      viewMoreButton.addEventListener('click', handleViewMore, false);
+
+                      document.getElementById('mypostslists').appendChild(post_div);
+                      //console.log("viewMoreButton.id " + viewMoreButton.id);
+                      viewMoreButton.addEventListener('click', function(){handleViewMore(pid)}, false);
+
+
+
               });
-            }
-
-
+            })
     });
   }
 
 });
-console.log("listButton: " + listButtons);
 
 function UpdatePhotoUrl(files){
   var user = firebase.auth().currentUser;
@@ -292,7 +295,6 @@ function handleAddDirections(){
   document.getElementById('directioninput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:100%;" placeholder="'+boxName+'" "  /><br/>';
   countBox += 1;
 }
-
 // file uplaod js starts here <--------------------------
 
 //Upload button handler
@@ -449,9 +451,8 @@ function handleAddPosts(){
   console.log("handleAddPosts clicked");
 }
 
-function createOnePost(Title, foodUrl){
+function createOnePost(Title, foodUrl, index){
   var post_div = document.createElement("div");
-  console.log(post_div);
 
   var postLabel = document.createElement("label");
   var postLabeltext = document.createTextNode(Title);
@@ -462,13 +463,17 @@ function createOnePost(Title, foodUrl){
   var viewMoreBtnText = document.createTextNode("View detail...");
   viewMoreBtn.style.backgroundColor = "transparent";
   viewMoreBtn.style.border = "none";
+  //viewMoreBtn.value = "view" + index;
+  viewMoreBtn.id = "view" + index;
   viewMoreBtn.appendChild(viewMoreBtnText);
   //viewMoreBtn.attachEvent('OnClick', handleAddPosts());
   //viewMoreBtn.onclick = handleAddPosts(); // this will create infinnite loop
 
   var elem = document.createElement("img");
   elem.src = foodUrl;
+  //elem.src = "../food.png";
   elem.width = "500"
+  elem.height = "280"
   elem.style.borderRadius = "5%";
   elem.style.border = "3px solid white"
 
@@ -486,21 +491,9 @@ function createOnePost(Title, foodUrl){
 }
 
 // load to recipe web page
-function handleViewMore(){
+function handleViewMore(postid){
+  console.log("current value: " + postid);
   console.log("handleViewMore clicked");
+  localStorage.setItem('currentPid', postid); // use localStorage to send postid to recipe.js
   window.location.href = "../recipe/recipe.html";
-  console.log(listButtons);
-}
-
-function handleAddPosts(){
-  console.log("addpost clicked");
-  var post_div = createOnePost(); // create a post
-  document.getElementById('mypostslists').appendChild(post_div);
-
-
-  // var singlePost = document.getElementById("mySinglePost").lastChild;
-  // // Copy the <mySinglePost> element and its child nodes
-  // var mySinglePost_clone = mySinglePost.cloneNode(true);
-  // console.log("clone...");
-  // document.getElementById("mypostslists").appendChild(mySinglePost_clone);
 }
