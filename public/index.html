@@ -20,7 +20,6 @@
   <link rel="stylesheet" type="text/css" href="css/scroll-bar.css">
 
 
-
   <!-- to get the search icon -->
   <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
   <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
@@ -35,7 +34,6 @@
   <script defer src="/__/firebase/6.6.0/firebase-storage.js"></script>
   <!-- initialize the SDK after all desired features are loaded -->
   <script defer src="/__/firebase/init.js"></script>
-
 
 </head>
 
@@ -218,7 +216,7 @@
   </div>
   <div class="dd-menu col-lg-auto mb-3 mb-md-0" align="center">
     <select multiple id="select" class="dropdown-content">
-      <option data-description="num1">Number 1 </option>
+      <!-- <option data-description="num1">Number 1 </option>
       <option data-description="num3">Number 3</option>
       <option data-description="num2">Number 2</option>
       <option data-description="num4">Number 4</option>
@@ -229,7 +227,7 @@
       <option data-description="num8">Number 8</option>
       <option data-description="num9">Number 9</option>
       <option data-description="num10">Number 10</option>
-      <option data-description="num11">Number 11</option>
+      <option data-description="num11">Number 11</option> -->
     </select>
 
   </div>
@@ -284,6 +282,9 @@ firebase.initializeApp(firebaseConfig);
 
 <!-- Javascript for dropdown -->
 <script src="js/dropdown.js"></script>
+<script src="js/option_populate.js"></script>
+
+<!-- for dropdown menu -->
 <script>
 tail.select('#select', {
   search: true,
