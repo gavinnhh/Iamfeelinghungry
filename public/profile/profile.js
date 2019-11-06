@@ -1,9 +1,33 @@
 //below two are necessay for communicating with firebase cloud database and storage
-const db = firebase.firestore();
+const db2 = firebase.firestore();
 const storageRef = firebase.storage().ref(); // global const
-
+var listButtons = []; // undefined initially
 document.getElementById('home').addEventListener('click', handleHome, false);
-document.getElementById('signout').addEventListener('click', handleSignout, false);
+document.getElementById('signout_from_profile').addEventListener('click', handleSignout, false);
+// document.getElementById('cancelEdit').style.visibility = 'hidden';
+document.getElementById('editprofile').addEventListener('click', handleEditProfile, false);
+document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
+// document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
+//document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
+//document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
+document.getElementById('addtags').addEventListener('click', handleAddTags, false);
+document.getElementById('addingredients').addEventListener('click', handleAddIngredients, false);
+document.getElementById('adddirections').addEventListener('click', handleAddDirections, false);
+document.getElementById('uploadpost').addEventListener('click', handleFileUploadbutton, false);
+
+
+// function loadProfile below means to upload a new profile photo
+// also: new image selcted will be uploaded into firebase storage and
+// new photo url will overwrite the current user's data field: photoUrl
+// once load file is called, that means we want to update profile image
+var loadProfile = function(files) {
+  var image = document.getElementById('profileImgId');
+  image.src = URL.createObjectURL(event.target.files[0]); // get a new photo
+  //TODO: upload the new profile image to the user in database
+  // console.log("image: " + image.src);
+  // store images into profileImages in firebase storage
+  UpdatePhotoUrl(files);
+};
 
 function handleHome(){
   console.log('Navigating to Home');
@@ -18,7 +42,7 @@ function handleSignout(){
     window.location.href = "../index.html";
 }
 
-// initiall load profile image, name and stuff
+// initiall load profile image, name, all the posts and stuff
 firebase.auth().onAuthStateChanged(function(user) {
   // user is a firebase built-in variable, firebase knows user
   var displayName = user.displayName;
@@ -30,12 +54,12 @@ firebase.auth().onAuthStateChanged(function(user) {
   var providerData = user.providerData;
 
   if (user) {
-    const mypost = db.collection('users').doc(uid);
-    mypost.onSnapshot(doc => {
+    const myprofile = db2.collection('users').doc(uid);
+    myprofile.onSnapshot(doc => {
             const data = doc.data();
             // *Important*: data.XXX: XXX is the data field from the database users document
             document.getElementsByTagName("h4")[0].innerHTML= data.username;
-            console.log("photoUrl: " + data.photoUrl);
+            //console.log("photoUrl: " + data.photoUrl);
             // TODO: load profile image
             document.getElementById("profileImgId").src = data.photoUrl;
             // load username firstname lastname and email
@@ -43,32 +67,43 @@ firebase.auth().onAuthStateChanged(function(user) {
             document.getElementById('profile_fname').value = data.firstname;
             document.getElementById('profile_lname').value = data.lastname;
             document.getElementById('profile_email').value = data.email;
+
+            // load all its posts: title and image for the profile page
+            //console.log("size of allPostsIDs = " + data.allPostsIDs.length);
+            var allPosts = data.allPostsIDs; // get the user's all post ids
+            var theWholeDiv = [];
+            var len = allPosts.length;
+          
+            var index = 0;
+            allPosts.forEach(pid => {
+              const mypost = db2.collection('posts').doc(pid);
+              mypost.onSnapshot(doc => {
+                      const postdata = doc.data();
+                      //var viewMoreBtnId = postdata.title; // maybe not necessary
+                      var post_div = createOnePost(postdata.title, postdata.foodUrl, index); // create a post
+                      index++;
+                      viewMoreButton = post_div.getElementsByTagName("button")[0]; // get the button from the div
+
+                      document.getElementById('mypostslists').appendChild(post_div);
+                      //console.log("viewMoreButton.id " + viewMoreButton.id);
+                      viewMoreButton.addEventListener('click', function(){handleViewMore(pid)}, false);
+
+
+
+              });
+            })
     });
   }
 
 });
 
-// function loadProfile below means to upload a new profile photo
-// also: new image selcted will be uploaded into firebase storage and
-// new photo url will overwrite the current user's data field: photoUrl
-// once load file is called, that means we want to update profile image
-var loadProfile = function(files) {
-  var image = document.getElementById('profileImgId');
-  image.src = URL.createObjectURL(event.target.files[0]); // get a new photo
-  //TODO: upload the new profile image to the user in database
-  // console.log("image: " + image.src);
-  // store images into profileImages in firebase storage
-  UpdatePhotoUrl(files);
-
-};
-
 function UpdatePhotoUrl(files){
   var user = firebase.auth().currentUser;
-  const current_user_profile = db.collection('users').doc(user.uid);
+  const current_user_profile = db2.collection('users').doc(user.uid);
 
   current_user_profile.get().then(function(doc) {
     if (doc.exists) {
-        updateProfileImage(files, doc.data().username);
+        updateProfileImage(files, user.uid);
     } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -99,7 +134,7 @@ function updateProfileImage(files, username){
         // first download the url first
         var user = firebase.auth().currentUser;
         // update the current user photoUrl
-        var updatePhotoUrl = db.collection("users").doc(user.uid);
+        var updatePhotoUrl = db2.collection("users").doc(user.uid);
         // Set the "PhotoUrl" field of the the document user.uid
         return updatePhotoUrl.update({
             photoUrl: url
@@ -159,7 +194,7 @@ function updateProfileInfo(){
   // first download the url first
   var user = firebase.auth().currentUser;
   // update the current user photoUrl
-  var updateNames = db.collection("users").doc(user.uid);
+  var updateNames = db2.collection("users").doc(user.uid);
   // Set the "PhotoUrl" field of the the document user.uid
   return updateNames.update({
       username: newusername,
@@ -218,8 +253,9 @@ function handleCancelEdit(){
   // first load names stuff
   var user = firebase.auth().currentUser;
   if (user) {
-    const mypost = db.collection('users').doc(user.uid);
+    const mypost = db2.collection('users').doc(user.uid);
     mypost.onSnapshot(doc => {
+            //console.log("user id = " + user.uid);
             const data = doc.data();
             // load username firstname lastname and email
             document.getElementById('profile_username').value = data.username;
@@ -237,6 +273,227 @@ function handleCancelEdit(){
   document.getElementById('profile_lname').setAttribute('readonly', true);
 }
 
-// document.getElementById('cancelEdit').style.visibility = 'hidden';
-document.getElementById('editprofile').addEventListener('click', handleEditProfile, false);
-document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
+//adding tags ingredients and directions strts here<---------------------------
+function handleAddTags(){
+  console.log("Add Tags clicked");
+  var countBox =1;
+  var boxName= "Next Tag"
+  document.getElementById('taginput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:100%;" placeholder="'+boxName+'" "  /><br/>';
+  countBox += 1;
+}
+function handleAddIngredients(){
+  console.log("Add Ingredients clicked");
+  var countBox =1;
+  var boxName= "Next Ingredient"
+  document.getElementById('ingredientinput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:100%;" placeholder="'+boxName+'" "  /><br/>';
+  countBox += 1;
+}
+function handleAddDirections(){
+  console.log("Add Directions clicked");
+  var countBox =1;
+  var boxName= "Next Direction"
+  document.getElementById('directioninput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:100%;" placeholder="'+boxName+'" "  /><br/>';
+  countBox += 1;
+}
+// file uplaod js starts here <--------------------------
+
+//Upload button handler
+function handleFileUploadbutton(){
+  handleFileUpload(files,obj);
+}
+//drag and drop handler-------------------------
+var obj = $("#drop-zone");
+var files;
+obj.on('dragenter', function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    $(this).css('border', '2px solid #0B85A1');
+});
+obj.on('dragover', function (e) {
+     e.stopPropagation();
+     e.preventDefault();
+});
+obj.on('drop', function (e) {
+     $(this).css('border', '2px dotted #0B85A1');
+     e.preventDefault();
+     files = e.originalEvent.dataTransfer.files;
+
+     //We need to send dropped files to firebase
+     //handleFileUpload(files,obj);
+     document.getElementById('notification').innerHTML = "File is ready for Upload!!";
+});
+
+//choose file handler--------------------------
+// automatically submit the form on file select
+$('#drop-zone-file').on('change', function (e) {
+    files = $('#drop-zone-file')[0].files;
+    //handleFileUpload(files, obj);
+    document.getElementById('notification').innerHTML = "File is ready for Upload!!";
+});
+
+//provent files from being opened in the browser
+$(document).on('dragenter', function (e)
+{
+    e.stopPropagation();
+    e.preventDefault();
+});
+$(document).on('dragover', function (e)
+{
+  e.stopPropagation();
+  e.preventDefault();
+  obj.css('border', '2px dotted #0B85A1');
+});
+$(document).on('drop', function (e)
+{
+    e.stopPropagation();
+    e.preventDefault();
+});
+
+//file uplaoder handler
+function handleFileUpload(files, obj) {
+    for (var i = 0; i < files.length; i++) {
+        var fd = new FormData();
+        fd.append('file', files[i]);
+
+        console.log(files[i]);
+        fireBaseImageUpload({
+            'file': files[i],
+            'path': '/images' //path_to_where_you_to_store_the_file
+        }, function (data) {
+            //console.log(data);
+            if (!data.error) {
+                if (data.progress) {
+                    // progress update to view here
+                }
+                if (data.downloadURL) {
+                    // update done
+                    // download URL here "data.downloadURL"
+                }
+            } else {
+                console.log(data.error + ' Firebase image upload error');
+            }
+        });
+    }
+};
+
+//firebase upload with call back
+function fireBaseImageUpload(parameters, callBackData) {
+
+    // expected parameters to start storage upload
+    var file = parameters.file;
+    var path = parameters.path;
+    var name;
+
+    //just some error check
+    if (!file) { callBackData({error: 'file required to interact with Firebase storage'}); }
+    if (!path) { callBackData({error: 'Node name required to interact with Firebase storage'}); }
+
+    var metaData = {'contentType': file.type};
+    var arr = file.name.split('.');
+    var fileSize = formatBytes(file.size); // get clean file size (function below)
+    var fileType = file.type;
+    var n = file.name;
+
+    // generate random string to identify each upload instance
+    name = generateRandomString(12); //(location function below)
+
+    //var fullPath = path + '/' + name + '.' + arr.slice(-1)[0];
+    var fullPath = path + '/' + file.name;
+
+    var uploadFile = storageRef.child(fullPath).put(file, metaData);
+
+    // first instance identifier
+    callBackData({id: name, fileSize: fileSize, fileType: fileType, fileName: n});
+
+    uploadFile.on('state_changed', function (snapshot) {
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        progress = Math.floor(progress);
+        callBackData({
+             progress: progress,
+             element: name,
+             fileSize: fileSize,
+             fileType: fileType,
+             fileName: n});
+    }, function (error) {
+        callBackData({error: error});
+    }, function () {
+        var downloadURL = uploadFile.snapshot.downloadURL;
+        callBackData({
+              downloadURL: downloadURL,
+              element: name,
+              fileSize: fileSize,
+              fileType: fileType,
+              fileName: n});
+    });
+}
+
+// function to generate random string to use in what creating firebase storage instance
+function generateRandomString(length) {
+    var chars = "abcdefghijklmnopqrstuvwxyz";
+    var pass = "";
+    for (var x = 0; x < length; x++) {
+        var i = Math.floor(Math.random() * chars.length);
+        pass += chars.charAt(i);
+    }
+    return pass;
+}
+
+function formatBytes(bytes, decimals) {
+    if (bytes == 0) return '0 Byte';
+    var k = 1000;
+    var dm = decimals + 1 || 3;
+    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    var i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
+function handleAddPosts(){
+  console.log("handleAddPosts clicked");
+}
+
+function createOnePost(Title, foodUrl, index){
+  var post_div = document.createElement("div");
+
+  var postLabel = document.createElement("label");
+  var postLabeltext = document.createTextNode(Title);
+  postLabel.appendChild(postLabeltext);
+
+  var viewMoreBtn = document.createElement("button");
+  //  var id = viewMoreBtn.id = "viewMoreBtnID";
+  var viewMoreBtnText = document.createTextNode("View detail...");
+  viewMoreBtn.style.backgroundColor = "transparent";
+  viewMoreBtn.style.border = "none";
+  //viewMoreBtn.value = "view" + index;
+  viewMoreBtn.id = "view" + index;
+  viewMoreBtn.appendChild(viewMoreBtnText);
+  //viewMoreBtn.attachEvent('OnClick', handleAddPosts());
+  //viewMoreBtn.onclick = handleAddPosts(); // this will create infinnite loop
+
+  var elem = document.createElement("img");
+  elem.src = foodUrl;
+  //elem.src = "../food.png";
+  elem.width = "500"
+  elem.height = "280"
+  elem.style.borderRadius = "5%";
+  elem.style.border = "3px solid white"
+
+  var brtag = document.createElement("br");
+  var hrtag = document.createElement("hr");
+
+  post_div.appendChild(postLabel);
+  post_div.appendChild(viewMoreBtn);
+  post_div.appendChild(brtag);
+  post_div.appendChild(elem);
+  post_div.appendChild(brtag);
+  post_div.appendChild(hrtag);
+
+  return post_div;
+}
+
+// load to recipe web page
+function handleViewMore(postid){
+  console.log("current value: " + postid);
+  console.log("handleViewMore clicked");
+  localStorage.setItem('currentPid', postid); // use localStorage to send postid to recipe.js
+  window.location.href = "../recipe/recipe.html";
+}

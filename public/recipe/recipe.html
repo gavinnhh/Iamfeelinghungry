@@ -21,7 +21,6 @@
   <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
   <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
   <title>Recipe</title>
-
   <!-- update the version number as needed -->
   <script defer src="/__/firebase/6.6.0/firebase-app.js"></script>
   <!-- include only the Firebase features as you need -->
@@ -29,9 +28,7 @@
   <script defer src="/__/firebase/6.6.0/firebase-database.js"></script>
   <script defer src="/__/firebase/6.6.0/firebase-messaging.js"></script>
   <script defer src="/__/firebase/6.6.0/firebase-storage.js"></script>
-
   <script defer src="/__/firebase/init.js"></script>
-
 
 </head>
 
@@ -43,7 +40,7 @@
     <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign In</button>
     <!-- Sign-up button -->
     <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign Up</button>
-    <button id="setting" type="button" class="btn btn-default" style="color: gray; visibility: hidden"><i class="fas fa-cog"></i></button>
+    <button id="setting" type="button" class="btn btn-default" style="color: gray; visibility: hidden"><i class="fas fa-user"></i></button>
 
   </div>
 
@@ -77,7 +74,7 @@
               <!-- <i class="fa fa-google" aria-hidden="true"></i> -->
               <!-- <i class="fab fa-google-plus-g"></i> -->
               <button id="siginbtnwithgoogle" class="btn btn-block" type="button" name="button">
-                <img src="googleicon.png" alt="" width="20" height="20">&nbsp;&nbsp;&nbsp;&nbsp;Sign in with Google</button>
+                <img src="../googleicon.png" alt="" width="20" height="20">&nbsp;&nbsp;&nbsp;&nbsp;Sign in with Google</button>
 
               <!-- <img src="googleicon.png" alt="" width="20" height="20">
               <input id="siginbtnwithgoogle" type="button" class="btn btn-block btn-color" value="Sign in with Google"> -->
@@ -172,20 +169,20 @@
 <div class="title">
   <p id = "name">Recipe name</p>
 </div>
-</br></br></br></br></br></br></br>
+</br></br></br></br></br></br></br></br></br>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6 offset-md-3 text-center mx-auto d-block">
-      <img id="imgID" src="../testleft.jpg" class="rounded-corners" width="600" height="350">
+      <img id="imgID" src="../loader.gif" class="rounded-corners" width="600" height="350">
       <p id = "tags" class="textFont"> tags</p>
     </div>
   </div>
   <div class="row">
     <div class= "col-md-7 mx-auto d-block">
       <p class= "textFont text-md-left" style= "font-size: 25px";>Ingredients</p>
-      <p id= "ingList" class= "textFont text-md-left">Place holder for ingredients list</p>
+      <p id= "ingList" class= "textFont text-md-left"></p>
       <p class= "textFont text-md-left" style= "font-size: 25px";>Directions</p>
-      <p id= "dirList" class= "textFont text-md-left">Place holder for Directions list</p>
+      <p id= "dirList" class= "textFont text-md-left"></p>
     </div>
   </div>
 </div>
@@ -223,7 +220,12 @@ firebase.initializeApp(firebaseConfig);
 <!-- <script src="https://cpde.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/propper.js/1.14.7/umd/popper.min.js"></script> -->
 <script src="../js/bootstrap.min.js"></script>
-<script src="profile.js"></script>
+<script src="../auth/auth.js"></script>
+<script src="../auth/passwordmeter.js"></script>
+<script src="../auth/badwords.js"></script>
+<script src="../bower_components/zxcvbn/dist/zxcvbn.js"></script>
+<!--  <script src="../profile/profile.js"></script> -->
+<script src="recipe.js"></script>
 
 </body>
 </html>

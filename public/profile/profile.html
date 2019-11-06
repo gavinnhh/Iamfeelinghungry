@@ -44,25 +44,26 @@
   <div class="top_nav">
     <!-- Sign-in button -->
     <button id="home" type="button" class="btn" style="color: gray;" ><i class="fas fa-home"></i>&nbsp;Home</button>
-    <button id="signout" type="button" class="btn" style="color: gray;" >Sign out</button>
+    <button id="signout_from_profile" type="button" class="btn" style="color: gray;" >Sign out</button>
   </div>
 
   <br><br><br><br>
 
   <!-- <div class="container"> -->
   <!-- row starts -->
-	<div class="row">
+	<div class="row container-fluid">
 
   	<div class="column left">
-
-      <div class="container">
+      <!-- <label style="font-size: 15px" for="" class="label label-primary rounded-pill mx-auto text-center" ><i class="fas fa-user"></i>&nbsp; My Profile</label>
+      <br><br> -->
+      <!-- <div class="container" style="width:00px"> -->
         <!-- col-md-3 used to prevent edit and upload button stretch too much -->
-      <div class="col-md-3">
+      <div class="col-md">
         <div class="text-center">
           <img id="profileImgId" src="../load_user.gif" class="user" >
           <h4>...</h4>
           <!-- Custom bootstrap upload file the attribute: for points to the control "profileUpload" -->
-                    <label id="profileUploadBtn" for="profileUpload" class="btn btn-info btn-block rounded-pill shadow">
+                    <label id="profileUploadBtn" for="profileUpload" style="width:200px;text-align: center;" class="btn btn-info btn-block rounded-pill shadow mx-auto text-center">
                       <i class="fa fa-upload mr-2"></i>Change photo ...
                       <input id="profileUpload" type="file" style="display:none;" onchange="loadProfile(this.files)" accept="image/*">
                     </label>
@@ -76,7 +77,7 @@
             </div>
             <div class="col-md">
               <!-- <p1 id="username" contenteditable="true">Adam</p1> -->
-                <p><input id="profile_username" size="15" type="text" value="..." readonly/></p>
+                <p><input id="profile_username" size="14" type="text" value="..." readonly/></p>
             </div>
 
           </div>
@@ -87,7 +88,7 @@
             </div>
             <div id="firstname" class="col-md">
               <!-- <p1>Adam</p1> -->
-              <p><input id="profile_fname" size="15" type="text" value="..." readonly/></p>
+              <p><input id="profile_fname" size="14" type="text" value="..." readonly/></p>
             </div>
           </div>
 
@@ -97,7 +98,7 @@
             </div>
             <div id="lastname" class="col-md">
               <!-- <p1>Lee</p1> -->
-              <p><input id="profile_lname" size="15" type="text" value="..." readonly/></p>
+              <p><input id="profile_lname" size="14" type="text" value="..." readonly/></p>
             </div>
           </div>
 
@@ -130,142 +131,95 @@
         <hr>
       </div>
 
-      </div>
+      <!-- </div> -->
     </div>
 
 <div class="column middle" style="background-color: transparent;">
-  <p>
-    Red Wing <br>
-Here's where they make the good work shoes
-in the long brick buildings beside the road.
-Shoes whose stitched, crepe-wedge soles
-and full-grain, oil-resistant leathers
-bless tiny bones in the ankles and feet, shoes
-of carpenters balanced on roof beams,
-electricians, farmers, iron workers, welders -
-cuffs frayed with sparks from the torch.
-At shift's end the socks emerge tinged
-pale orange, tops of the arches crisscrossed
-with lace marks, propped up in front
-of the six o'clock news. Here's to the sweet
-breath of pond mist filling the lungs of summer.
-Here's to baked beans and twelve hours off.
-Here's to dust from the trucker's shoe, dust
-he stepped into three states back.
-Here's to shingles, aluminum flashing,
-wall studs, rafters, ten-penny nails,
-here's to tomatoes, onions and corn,
-here's squatting down and here's reaching over,
-here's to the ones who showed up.
-—Joseph Millar<br><br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-    Posts Here<br>
-  </p>
-</div>
-<!-- column right start -->
-<div class="column right">
-  <!-- <p> Add a new recipe here</p> -->
-  <div class="add_label" >
-    <span style="font-size: 15px" class="label label-primary rounded-pill">Add a new recipe here</span>
-  </div>
+  <label style="font-size: 15px" for="" class="label label-primary rounded-pill" ><i class="fas fa-utensils"></i>&nbsp; My Recipes</label>
   <hr>
-  <!-- <div class="file-upload-wrapper">
-  <input type="file" id="input-file-now" class="file-upload" />
-</div> -->
+  <!-- mypostslists: will show all my personal posts/recipes that user uploaded. Use JS to append more posts -->
+  <div id="mypostslists" class="">
+  </div>
 
-<div id="drop-zone">
-    Drop files here...
-    <label for="fileUpload" class="file-upload btn btn-info rounded-pill">
-      Or click here
-      <input id="fileUpload" style="display:none" type="file">
-      <img id="imgUpload" src="" alt="" width="100vw">
-    </label>
+  <!-- Another way: we create post template here and use JS to clone more -->
+  <!-- <div id="mypostslists" class="">
+    <div id="mySinglePost" class="">
+      <br><br>
+      <div class="">
+        <label for="">Test Image</label>
+      </div>
+      <div class="">
+        <img src="../testleft.jpg" alt="">
+      </div>
+      <br>
+      <p>
+    <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Ingredients</a>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Directions</button>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Ingredients+Indirections</button>
+    <button type="button" class="btn btn-primary" name="button">Edit</button>
+    <button type="button" class="btn btn-primary" name="button">Delete</button>
+  </p>
+  <div class="row">
+    <div class="col">
+      <div class="collapse multi-collapse" id="multiCollapseExample1">
+        <div class="card card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="collapse multi-collapse" id="multiCollapseExample2">
+        <div class="card card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div> -->
+
+
+  <!-- class="rounded mx-auto d-block" makes the image in the middle -->
+  <!-- <img src="../testleft.jpg" class="rounded mx-auto d-block" alt=""> -->
+
+
 </div>
 
+<!-- column right start -->
+<div class="column right mx-auto">
+  <label for="" class="label label-primary rounded-pill" style="font-size: 15px">Add New Recipe Here</label>
+  <form class="contaier" method="post" action="" enctype="multipart/form-data">
+    <div id="drop-zone">
+      <div id="notification" class="drop-zone-caption">Drag & Drop Image Here</div>
+      <span class="btn btn-primary btn-file" style="position: relative">
+        <span>Choose file</span>
+        <input type="file"id="drop-zone-file" name="files[]" accept=".jpg, .png">
+      </span>
+    </div>
+  </form>
+  <br><br>
+  <div class = "col-md">
+    <button id="addtags" class="btn btn-info btn-block rounded-pill shadow" style="width:130px;" data-toggle="modal" data-target="#">
+      Add Tags +</button>
+      <span id="taginput"></span>
+    <br>
+    <button id="addingredients" class="btn btn-info btn-block rounded-pill shadow" style="width:130px;" data-toggle="modal" data-target="#">
+      Add Ingredients +</button>
+      <span id="ingredientinput"></span>
+    <br>
+    <button id="adddirections" class="btn btn-info btn-block rounded-pill shadow" style="width:130px;" data-toggle="modal" data-target="#">
+      Add Directions +</button>
+      <span id="directioninput"></span>
+    <br>
+    <button id="uploadpost" class="btn btn-info btn-block rounded-pill shadow" style="width:130px;" data-toggle="modal" data-target="#">
+      Upload Post</button>
+  </div>
 </div>
 <!-- column right end -->
 
 </div>
 <!-- row ends -->
 
-<!-- pop window for edit profile starts-->
-<!-- Modal -->
-<div class="modal fade" id="editProfileModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Edit profile</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <input type="text"/>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- pop window for edit profile ends-->
-
-
-
-  <!-- <div class="file-upload-wrapper">
-  <input type="file" id="input-file-now-custom-1" class="file-upload" data-default-file="https://mdbootstrap.com/img/Photos/Others/images/89.jpg" />
- </div> -->
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <!-- <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase.js"></script> -->
@@ -301,6 +255,5 @@ firebase.initializeApp(firebaseConfig);
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/propper.js/1.14.7/umd/popper.min.js"></script> -->
 <script src="../js/bootstrap.min.js"></script>
 <script src="profile.js"></script>
-
 </body>
 </html>

@@ -59,18 +59,35 @@ border:2px solid #03b1ce ;}
 /* Create three unequal columns that floats next to each other */
 .column{
   /* float: left; */
-  padding: 30px;
+  padding: 40px;
 }
 .left{
-  width:25%;
+  width:30%;
 }
 
+
 .right{
-  width:25%;
+  width:30%;
 }
 .middle{
-  width:50%;
+  width:40%;
 }
+
+@media screen and (max-width: 1150px) {
+  .column {
+    width: 100%;
+  }
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  object-fit: cover;
+
+}
+
 
 .view input {
   border:0;
@@ -125,55 +142,64 @@ input{
 
 /* column right: drop zone starts */
 
+/* file upload css*/
+#dragandrophandler {
+    border: 2px dotted #0B85A1;
+    width: 400px;
+    color: #92AAB0;
+    text-align: left;
+    vertical-align: middle;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+    font-size: 200%;
+}
+
 #drop-zone {
-    /*Sort of important*/
-    width: 220px;
-    /*Sort of important*/
-    height: 200px;
-    position:absolute;
-    left:80%;
-    top:25px;
-    /* margin-leftL: set the marigin to the left column border */
-    margin-left:-205px;
+    position: relative;
+    left:0%;
+    width: 100%;
+    height: 240px;
+    text-align: center;
+    padding: 86px 0 0;
+    outline: 2px dashed #92b0b3;
+    outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    font-size: 1.25rem;
+    font-family: helvetica;
+    background-color: #c8dadf;
     border: 2px dashed rgba(0,0,0,.3);
     border-radius: 20px;
-    font-family: Arial;
-    text-align: center;
-    position: relative;
+    font-family: helvetica;
+    top:25px;
     line-height: 80px;
-    font-size: 15px;
-    color: rgba(0,0,0,.3);
+    /* position: relative; */
+    /* padding: 100px 20px; */
 }
 
-#drop-zone input {
-        /*Important*/
-        position: absolute;
-        /*Important*/
-        cursor: pointer;
-        left: 0px;
-        top: 0px;
-        /*Important This is only comment out for demonstration purposes.
-        opacity:0; */
-    }
-    /*If you dont want the button*/
-#clickHere {
+.btn-file input[type=file] {
     position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
     cursor: pointer;
-    left: 80%;
-    top: 40%;
-    margin-left: -100px;
-    margin-top: 20px;
-    line-height: 26px;
-    color: gray;
-    font-size: 12px;
-    width: 100px;
-    height: 26px;
-    border-radius: 4px;
-    background-color: #3b85c3;
-
+    font-family: helvetica;
 }
 
-/* input[type="checkbox"]:checked + label {
-  color: yellow;
-  font-weight: bold;
-} */
+input[type=file] {
+    display: block;
+}
+
+#drop-zone .drop-zone-caption {
+    font-size: 20px;
+    font-weight: 600;
+    color: #919fa9;
+    margin: 0 0 14px;
+}
+
+.btn.btn-primary {
+    background-color: #00a8ff;
+    border-color: #00a8ff;
+}
