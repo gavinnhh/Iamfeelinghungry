@@ -9,6 +9,11 @@ document.getElementById('editprofile').addEventListener('click', handleEditProfi
 document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
 // document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
 //document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
+//document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
+document.getElementById('addtags').addEventListener('click', handleAddTags, false);
+document.getElementById('addingredients').addEventListener('click', handleAddIngredients, false);
+document.getElementById('adddirections').addEventListener('click', handleAddDirections, false);
+document.getElementById('uploadpost').addEventListener('click', handleFileUploadbutton, false);
 
 
 // function loadProfile below means to upload a new profile photo
@@ -268,10 +273,37 @@ function handleCancelEdit(){
   document.getElementById('profile_lname').setAttribute('readonly', true);
 }
 
+//adding tags ingredients and directions strts here<---------------------------
+function handleAddTags(){
+  console.log("Add Tags clicked");
+  var countBox =1;
+  var boxName= "Next Tag"
+  document.getElementById('taginput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:100%;" placeholder="'+boxName+'" "  /><br/>';
+  countBox += 1;
+}
+function handleAddIngredients(){
+  console.log("Add Ingredients clicked");
+  var countBox =1;
+  var boxName= "Next Ingredient"
+  document.getElementById('ingredientinput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:100%;" placeholder="'+boxName+'" "  /><br/>';
+  countBox += 1;
+}
+function handleAddDirections(){
+  console.log("Add Directions clicked");
+  var countBox =1;
+  var boxName= "Next Direction"
+  document.getElementById('directioninput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:100%;" placeholder="'+boxName+'" "  /><br/>';
+  countBox += 1;
+}
 // file uplaod js starts here <--------------------------
 
+//Upload button handler
+function handleFileUploadbutton(){
+  handleFileUpload(files,obj);
+}
 //drag and drop handler-------------------------
 var obj = $("#drop-zone");
+var files;
 obj.on('dragenter', function (e) {
     e.stopPropagation();
     e.preventDefault();
@@ -284,17 +316,19 @@ obj.on('dragover', function (e) {
 obj.on('drop', function (e) {
      $(this).css('border', '2px dotted #0B85A1');
      e.preventDefault();
-     var files = e.originalEvent.dataTransfer.files;
+     files = e.originalEvent.dataTransfer.files;
 
      //We need to send dropped files to firebase
-     handleFileUpload(files,obj);
+     //handleFileUpload(files,obj);
+     document.getElementById('notification').innerHTML = "File is ready for Upload!!";
 });
 
 //choose file handler--------------------------
 // automatically submit the form on file select
 $('#drop-zone-file').on('change', function (e) {
-    var files = $('#drop-zone-file')[0].files;
-    handleFileUpload(files, obj);
+    files = $('#drop-zone-file')[0].files;
+    //handleFileUpload(files, obj);
+    document.getElementById('notification').innerHTML = "File is ready for Upload!!";
 });
 
 //provent files from being opened in the browser
@@ -411,6 +445,10 @@ function formatBytes(bytes, decimals) {
     var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     var i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
+function handleAddPosts(){
+  console.log("handleAddPosts clicked");
 }
 
 function createOnePost(Title, foodUrl, index){
