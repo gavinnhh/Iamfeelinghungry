@@ -68,23 +68,7 @@ firebase.auth().onAuthStateChanged(function(user) {
             var allPosts = data.allPostsIDs; // get the user's all post ids
             var theWholeDiv = [];
             var len = allPosts.length;
-            //console.log("index 0 " + allPosts[0]);
-
-            // for(i = 0; i < len; i++){
-            //   var post_div = createOnePost("dummy", "dummy", i);
-            //   document.getElementById('mypostslists').appendChild(post_div);
-            //   viewMoreButton = post_div.getElementsByTagName("button")[0]; // get the button from the div
-            //   theWholeDiv.push(viewMoreButton);
-            // }
-            //
-            // theWholeDiv.forEach(eachBtn => {
-            //
-            //     eachBtn.addEventListener('click', function(){console.log("clicked " + eachBtn.id);}, false);
-            //
-            // })
-
-            // document.getElementById('view0').addEventListener('click', function(){console.log("view0 clicked " );}, false);
-            // document.getElementById('view1').addEventListener('click', function(){console.log("view1 clicked " );}, false);
+          
             var index = 0;
             allPosts.forEach(pid => {
               const mypost = db2.collection('posts').doc(pid);
@@ -103,44 +87,10 @@ firebase.auth().onAuthStateChanged(function(user) {
 
               });
             })
-            // for(i = 0; i < len; i++){
-            //   var pid = allPosts[i]; // get each post id
-            //   console.log("current pid " + pid);
-            //
-            //   const mypost = db2.collection('posts').doc(pid);
-            //   mypost.onSnapshot(doc => {
-            //           const postdata = doc.data();
-            //           //var viewMoreBtnId = postdata.title; // maybe not necessary
-            //           var post_div = createOnePost(postdata.title, postdata.foodUrl, i); // create a post
-            //
-            //           viewMoreButton = post_div.getElementsByTagName("button")[0]; // get the button from the div
-            //           theWholeDiv.push(viewMoreButton);
-            //           document.getElementById('mypostslists').appendChild(post_div);
-            //           console.log("viewMoreButton.id " + viewMoreButton.id);
-            //           viewMoreButton.addEventListener('click', function(){handleViewMore(allPosts[i])}, false);
-            //
-            //           i-=1; // to make it view1, view2
-            //
-            //   });
-            // }
-          //  console.log("theWholeDiv.length = " + theWholeDiv.length);
-
-
-
-            // console.log("length of allPosts initially " + allPosts.length);
-            // localStorage.setItem('pushallposts', JSON.stringify(allPosts));
-
     });
   }
 
 });
-
-// function passAllPostsIDs(allPostsIDs){
-//   console.log("allPostsIDs: " + allPostsIDs);
-// }
-
-
-
 
 function UpdatePhotoUrl(files){
   var user = firebase.auth().currentUser;
@@ -503,25 +453,9 @@ function createOnePost(Title, foodUrl, index){
 }
 
 // load to recipe web page
-// TODO: pass each post ID to recipe.js
 function handleViewMore(postid){
-  //console.log("length of allPosts initially " + allPosts.length);
   console.log("current value: " + postid);
   console.log("handleViewMore clicked");
-  localStorage.setItem('currentPid', postid);
+  localStorage.setItem('currentPid', postid); // use localStorage to send postid to recipe.js
   window.location.href = "../recipe/recipe.html";
 }
-
-
-
-
-// function handleAddPosts(){
-//   console.log("addpost clicked");
-//   var post_div = createOnePost(); // create a post
-//   document.getElementById('mypostslists').appendChild(post_div);
-//   // var singlePost = document.getElementById("mySinglePost").lastChild;
-//   // // Copy the <mySinglePost> element and its child nodes
-//   // var mySinglePost_clone = mySinglePost.cloneNode(true);
-//   // console.log("clone...");
-//   // document.getElementById("mypostslists").appendChild(mySinglePost_clone);
-// }
