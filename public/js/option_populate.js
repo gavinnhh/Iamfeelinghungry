@@ -1,14 +1,13 @@
-// retrive data from firebase database
-const database = firebase.firestore();
-const menuDoc = database.collection('dropdown menu').doc("food_tags");
-menuDoc.get().then(function(doc) {
-  var options = doc.data().tags
-  // console.log(options.length)
-  createOption(options);
-});
+// // retrive data from firebase database
+// const database = firebase.firestore();
+// const menuDoc = database.collection('dropdown menu').doc("food_tags");
+// menuDoc.get().then(function(doc) {
+//   var options = doc.data().tags
+//   createOption(options);
+// });
 
-// var arr = ["Chinese", "American", "Vietnamese", "Mexican", "Japanese", "Korean"];
-// createOption(arr);
+var arr = ["Chinese", "American", "Vietnamese", "Mexican", "Japanese", "Korean"];
+createOption(arr);
 
 // populate items in dropdown menu
 function createOption(arr) {
