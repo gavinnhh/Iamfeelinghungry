@@ -298,6 +298,7 @@ function handleAddDirections(){
 //Upload button handler
 function handleFileUploadbutton(){
   handleFileUpload(files,obj);
+  console.log("clikced");
 }
 //drag and drop handler-------------------------
 var obj = $("#drop-zone");
@@ -445,9 +446,9 @@ function formatBytes(bytes, decimals) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
-function handleAddPosts(){
-  console.log("handleAddPosts clicked");
-}
+// function handleAddPosts(){
+//   console.log("handleAddPosts clicked");
+// }
 
 function createOnePost(Title, foodUrl, index){
   var post_div = document.createElement("div");
