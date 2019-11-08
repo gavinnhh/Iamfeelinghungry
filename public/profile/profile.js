@@ -270,6 +270,8 @@ function handleCancelEdit(){
   document.getElementById('profile_lname').setAttribute('readonly', true);
 }
 
+var ingNum=1;
+var directionNum=1;
 //adding tags ingredients and directions strts here<---------------------------
 function handleAddTags(){
   console.log("Add Tags clicked");
@@ -279,18 +281,40 @@ function handleAddTags(){
   countBox += 1;
 }
 function handleAddIngredients(){
-  console.log("Add Ingredients clicked");
-  var countBox =1;
-  var boxName= "Next Ingredient"
-  document.getElementById('ingredientinput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:100%;" placeholder="'+boxName+'" "  /><br/>';
-  countBox += 1;
+   var brtag = document.createElement('br');
+   var inTag = document.getElementById('ingredientinput');
+   inTag.appendChild(brtag);
+   var input = document.createElement('input');
+   var brtag2 = document.createElement('br');
+   input.style.background = 'white';
+   input.style.width = '100%';
+   input.placeholder= "New Ingredient"
+   inTag.appendChild(input);
+   inTag.appendChild(brtag2);
+   input.id = "ingNum" + ingNum;
+   ingNum++;
+
 }
 function handleAddDirections(){
-  console.log("Add Directions clicked");
-  var countBox =1;
-  var boxName= "Next Direction"
-  document.getElementById('directioninput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:100%;" placeholder="'+boxName+'" "  /><br/>';
-  countBox += 1;
+  console.log('clicked directions');
+  var remove = "remove";
+  var div = document.createElement('div');
+  var brtag = document.createElement('br');
+  var diTag = document.getElementById('directioninput');
+  diTag.appendChild(brtag);
+  var input = document.createElement('input');
+  var brtag2 = document.createElement('br');
+  input.style.background = 'white';
+  input.style.width = '80%';
+  input.placeholder= "New Ingredient"
+  diTag.appendChild(input);
+  diTag.innerHTML += '<button id="remove'+directionNum+'" class="btn"><i class="fas fa-trash" style:"color:white"></i>&nbsp;</button>';
+  diTag.appendChild(brtag2);
+  document.getElementById('remove'+directionNum+'').addEventListener('click', function(){
+    (this.parentNode).remove();
+  });
+  console.log(name);
+  directionNum++;
 }
 
 // file uplaod js starts here <--------------------------
