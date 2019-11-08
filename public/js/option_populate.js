@@ -4,14 +4,15 @@ const menuDoc = database.collection('dropdown menu').doc("food_tags");
 menuDoc.get().then(function(doc) {
   var arr = doc.data().tags;
   createOption(arr);
+  document.getElementById('select').addEventListener('change', getSelectValue, false);
 });
 
 // populate items in dropdown menu
 function createOption(arr) {
   var dddiv = document.getElementById('dropdown-menu');
   var select = document.createElement('select');
-  select.id = "select";
   select.multiple = true;
+  select.setAttribute("id", "select");
   select.setAttribute("class", "dropdown-content");
   dddiv.appendChild(select);
   for(var i = 0; i < arr.length; i++) {
@@ -30,4 +31,14 @@ function createOption(arr) {
     multiShowCount: false,
     multiContainer: '.move-container'
   });
+}
+
+function getSelectValue() {
+  localStorage.clear();
+  var optionContainer = document.getElementById('tags-container');
+  var selectedValue = optionContainer.getElementsByClassName("select-handle");
+  for (var i = 0; i < selectedValue.length; i++ ){
+    var data = selectedValue[i].getAttribute("data-key");
+    localStorage.setItem(i, data);
+  }
 }
