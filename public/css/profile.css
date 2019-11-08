@@ -84,6 +84,8 @@ img {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+  object-fit: cover;
+
 }
 
 

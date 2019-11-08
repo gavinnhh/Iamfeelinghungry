@@ -137,21 +137,26 @@ function handleGoogleSigninbtn(){
         var email = user.email;
         var imgUrl = user.photoURL;
         var allPostsIDsArray = [];
-        // add a new user into database
-        db.collection("users").doc(user.uid).set({
-            allPostsIDs:allPostsIDsArray,
-            username: username,
-            firstname: firstname,
-            lastname:lastname,
-            email: email,
-            photoUrl: imgUrl
-        })
-        .then(function() {
-            console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        });
+
+        // <--- add a new user into database starts  --->
+        if(user == null){
+          db.collection("users").doc(user.uid).set({
+              allPostsIDs:allPostsIDsArray,
+              username: username,
+              firstname: firstname,
+              lastname:lastname,
+              email: email,
+              photoUrl: imgUrl
+          })
+          .then(function() {
+              console.log("Document successfully written!");
+          })
+          .catch(function(error) {
+              console.error("Error writing document: ", error);
+          });
+        }
+
+        // <--- add a new user into database ends --->
 
     }).catch(function(error) {
         // Handle Errors here.

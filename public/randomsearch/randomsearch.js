@@ -83,11 +83,13 @@ function loadImages(){
   var allUrls = [];
   // Create a reference under which you want to list
   var listRef = storageRef.child('images');
+
   // Find all the prefixes and items.
   listRef.listAll().then(function(res) {
     res.items.forEach(function(itemRef) {
         // All the items under listRef.
         // console.log('list all: ');
+          console.log("inside here???");
         // console.log(itemRef.location);
         itemRef.getDownloadURL().then(function(url) {
           // console.log('url: ' + url); // url is string
