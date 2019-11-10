@@ -16,6 +16,9 @@
   <link rel="stylesheet" type="text/css" href="../css/signin.css">
   <link rel="stylesheet" type="text/css" href="../css/signup.css">
 
+  <link rel="stylesheet" type="text/css" href="css/dropdown.css">
+  <link rel="stylesheet" type="text/css" href="css/scroll-bar.css">
+
   <!-- to get the search icon -->
   <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
   <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
@@ -167,7 +170,12 @@
 <!-- <div class="container" style="background-color: white;">abc</div> -->
 <div class="result row">
   <div class="result-col1">
-    <a class="btn btn-info" href="https://www.calculator.net/calorie-calculator.html">Calorie Calculator</a>
+    <div id="tags-container" class="container search-tags-container move-container mt-2 col-lg-auto">
+      <h5>Searching for:</h5>
+    </div>
+    <div class="container calorie">
+      <a class="btn btn-info" href="https://www.calculator.net/calorie-calculator.html">Calorie Calculator</a>
+    </div>
   </div>
   <!-- <div class="result-col2"></div> -->
   <div class="result-col3">
@@ -268,5 +276,6 @@ firebase.initializeApp(firebaseConfig);
 <script src="../auth/badwords.js"></script>
 <script src="../bower_components/zxcvbn/dist/zxcvbn.js"></script>
 <script src="./specificsearch.js"></script>
+<script src="js/dropdown.js"></script>
 </body>
 </html>

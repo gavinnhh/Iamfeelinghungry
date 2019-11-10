@@ -22,7 +22,7 @@
 .result-col1 {
   width: 20%;
   height: auto;
-  /* background-color: white; */
+  /* background-color: green; */
   word-wrap: break-word;
   padding: 10px 0px;
 }
@@ -108,4 +108,35 @@ img {
 .user-info p {
   display: inline-block;
   word-break: break-all;
+}
+
+.search-tags-container label {
+  width: auto;
+  color: white;
+  cursor: pointer;
+  margin: 1px;
+  padding: 0.2em 0.6em 0.3em;
+  display: inline-block;
+  position: relative;
+  font-size: 11.844px;
+  text-align: left;
+  font-weight: bold;
+  line-height: 16px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  vertical-align: top;
+  background-color: #28A745;
+  border-width: 0;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 3px;
+  transition: background 142ms linear;
+  -webkit-transition: background 142ms linear;
+}
+
+.search-tags-container {
+  /* background-color: yellow; */
+}
+
+.calorie {
+  margin-top: 20px;
 }
