@@ -67,6 +67,7 @@ body {
 .search-box:hover > .search-btn {
  /* background: #66ff33;
  color: green; */
+ /* width: 50px; */
 }
 
 .search-btn {

@@ -20,6 +20,7 @@ document.getElementById('uploadpost').addEventListener('click', handleFileUpload
 // also: new image selcted will be uploaded into firebase storage and
 // new photo url will overwrite the current user's data field: photoUrl
 // once load file is called, that means we want to update profile image
+// loadProfile is from the HTML
 var loadProfile = function(files) {
   var image = document.getElementById('profileImgId');
   image.src = URL.createObjectURL(event.target.files[0]); // get a new photo
@@ -527,5 +528,5 @@ function handleViewMore(postid){
   console.log("current value: " + postid);
   console.log("handleViewMore clicked");
   localStorage.setItem('currentPid', postid); // use localStorage to send postid to recipe.js
-  window.location.href = "../recipe/recipe.html";
+  window.location.href = "../recipe/recipeDisplay.html";
 }
