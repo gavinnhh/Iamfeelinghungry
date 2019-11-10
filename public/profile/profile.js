@@ -20,6 +20,7 @@ document.getElementById('uploadpost').addEventListener('click', handleFileUpload
 // also: new image selcted will be uploaded into firebase storage and
 // new photo url will overwrite the current user's data field: photoUrl
 // once load file is called, that means we want to update profile image
+// loadProfile is from the HTML
 var loadProfile = function(files) {
   var image = document.getElementById('profileImgId');
   image.src = URL.createObjectURL(event.target.files[0]); // get a new photo
@@ -73,7 +74,7 @@ firebase.auth().onAuthStateChanged(function(user) {
             var allPosts = data.allPostsIDs; // get the user's all post ids
             var theWholeDiv = [];
             var len = allPosts.length;
-          
+
             var index = 0;
             allPosts.forEach(pid => {
               const mypost = db2.collection('posts').doc(pid);
@@ -87,8 +88,6 @@ firebase.auth().onAuthStateChanged(function(user) {
                       document.getElementById('mypostslists').appendChild(post_div);
                       //console.log("viewMoreButton.id " + viewMoreButton.id);
                       viewMoreButton.addEventListener('click', function(){handleViewMore(pid)}, false);
-
-
 
               });
             })
@@ -288,18 +287,52 @@ function handleAddIngredients(){
   document.getElementById('ingredientinput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:100%;" placeholder="'+boxName+'" "  /><br/>';
   countBox += 1;
 }
+
+// <div>
+//    <input type="text" style="" />
+//    <button>delete</button>
+//
+// </div>
+
+var directionNum = 1;
+allDeleteBtns = [];
 function handleAddDirections(){
-  console.log("Add Directions clicked");
-  var countBox =1;
-  var boxName= "Next Direction"
-  document.getElementById('directioninput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:100%;" placeholder="'+boxName+'" "  /><br/>';
-  countBox += 1;
+ var inputDiv = document.createElement('div');
+ inputDiv.id = "inputdivID" + directionNum;
+
+ var brtag = document.createElement('br');
+ var diTag = document.getElementById('directioninput');
+ inputDiv.appendChild(brtag);
+ var input = document.createElement('input');
+ var brtag2 = document.createElement('br');
+ input.style.background = 'white';
+ input.style.width = '80%';
+ input.placeholder= "New Ingredient"
+ inputDiv.appendChild(input);
+ inputDiv.innerHTML += '<button id="remove'+directionNum+'" class="btn"><i class="fas fa-trash"></i>&nbsp;</button>';
+ inputDiv.appendChild(brtag2);
+ input.id = "directionNum" + directionNum;
+ directionNum++;
+
+ diTag.appendChild(inputDiv);
+ deleteBtn = inputDiv.getElementsByTagName("button")[0];
+ allDeleteBtns.push(deleteBtn);
+ //console.log(allDeleteBtns);
+ // diTag.innerHTML += '<button id="remove" class="btn btn-info rounded-pill shadow" data-toggle="modal" data-target="#"><i class="fas fa-trash"></i>&nbsp;</button>';
+ allDeleteBtns.forEach(function(eachdeletebtn){
+   eachdeletebtn.addEventListener('click', function(){console.log(eachdeletebtn.id + "clicked");this.parentNode.remove();}, false);
+
+ });
 }
+
+
+
 // file uplaod js starts here <--------------------------
 
 //Upload button handler
 function handleFileUploadbutton(){
   handleFileUpload(files,obj);
+  console.log("clikced");
 }
 //drag and drop handler-------------------------
 var obj = $("#drop-zone");
@@ -447,9 +480,9 @@ function formatBytes(bytes, decimals) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
 
-function handleAddPosts(){
-  console.log("handleAddPosts clicked");
-}
+// function handleAddPosts(){
+//   console.log("handleAddPosts clicked");
+// }
 
 function createOnePost(Title, foodUrl, index){
   var post_div = document.createElement("div");
@@ -495,5 +528,5 @@ function handleViewMore(postid){
   console.log("current value: " + postid);
   console.log("handleViewMore clicked");
   localStorage.setItem('currentPid', postid); // use localStorage to send postid to recipe.js
-  window.location.href = "../recipe/recipe.html";
+  window.location.href = "../recipe/recipeDisplay.html";
 }

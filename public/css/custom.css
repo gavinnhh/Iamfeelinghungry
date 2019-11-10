@@ -46,7 +46,7 @@ body {
 
 .title{
   position: absolute;
-  top: 38%;
+  top: 33%;
   left: 50%;
   transform: translate(-50%, -50%);
 
@@ -67,6 +67,7 @@ body {
 .search-box:hover > .search-btn {
  /* background: #66ff33;
  color: green; */
+ /* width: 50px; */
 }
 
 .search-btn {
