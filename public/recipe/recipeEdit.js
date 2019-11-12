@@ -8,6 +8,7 @@ console.log("sendCurrentPid2Display = " + currpostid);
 document.getElementById('home').addEventListener('click', goHome, false);
 document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
 document.getElementById('savePost').addEventListener('click', handleSavePost, false);
+document.getElementById('deletePost').addEventListener('click', handledeletePost, false);
 
 function handleCancelEdit(){
   window.location.href = "recipeDisplay.html";
@@ -72,6 +73,22 @@ function handleSavePost(){
 
 function goHome(){
   window.location.href = "../index.html";
+}
+
+function handledeletePost(){
+  console.log("delete post clicked");
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      db_recipe.collection("posts").doc().delete(currpostid).then(function() {
+          console.log("Post successfully deleted!");
+      }).catch(function(error) {
+          console.error("Error removing post: ", error);
+      });
+    }else{
+      alert("You are not signed in!!!");
+    }
+  });
+
 }
 
 const mypost = db_recipe.collection('posts').doc(currpostid);
