@@ -215,8 +215,8 @@
   <div class="search-bar-text col-lg-auto mt-5 mt-md-0" align="center">
     <h1 class="label-text">I'm feeling</h1>
   </div>
-  <div class="dd-menu col-lg-auto mb-3 mb-md-0" align="center">
-    <select multiple id="select" class="dropdown-content">
+  <div class="dd-menu col-lg-auto mb-3 mb-md-0" id="dropdown-menu" align="center">
+    <!-- <select multiple id="select" class="dropdown-content"> -->
       <!-- <option data-description="num1">Number 1 </option>
       <option data-description="num3">Number 3</option>
       <option data-description="num2">Number 2</option>
@@ -229,13 +229,12 @@
       <option data-description="num9">Number 9</option>
       <option data-description="num10">Number 10</option>
       <option data-description="num11">Number 11</option> -->
-    </select>
-
+    <!-- </select> -->
   </div>
   <div class="go-button col-xs-auto" align="center">
     <button id="go" type="button" class="go-button btn btn-success" onclick="window.location='specificsearch/specificsearch.html'">GO</button>
   </div>
-  <div class="container search-tags-container move-container mt-2 col-lg-auto" align="center"></div>
+  <div id="tags-container" class="container search-tags-container move-container mt-2 col-lg-auto" align="center"></div>
 </div>
 
 
@@ -284,19 +283,6 @@ firebase.initializeApp(firebaseConfig);
 <!-- Javascript for dropdown -->
 <script src="js/dropdown.js"></script>
 <script src="js/option_populate.js"></script>
-
-<!-- for dropdown menu -->
-<script>
-tail.select('#select', {
-  search: true,
-  descriptions: true,
-  multilimit: 15,
-  hideSelected: true,
-  hideDisabled: true,
-  multiShowCount: false,
-  multiContainer: '.move-container'
-});
-</script>
 
 <script src="js/bootstrap.min.js"></script>
 <script src="auth/auth.js"></script>

@@ -2,26 +2,43 @@
 const database = firebase.firestore();
 const menuDoc = database.collection('dropdown menu').doc("food_tags");
 menuDoc.get().then(function(doc) {
-  var options = doc.data().tags
-  localStorage.setItem('opts', JSON.stringify(options));
+  var arr = doc.data().tags;
+  createOption(arr);
+  document.getElementById('select').addEventListener('change', getSelectValue, false);
 });
-
-var arr = JSON.parse(localStorage.getItem("opts"));
-createOption(arr)
 
 // populate items in dropdown menu
 function createOption(arr) {
-  console.log("inside");
-  console.log(arr.length);
-  var select = document.getElementById("select");
+  var dddiv = document.getElementById('dropdown-menu');
+  var select = document.createElement('select');
+  select.multiple = true;
+  select.setAttribute("id", "select");
+  select.setAttribute("class", "dropdown-content");
+  dddiv.appendChild(select);
   for(var i = 0; i < arr.length; i++) {
     var opt = arr[i];
     var el = document.createElement("option");
-
-    var el_text = document.createTextNode(opt);
-    el.appendChild(el_text);
-    //el.textContent = opt;
-    //el.value = opt;
+    el.textContent = opt;
+    el.value = opt;
     select.appendChild(el);
+  }
+  tail.select('#select', {
+    search: true,
+    descriptions: true,
+    multilimit: 15,
+    hideSelected: true,
+    hideDisabled: true,
+    multiShowCount: false,
+    multiContainer: '.move-container'
+  });
+}
+
+function getSelectValue() {
+  localStorage.clear();
+  var optionContainer = document.getElementById('tags-container');
+  var selectedValue = optionContainer.getElementsByClassName("select-handle");
+  for (var i = 0; i < selectedValue.length; i++ ){
+    var data = selectedValue[i].getAttribute("data-key");
+    localStorage.setItem(i, data);
   }
 }
