@@ -1,8 +1,8 @@
 const storageRef = firebase.storage().ref(); // global const
 const db_randomsearch = firebase.firestore();
 
+// random loadimages should allow anyone 
 function loadImages(){
-
   // postsColections = db_randomsearch.collection("cities")
   // TODO: get two random images from posts, but not /images in firestorage
   // Get all documents id from the database
