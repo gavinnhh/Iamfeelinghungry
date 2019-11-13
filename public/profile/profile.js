@@ -272,42 +272,62 @@ function handleCancelEdit(){
   document.getElementById('profile_lname').setAttribute('readonly', true);
 }
 
+var ingNum=1;
+var directionNum=1;
 //adding tags ingredients and directions strts here<---------------------------
 function handleAddTags(){
   console.log("Add Tags clicked");
   var countBox =1;
   var boxName= "Next Tag"
-  document.getElementById('taginput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:100%;" placeholder="'+boxName+'" "  /><br/>';
-  countBox += 1;
-}
-function handleAddIngredients(){
-  console.log("Add Ingredients clicked");
-  var countBox =1;
-  var boxName= "Next Ingredient"
-  document.getElementById('ingredientinput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:100%;" placeholder="'+boxName+'" "  /><br/>';
+  document.getElementById('taginput').innerHTML+='<br/><input type="text" id="'+boxName+countBox+'" style="background-color: white; width:80%;" placeholder="'+boxName+'" "  /><br/>';
   countBox += 1;
 }
 
-// <div>
-//    <input type="text" style="" />
-//    <button>delete</button>
-//
-// </div>
+var ingredientNum = 1;
+function handleAddIngredients(){
+  var inputDiv = document.createElement('div');
+  inputDiv.id = "inputdivID" + ingredientNum;
+  var allDeleteBtns = [];
+
+  var brtag = document.createElement('br');
+  var diTag = document.getElementById('ingredientinput');
+  inputDiv.appendChild(brtag);
+  var input = document.createElement('input');
+  var brtag2 = document.createElement('br');
+  input.style.background = 'white';
+  input.style.width = '80%';
+  input.placeholder= "New Ingredient";
+  inputDiv.appendChild(input);
+  inputDiv.innerHTML += '<button id="remove'+ingredientNum+'" class="btn"><i class="fas fa-trash"></i>&nbsp;</button>';
+  inputDiv.appendChild(brtag2);
+  input.id = "ingredientNum" + ingredientNum;
+  directionNum++;
+
+  diTag.appendChild(inputDiv);
+  deleteBtn = inputDiv.getElementsByTagName("button")[0];
+  allDeleteBtns.push(deleteBtn);
+  //console.log(allDeleteBtns);
+  // diTag.innerHTML += '<button id="remove" class="btn btn-info rounded-pill shadow" data-toggle="modal" data-target="#"><i class="fas fa-trash"></i>&nbsp;</button>';
+  allDeleteBtns.forEach(function(eachdeletebtn){
+    eachdeletebtn.addEventListener('click', function(){console.log(eachdeletebtn.id + "clicked");this.parentNode.remove();}, false);
+
+  });
+}
 
 var directionNum = 1;
-allDeleteBtns = [];
 function handleAddDirections(){
  var inputDiv = document.createElement('div');
+ var allDeleteBtns = [];
  inputDiv.id = "inputdivID" + directionNum;
 
  var brtag = document.createElement('br');
  var diTag = document.getElementById('directioninput');
  inputDiv.appendChild(brtag);
- var input = document.createElement('input');
+ var input = document.createElement('textarea');
  var brtag2 = document.createElement('br');
  input.style.background = 'white';
  input.style.width = '80%';
- input.placeholder= "New Ingredient"
+ input.placeholder= "Next Step";
  inputDiv.appendChild(input);
  inputDiv.innerHTML += '<button id="remove'+directionNum+'" class="btn"><i class="fas fa-trash"></i>&nbsp;</button>';
  inputDiv.appendChild(brtag2);
