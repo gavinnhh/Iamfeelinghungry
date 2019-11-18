@@ -94,6 +94,7 @@ img {
   background:0;
   outline:none !important;
 }
+
 /* to set background color of text input box */
 /* input[type="text"], textarea {
   background-color :transparent;
@@ -203,3 +204,7 @@ input[type=file] {
     background-color: #00a8ff;
     border-color: #00a8ff;
 }
+
+/* .fas{
+  color:white !important;
+} */

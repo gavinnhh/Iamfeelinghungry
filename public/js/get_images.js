@@ -123,5 +123,5 @@ function handleViewMore(postid){
   console.log("current value: " + postid);
   console.log("handleViewMore clicked");
   localStorage.setItem('currentPid', postid); // use localStorage to send postid to recipe.js
-  window.location.href = "../recipe/recipe.html";
+  window.location.href = "../recipe/recipeDisplay.html";
 }

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-
+<!-- Compiled and minified CSS -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"> -->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,17 +11,16 @@
   <!--Bootstrap core CSS-->
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <!-- <link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/custom.css"> -->
-  <link rel="stylesheet" type="text/css" href="../css/randomsearch.css">
   <link rel="stylesheet" type="text/css" href="../css/custom.css">
+  <link rel="stylesheet" type="text/css" href="../css/recipe.css">
   <link rel="stylesheet" type="text/css" href="../css/switch.css">
   <link rel="stylesheet" type="text/css" href="../css/signin.css">
   <link rel="stylesheet" type="text/css" href="../css/signup.css">
 
-  <!-- to get the search icon -->
+  <!-- to get the smily face icon -->
   <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
   <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
-  <title>I'M FEELING RANDOM</title>
-
+  <title>Recipe</title>
   <!-- update the version number as needed -->
   <script defer src="/__/firebase/6.6.0/firebase-app.js"></script>
   <!-- include only the Firebase features as you need -->
@@ -28,18 +28,19 @@
   <script defer src="/__/firebase/6.6.0/firebase-database.js"></script>
   <script defer src="/__/firebase/6.6.0/firebase-messaging.js"></script>
   <script defer src="/__/firebase/6.6.0/firebase-storage.js"></script>
-  <!-- initialize the SDK after all desired features are loaded -->
   <script defer src="/__/firebase/init.js"></script>
+
 </head>
 
 <body>
 
   <div class="top_nav">
+    <!-- Sign-in button -->
     <button id="home" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal"><i class="fas fa-home"></i>&nbsp;Home</button>
-    <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign in</button>
+    <button id="home-signin" type="button" class="btn btn-default" style="color: gray;" data-toggle="modal" data-target="#signInModal">Sign In</button>
     <!-- Sign-up button -->
-    <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign up</button>
-    <button id="setting" type="button" title="Click to see my profile" class="btn btn-default" style="color: gray;"><i class="fas fa-user"></i></i></button>
+    <button id="home-signup" type="button" class="btn btn-default" style="color: gray;"data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+    <button id="setting" type="button" class="btn btn-default" style="color: gray; visibility: hidden"><i class="fas fa-user"></i></button>
 
   </div>
 
@@ -70,15 +71,22 @@
             </div>
 
             <div class="form-group">
-              <button id="siginbtnwithgoogle" class="btn btn-block" type="button" name="button"><img src="../googleicon.png" alt="" width="20" height="20">&nbsp;&nbsp; Sign in with Google</button>
-            </div>
-          </form>
+              <!-- <i class="fa fa-google" aria-hidden="true"></i> -->
+              <!-- <i class="fab fa-google-plus-g"></i> -->
+              <button id="siginbtnwithgoogle" class="btn btn-block" type="button" name="button">
+                <img src="../googleicon.png" alt="" width="20" height="20">&nbsp;&nbsp;&nbsp;&nbsp;Sign in with Google</button>
 
+              <!-- <img src="googleicon.png" alt="" width="20" height="20">
+              <input id="siginbtnwithgoogle" type="button" class="btn btn-block btn-color" value="Sign in with Google"> -->
+            </div>
+
+          </form>
         </div>
         <div class="modal-footer">
           <span style="font-family:helvetica" class="txt">Don’t have an account?</span>
           <button id="noAccountSignup" type="button" class="btn btn-default" style="color: gray; font-size: 12px;" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
         </div>
+
       </div>
     </div>
   </div>
@@ -126,7 +134,7 @@
             <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="required">
           </div> -->
           <div class="form-group">
-            <input id="signupbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign up">
+            <input id="signupbtn" type="button" class="btn btn-block btn-lg btn-color" value="Sign Up">
           </div>
         </form>
       </div>
@@ -154,90 +162,88 @@
           </div>
         </form>
       </div>
-
     </div>
   </div>
 </div>
 
-
-<div class="foodfight">
-  <p>Food Fight!</p>
+<div class="title">
+  <p id = "name">...</p>
 </div>
-
-</br></br></br></br></br>
+<br><br><br><br><br><br><br><br><br>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4 offset-md-1 text-center" id="left" >
-      <!-- Once click the image, this link brings the full receipe page  -->
-
-        <h3 id='lefttitle' style="color: grey; font-size: 1.5em;">loading title...</h3>
-        <a href="javascript:;" onclick='seeleftdetail();'>
-        <div class= "imagecontainer">
-          <div class="loader"></div>
-          <img id="imgID" src="../loader.gif" alt="test left" class="rounded-corners mx-auto d-block"  width="653" height="400"/>
-          <div class= "overlay">
-            <div class="overlaytext" id="leftoverlaytext">loading...</div>
-          </div>
-        </div>
-      </a>
-      </div>
-      <div class="centertext textFont" style= "font-size: 72px";>
-        <p>VS</p>
-      </div>
-      <div class="col-md-4 offset-md-2 text-center" id="right">
-        <h3 id='righttitle' style="color: grey; font-size: 1.5em;">loading title...</h3>
-        <a href="javascript:;" onclick='seerightdetail()'>
-          <div class= "imagecontainer">
-            <img id="imgID2" src="../loader.gif" alt="test right" class="rounded-corners mx-auto d-block" width="653" height="400"/>
-            <div class= "overlay">
-              <div class="overlaytext" id="rightoverlaytext">loading...</div>
-            </div>
-          </div>
-        </a>
-        </div>
-      </div>
+    <div class="col-md-6 offset-md-3 text-center mx-auto d-block">
+      <img id="imgID" src="../loader.gif" class="rounded-corners" width="600" height="350" style="margin-top: 2em">
+      <p id = "tags" class="textFont"> tags</p>
     </div>
-    <!-- id="reroll" -->
+  </div>
+  <div class="row">
+    <div class= "col-md-7 mx-auto d-block">
+      <p class= "textFont text-md-left" style= "font-size: 25px";>Ingredients</p>
+      <p id= "ingList" class= "textFont text-md-left"></p>
+      <p class= "textFont text-md-left" style= "font-size: 25px";>Directions</p>
+      <p id= "dirList" class= "textFont text-md-left"></p>
 
-    <div class="col-md-6 mx-auto text-center">
-      <button id="reroll" type="button" style= "text-align: center" class="textFont buttonbottom btn btn-primary btn-lg">I'm still hungry</button>
+      <div class="row">
+        <div class="col-md">
+            <button id="cancelEditPost" style="display:none" type="button" class="btn btn-info btn-block rounded-pill shadow" name="cancel">Cancel</button>
+        </div>
+        <div class="col-md" align="right">
+          <!-- edit button will show as long as there is a user logged in -->
+          <button id="editPost" style="display:none" class="btn btn-info rounded-pill shadow" data-toggle="modal" data-target="#">
+            <!-- <i class="fa fa-pencil-square-o" aria-hidden="true"></i> -->
+            Edit</button>
+        </div>
+        <!-- make some extra space after edit button -->
+        <br><br><br>
+      </div>
+
     </div>
 
+  </div>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-storage.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-    https://firebase.google.com/docs/web/setup#available-libraries -->
 
-    <script>
-    // Your web app's Firebase configuration
-    // setting connections between front end and back end
-    var firebaseConfig = {
-      apiKey: "AIzaSyBJjuNNBDtW2RgK_C-nwce_DGr3ObKYfZA",
-      authDomain: "i-am-feeling-hungry.firebaseapp.com",
-      databaseURL: "https://i-am-feeling-hungry.firebaseio.com",
-      projectId: "i-am-feeling-hungry",
-      storageBucket: "i-am-feeling-hungry.appspot.com",
-      messagingSenderId: "478024235219",
-      appId: "1:478024235219:web:213bcfd5fbd09a78"
-    };
+</div>
 
-    firebase.initializeApp(firebaseConfig);
-    </script>
 
-    <!--Placed at the end of the page so that the pages load faster-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <!-- auth.js declare const db = firebase.firestore(); so no need to declare in any js file after auth.js -->
-    <script src="../auth/auth.js"></script>
-    <script src="../auth/passwordmeter.js"></script>
-    <script src="../auth/badwords.js"></script>
-    <script src="../bower_components/zxcvbn/dist/zxcvbn.js"></script>
-    <script src="../randomsearch/randomsearch.js"></script>
-  </body>
-  </html>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<!-- <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase.js"></script> -->
+<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-storage.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+// Your web app's Firebase configuration
+// setting connections between front end and back end
+var firebaseConfig = {
+  apiKey: "AIzaSyBJjuNNBDtW2RgK_C-nwce_DGr3ObKYfZA",
+  authDomain: "i-am-feeling-hungry.firebaseapp.com",
+  databaseURL: "https://i-am-feeling-hungry.firebaseio.com",
+  projectId: "i-am-feeling-hungry",
+  storageBucket: "i-am-feeling-hungry.appspot.com",
+  messagingSenderId: "478024235219",
+  appId: "1:478024235219:web:213bcfd5fbd09a78"
+};
+firebase.initializeApp(firebaseConfig);
+</script>
+
+<!--Placed at the end of the page so that the pages load faster-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Dropdown menu -->
+<!-- <script src="https://cpde.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/propper.js/1.14.7/umd/popper.min.js"></script> -->
+<script src="../js/bootstrap.min.js"></script>
+<script src="../auth/auth.js"></script>
+<script src="../auth/passwordmeter.js"></script>
+<script src="../auth/badwords.js"></script>
+<script src="../bower_components/zxcvbn/dist/zxcvbn.js"></script>
+<!--  <script src="../profile/profile.js"></script> -->
+<script src="recipeDisplay.js"></script>
+
+</body>
+</html>

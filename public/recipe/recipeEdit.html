@@ -167,24 +167,74 @@
 </div>
 
 <div class="title">
-  <p id = "name">Recipe name</p>
+  <p2 id = "name">...</p2>
 </div>
+
 </br></br></br></br></br></br></br></br></br>
 <div class="container-fluid">
+
   <div class="row">
     <div class="col-md-6 offset-md-3 text-center mx-auto d-block">
-      <img id="imgID" src="../loader.gif" class="rounded-corners" width="600" height="350">
+      <img id="imgID" src="../loader.gif" class="rounded-corners" width="600" height="350" style="margin-top: 2em">
       <p id = "tags" class="textFont"> tags</p>
     </div>
   </div>
   <div class="row">
-    <div class= "col-md-7 mx-auto d-block">
-      <p class= "textFont text-md-left" style= "font-size: 25px";>Ingredients</p>
+    <div id="bothIngAndDir" class= "col-md-7 mx-auto d-block">
+      <!-- <p class= "textFont text-md-left" style= "font-size: 25px";>Ingredients</p>
       <p id= "ingList" class= "textFont text-md-left"></p>
       <p class= "textFont text-md-left" style= "font-size: 25px";>Directions</p>
-      <p id= "dirList" class= "textFont text-md-left"></p>
+      <p id= "dirList" class= "textFont text-md-left"></p> -->
+      <label id="profileUploadBtn" for="profileUpload" style="width:200px;text-align: center;" class="btn btn-info btn-block rounded-pill mx-auto text-center">
+        <i class="fa fa-upload mr-2"></i>Change photo
+        <input id="profileUpload" type="file" style="display:none;" onchange="loadProfile(this.files)" accept="image/*">
+      </label>
+
+      <p class= "textFont text-md-left" style= "font-size: 25px";>Ingredients</p>
+      <div id="ingList" class="textFont text-md-left">
+
+      </div>
+
+      <!-- ingredients -->
+      <div class="">
+        <button id="addMoreIng" class="btn btn-info  rounded-pill">
+          <i class="fas fa-plus"></i>
+          </button>
+      </div>
+
+      <!-- directions -->
+      <p class= "textFont text-md-left" style= "font-size: 25px";>Directions</p>
+      <div id="dirList" class="textFont text-md-left">
+
+      </div>
+
+      <div class="">
+        <button id="addMoreDir" class="btn btn-info  rounded-pill ">
+        <i class="fas fa-plus"></i>
+        </button>
+      </div>
+
+
+      <br><br>
+      <div class="row">
+        <div class="col-sm-2" align="left">
+            <button id="cancelEdit" type="button" class="btn btn-info  rounded-pill shadow" name="cancel">Cancel</button>
+        </div>
+        <div class="col-sm-2" align="left">
+          <button id="savePost" class="btn btn-info  rounded-pill shadow" data-toggle="modal" data-target="#">
+            <!-- <i class="fa fa-pencil-square-o" aria-hidden="true"></i> -->
+            Save</button>
+        </div>
+        <div class="col-sm-2" align="left">
+          <button id="deletePost" class="btn btn-info  rounded-pill shadow" data-toggle="modal" data-target="#">
+            Delete post</button>
+        </div>
+
+        <!-- make some extra space after edit button -->
+        <br><br><br>
     </div>
   </div>
+
 </div>
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -225,7 +275,7 @@ firebase.initializeApp(firebaseConfig);
 <script src="../auth/badwords.js"></script>
 <script src="../bower_components/zxcvbn/dist/zxcvbn.js"></script>
 <!--  <script src="../profile/profile.js"></script> -->
-<script src="recipe.js"></script>
+<script src="recipeEdit.js"></script>
 
 </body>
 </html>
