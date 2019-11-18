@@ -6,15 +6,13 @@ var rightpostid = ''
 // ................loadImages starts ................
 function loadImages(){
   // postsColections = db_randomsearch.collection("cities")
-  // get two random images from posts, but not /images in firestorage
+  // get two random post ids from posts, but not /images in firestorage
   // Get all documents id from the database
-  var postsColections = []
   var allPostsIds = []
 
   db_randomsearch.collection("posts").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
         // doc.data() is never undefined for query doc snapshots
-        postsColections.push(doc.data().foodUrl)
         allPostsIds.push(doc.id)
     });
     //console.log("postsColections.len " + postsColections.length);
