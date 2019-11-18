@@ -1,35 +1,69 @@
 const storageRef = firebase.storage().ref(); // global const
 const db_randomsearch = firebase.firestore();
-
-// random loadimages should allow anyone 
+var leftpostpid = ''
+var rightpostid = ''
+// random loadimages should allow anyone
+// ................loadImages starts ................
 function loadImages(){
   // postsColections = db_randomsearch.collection("cities")
-  // TODO: get two random images from posts, but not /images in firestorage
+  // get two random images from posts, but not /images in firestorage
   // Get all documents id from the database
   var postsColections = []
+  var allPostsIds = []
+
   db_randomsearch.collection("posts").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
         // doc.data() is never undefined for query doc snapshots
         postsColections.push(doc.data().foodUrl)
+        allPostsIds.push(doc.id)
     });
     //console.log("postsColections.len " + postsColections.length);
-    getTwoRandomUrls(postsColections)
-});
+    getTwoRandomUrls(allPostsIds)
+  });
 
-function getTwoRandomUrls(allPosts){
-  random1 = Math.floor(Math.random() * allPosts.length);
-  random2 = Math.floor(Math.random() * allPosts.length);
-  while(random1 === random2){
-    random2 = Math.floor(Math.random() * allPosts.length);
-  }
-  // console.log(allUrls[random1]);
-  // console.log(allUrls[random2]);
-  // set the two random display images
-  document.getElementById("imgID").src = allPosts[random1];
-  document.getElementById("imgID2").src = allPosts[random2];
+  function getTwoRandomUrls(allPostsIds){
+    random1 = Math.floor(Math.random() * allPostsIds.length);
+    random2 = Math.floor(Math.random() * allPostsIds.length);
+    while(random1 === random2){
+      random2 = Math.floor(Math.random() * allPostsIds.length);
+    }
+    leftpostpid = allPostsIds[random1];
+    rightpostid = allPostsIds[random2];
+    const randomLeftDisplay = db_randomsearch.collection('posts').doc(allPostsIds[random1]);
+    randomLeftDisplay.onSnapshot(doc => {
+            const leftdata = doc.data();
+            document.getElementById("imgID").src = leftdata.foodUrl;
+            document.getElementById('lefttitle').innerHTML = leftdata.title;
+            document.getElementById('leftoverlaytext').innerHTML = leftdata.description.substring(0, 100)+'...';
+    })
+
+    const randomRightDisplay = db_randomsearch.collection('posts').doc(allPostsIds[random2]);
+    randomRightDisplay.onSnapshot(doc => {
+            const rightdata = doc.data();
+            document.getElementById("imgID2").src = rightdata.foodUrl;
+            document.getElementById('righttitle').innerHTML = rightdata.title;
+            document.getElementById('rightoverlaytext').innerHTML = rightdata.description.substring(0, 100)+'...';
+
+    })
+
+   }
+
+
 }
 
+// ................loadImages ends ................
+function seeleftdetail(){
+  console.log('seeleftdetail clicked');
+  localStorage.setItem('currentPid', leftpostpid);
+  window.location.href = "../recipe/recipeDisplay.html";
 }
+
+function seerightdetail(){
+  console.log('seerightdetail clicked');
+  localStorage.setItem('currentPid', rightpostid);
+  window.location.href = "../recipe/recipeDisplay.html";
+}
+
 //   var allUrls = [];
 //   // Create a reference under which you want to list
 //   var listRef = storageRef.child('images');

@@ -34,7 +34,6 @@ function handleEditPost(postid){
 var currpostidDisplay = localStorage.getItem('currentPid'); // get pid from profile.js
 document.getElementById('editPost').addEventListener('click', function(){handleEditPost(currpostidDisplay)}, false);
 
-console.log("currentpostid = " + currpostidDisplay);
 
 // console.log("retrivedAllPosts in recipe: " + retrivedAllPosts);
 // console.log("retrivedAllPosts in recipe length = " + retrivedAllPosts.length);

@@ -3,7 +3,6 @@ const storageRef_recipeDisplay = firebase.storage().ref(); // global const
 const db_recipe = firebase.firestore();
 var currpostid = localStorage.getItem('sendCurrentPid2Display');
 var imageHasBeenUpdated = false;
-console.log("sendCurrentPid2Display = " + currpostid);
 
 document.getElementById('home').addEventListener('click', goHome, false);
 document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
