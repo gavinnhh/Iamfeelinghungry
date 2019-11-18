@@ -165,3 +165,11 @@ img {
 .calorie {
   margin-top: 20px;
 }
+
+#footer {
+	width: 100%;
+}
+
+.footer_info {
+	text-align: center;
+}
