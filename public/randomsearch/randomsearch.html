@@ -170,13 +170,13 @@
     <div class="col-md-4 offset-md-1 text-center" id="left" >
       <!-- Once click the image, this link brings the full receipe page  -->
 
-        <h3>Test image left</h3>
-        <a href="//LINK">
+        <h3 id='lefttitle' style="color: grey; font-size: 1.5em;">loading title...</h3>
+        <a href="javascript:;" onclick='seeleftdetail();'>
         <div class= "imagecontainer">
           <div class="loader"></div>
           <img id="imgID" src="../loader.gif" alt="test left" class="rounded-corners mx-auto d-block"  width="653" height="400"/>
           <div class= "overlay">
-            <div class="overlaytext">Test</div>
+            <div class="overlaytext" id="leftoverlaytext">loading...</div>
           </div>
         </div>
       </a>
@@ -185,12 +185,12 @@
         <p>VS</p>
       </div>
       <div class="col-md-4 offset-md-2 text-center" id="right">
-        <h3>Test image right</h3>
-        <a href="//LINK">
+        <h3 id='righttitle' style="color: grey; font-size: 1.5em;">loading title...</h3>
+        <a href="javascript:;" onclick='seerightdetail()'>
           <div class= "imagecontainer">
             <img id="imgID2" src="../loader.gif" alt="test right" class="rounded-corners mx-auto d-block" width="653" height="400"/>
             <div class= "overlay">
-              <div class="overlaytext">Test</div>
+              <div class="overlaytext" id="rightoverlaytext">loading...</div>
             </div>
           </div>
         </a>

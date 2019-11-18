@@ -19,15 +19,21 @@ function goHome(){
 
 function handleEditPost(postid){
   console.log("edit post clicked ");
-  localStorage.setItem('sendCurrentPid2Display', postid); // send pid to recipe.js
-  window.location.href = "recipeEdit.html";
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      localStorage.setItem('sendCurrentPid2Display', postid); // send pid to recipe.js
+      window.location.href = "recipeEdit.html";
+    }else{
+      alert("You are not signed in!!!");
+    }
+  });
+
 
 }
 
 var currpostidDisplay = localStorage.getItem('currentPid'); // get pid from profile.js
 document.getElementById('editPost').addEventListener('click', function(){handleEditPost(currpostidDisplay)}, false);
 
-console.log("currentpostid = " + currpostidDisplay);
 
 // console.log("retrivedAllPosts in recipe: " + retrivedAllPosts);
 // console.log("retrivedAllPosts in recipe length = " + retrivedAllPosts.length);
