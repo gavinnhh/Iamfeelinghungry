@@ -35,7 +35,7 @@ document.getElementById("username3"),
 document.getElementById("username6")];
 var title = [];
 var user = [];
-var postid = [];
+var postID = [];
 
 posts.get().then(snapshot => {
   snapshot.forEach(doc => {
@@ -45,6 +45,7 @@ posts.get().then(snapshot => {
       for (var i = 0; i < chosen_tags.length; i++) {
         for (var j = 0; j < arr.length; j++) {
           if (chosen_tags[i] == arr[j]) {
+            postID.push(doc.id);
             food_urls.push(doc.data().foodUrl);
             title.push(doc.data().title);
             user.push(doc.data().fromUser);
@@ -108,11 +109,11 @@ function loadImg(div, index) {
 
 function loadImgInfo(button, user_img, user_name, index) {
   button.innerText = title[index];
+  button.addEventListener('click', function(){handleViewMore(postID[index])}, false);
   const userDoc = dabase.collection('users').doc(user[index]);
   userDoc.get().then(function(doc) {
     user_img.src = doc.data().photoUrl;
     user_name.innerText = doc.data().username;
-    button.addEventListener('click', function(){handleViewMore(doc.data().allPostsIDs)}, false);
   });
 }
 
