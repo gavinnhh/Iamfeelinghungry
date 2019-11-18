@@ -1,12 +1,14 @@
 // retrive data from firebase database
 const dabase = firebase.firestore();
 const posts = dabase.collection('posts');
+
 var chosen_tags = [];
 //var temp_chosen_tags = [];
-for (var i = 0; i < localStorage.length; i++) {
+for (var i = 0; i < localStorage.getItem("length"); i++) {
   chosen_tags.push(localStorage[i]);
   //temp_chosen_tags.push(localStorage[i]);
 }
+
 var temp_chosen_tag;
 var food_urls = [];
 var img_divs = [document.getElementById("img-div1"),
