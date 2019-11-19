@@ -41,4 +41,5 @@ function getSelectValue() {
     var data = selectedValue[i].getAttribute("data-key");
     localStorage.setItem(i, data);
   }
+  localStorage.setItem("length", localStorage.length);
 }
