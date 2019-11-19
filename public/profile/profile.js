@@ -22,6 +22,7 @@ document.getElementById('uploadpost').addEventListener('click', handleFileUpload
 // also: new image selcted will be uploaded into firebase storage and
 // new photo url will overwrite the current user's data field: photoUrl
 // once load file is called, that means we want to update profile image
+// loadProfile is from the HTML
 var loadProfile = function(files) {
   var image = document.getElementById('profileImgId');
   image.src = URL.createObjectURL(event.target.files[0]); // get a new photo
@@ -343,7 +344,7 @@ function handleAddTitle(){
 var ingredientNum = 1;
 function handleAddIngredients(){
   var inputDiv = document.createElement('div');
-  inputDiv.id = "inputdivID" + ingredientNum;
+  inputDiv.id = "ing_inputdivID" + ingredientNum;
   var allDeleteBtns = [];
 
   var brtag = document.createElement('br');
@@ -367,7 +368,6 @@ function handleAddIngredients(){
   // diTag.innerHTML += '<button id="remove" class="btn btn-info rounded-pill shadow" data-toggle="modal" data-target="#"><i class="fas fa-trash"></i>&nbsp;</button>';
   allDeleteBtns.forEach(function(eachdeletebtn){
     eachdeletebtn.addEventListener('click', function(){console.log(eachdeletebtn.id + "clicked");this.parentNode.remove();}, false);
-
   });
 }
 
@@ -435,14 +435,64 @@ function handleAddDescription(){
 }
 
 
-
 // file uplaod js starts here <--------------------------
 
 //Upload button handler
+var fileName = "";
 function handleFileUploadbutton(){
-  handleFileUpload(files,obj);
-  console.log("clikced");
+  console.log("handleFileUploadbutton clikced");
+  //TODO: grab all ingredients and directions and upload to db
+  var ingredientDivArray = document.getElementById('ingredientinput'); // get txt area
+  var inglen = ingredientDivArray.getElementsByTagName('div').length;
+
+  // get each ingredient
+  ingContents = [];
+  for(i = 0; i < inglen; i++){
+    var ingcontent = ingredientDivArray.getElementsByTagName('input')[i].value;
+    ingContents.push(ingcontent);
+  }
+
+  var directionDivArray = document.getElementById('directioninput'); // get txt area
+  var dirlen = directionDivArray.getElementsByTagName('div').length;
+
+  // get each ingredient
+  dirContents = [];
+  for(i = 0; i < dirlen; i++){
+    var dircontent = directionDivArray.getElementsByTagName('textarea')[i].value;
+    dirContents.push(dircontent);
+
+  }
+
+
+  // ---------------------upload new post starts---------------------
+  handleFileUpload(files,obj); // upload file first and it will set the global var fileName
+  console.log("files[i].name) " + fileName);
+  downloadfoodurl = downloadFoodUrl(fileName);
+  console.log("downloadfoodurl " + downloadfoodurl);
+  // get user
+  var currentPhotoUrl = localStorage.getItem('currentPhotoUrl');
+
+  // Add a new document with a generated id.
+  db2.collection("posts").add({
+      description: "...",
+      direction: dirContents,
+      foodUrl: currentPhotoUrl,
+      fromUser: firebase.auth().currentUser.uid,
+      ingredient: ingContents,
+      tags: '...',
+      title: '...'
+  })
+  .then(function(docRef) {
+      console.log("Document written with ID: ", docRef.id);
+  })
+  .catch(function(error) {
+      console.error("Error adding document: ", error);
+  });
+
+  // ---------------------upload new post ends---------------------
+
 }
+
 //drag and drop handler-------------------------
 var obj = $("#drop-zone");
 var files;
@@ -493,29 +543,33 @@ $(document).on('drop', function (e)
 
 //file uplaoder handler
 function handleFileUpload(files, obj) {
-  for (var i = 0; i < files.length; i++) {
-    var fd = new FormData();
-    fd.append('file', files[i]);
+    for (var i = 0; i < files.length; i++) {
+        var fd = new FormData();
+        fd.append('file', files[i]);
 
-    console.log(files[i]);
-    fireBaseImageUpload({
-      'file': files[i],
-      'path': '/images' //path_to_where_you_to_store_the_file
-    }, function (data) {
-      //console.log(data);
-      if (!data.error) {
-        if (data.progress) {
-          // progress update to view here
-        }
-        if (data.downloadURL) {
-          // update done
-          // download URL here "data.downloadURL"
-        }
-      } else {
-        console.log(data.error + ' Firebase image upload error');
-      }
-    });
-  }
+        console.log(files[i]);
+        fileName = files[i].name;
+
+        fireBaseImageUpload({
+            'file': files[i],
+            'path': '/images' //path_to_where_you_to_store_the_file
+        }, function (data) {
+            //console.log(data);
+            if (!data.error) {
+                if (data.progress) {
+                    // progress update to view here
+                }
+                if (data.downloadURL) {
+                    // update done
+                    // download URL here "data.downloadURL"
+                      console.log("downloadURL " + downloadURL);
+                    localStorage.setItem('currentPhotoUrl', data.downloadURL);
+                }
+            } else {
+                console.log(data.error + ' Firebase image upload error');
+            }
+        });
+    }
 };
 
 //firebase upload with call back
@@ -589,53 +643,81 @@ function fireBaseImageUpload(parameters, callBackData) {
       return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
 
-    // function handleAddPosts(){
-    //   console.log("handleAddPosts clicked");
-    // }
+function downloadFoodUrl(fileName){
+  // Create a reference to the file we want to download
+var starsRef = storageRef.child('images/'+fileName);
 
-    function createOnePost(Title, foodUrl, index){
-      var post_div = document.createElement("div");
+// Get the download URL
+starsRef.getDownloadURL().then(function(url) {
+  // Insert url into an <img> tag to "download"
+  return url;
+}).catch(function(error) {
 
-      var postLabel = document.createElement("label");
-      var postLabeltext = document.createTextNode(Title);
-      postLabel.appendChild(postLabeltext);
+  // A full list of error codes is available at
+  // https://firebase.google.com/docs/storage/web/handle-errors
+  switch (error.code) {
+    case 'storage/object-not-found':
+      // File doesn't exist
+      break;
 
-      var viewMoreBtn = document.createElement("button");
-      //  var id = viewMoreBtn.id = "viewMoreBtnID";
-      var viewMoreBtnText = document.createTextNode("View detail...");
-      viewMoreBtn.style.backgroundColor = "transparent";
-      viewMoreBtn.style.border = "none";
-      //viewMoreBtn.value = "view" + index;
-      viewMoreBtn.id = "view" + index;
-      viewMoreBtn.appendChild(viewMoreBtnText);
-      //viewMoreBtn.attachEvent('OnClick', handleAddPosts());
-      //viewMoreBtn.onclick = handleAddPosts(); // this will create infinnite loop
+    case 'storage/unauthorized':
+      // User doesn't have permission to access the object
+      break;
 
-      var elem = document.createElement("img");
-      elem.src = foodUrl;
-      //elem.src = "../food.png";
-      elem.width = "500"
-      elem.height = "280"
-      elem.style.borderRadius = "5%";
-      elem.style.border = "3px solid white"
+    case 'storage/canceled':
+      // User canceled the upload
+      break;
 
-      var brtag = document.createElement("br");
-      var hrtag = document.createElement("hr");
+    case 'storage/unknown':
+      // Unknown error occurred, inspect the server response
+      break;
+  }
+});
+}
 
-      post_div.appendChild(postLabel);
-      post_div.appendChild(viewMoreBtn);
-      post_div.appendChild(brtag);
-      post_div.appendChild(elem);
-      post_div.appendChild(brtag);
-      post_div.appendChild(hrtag);
+// Below is to show the post in the middle
+function createOnePost(Title, foodUrl, index){
+  var post_div = document.createElement("div");
 
-      return post_div;
-    }
+  var postLabel = document.createElement("label");
+  var postLabeltext = document.createTextNode(Title);
+  postLabel.appendChild(postLabeltext);
 
-    // load to recipe web page
-    function handleViewMore(postid){
-      console.log("current value: " + postid);
-      console.log("handleViewMore clicked");
-      localStorage.setItem('currentPid', postid); // use localStorage to send postid to recipe.js
-      window.location.href = "../recipe/recipe.html";
-    }
+  var viewMoreBtn = document.createElement("button");
+  //  var id = viewMoreBtn.id = "viewMoreBtnID";
+  var viewMoreBtnText = document.createTextNode("View detail...");
+  viewMoreBtn.style.backgroundColor = "transparent";
+  viewMoreBtn.style.border = "none";
+  //viewMoreBtn.value = "view" + index;
+  viewMoreBtn.id = "view" + index;
+  viewMoreBtn.appendChild(viewMoreBtnText);
+  //viewMoreBtn.attachEvent('OnClick', handleAddPosts());
+  //viewMoreBtn.onclick = handleAddPosts(); // this will create infinnite loop
+
+  var elem = document.createElement("img");
+  elem.src = foodUrl;
+  //elem.src = "../food.png";
+  elem.width = "500"
+  elem.height = "280"
+  elem.style.borderRadius = "5%";
+  elem.style.border = "3px solid white"
+
+  var brtag = document.createElement("br");
+  var hrtag = document.createElement("hr");
+
+  post_div.appendChild(postLabel);
+  post_div.appendChild(viewMoreBtn);
+  post_div.appendChild(brtag);
+  post_div.appendChild(elem);
+  post_div.appendChild(brtag);
+  post_div.appendChild(hrtag);
+
+  return post_div;
+}
+
+// load to recipe web page
+function handleViewMore(postid){
+  console.log("handleViewMore clicked");
+  localStorage.setItem('currentPid', postid); // use localStorage to send postid to recipe.js
+  window.location.href = "../recipe/recipeDisplay.html";
+}
