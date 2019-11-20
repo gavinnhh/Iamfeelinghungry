@@ -466,27 +466,55 @@ function handleFileUploadbutton(){
 
   // ---------------------upload new post starts---------------------
   handleFileUpload(files,obj); // upload file first and it will set the global var fileName
-  console.log("files[i].name) " + fileName);
-  downloadfoodurl = downloadFoodUrl(fileName);
-  console.log("downloadfoodurl " + downloadfoodurl);
-  // get user
-  var currentPhotoUrl = localStorage.getItem('currentPhotoUrl');
+  console.log("files[i].name) " + fileName); // file name is a global variable
+  //var downloadfoodurl = downloadFoodUrl(fileName);
+  //console.log("downloadfoodurl " + downloadfoodurl);
+  var starsRef = storageRef.child('images/'+fileName);
+  // Get the download URL
+  starsRef.getDownloadURL().then(function(url) {
+        // Insert url into an <img> tag to "download"
+        // Add a new document with a generated id.
+        console.log('url: ' + url);
+        db2.collection("posts").add({
+            description: "...",
+            direction: dirContents,
+            foodUrl: url,
+            fromUser: firebase.auth().currentUser.uid,
+            ingredient: ingContents,
+            tags: '...',
+            title: '...'
+        })
+        .then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+            var addNewPost2CurrentUser = db2.collection("users").doc(firebase.auth().currentUser.uid);
 
-  // Add a new document with a generated id.
-  db2.collection("posts").add({
-      description: "...",
-      direction: dirContents,
-      foodUrl: currentPhotoUrl,
-      fromUser: firebase.auth().currentUser.uid,
-      ingredient: ingContents,
-      tags: '...',
-      title: '...'
-  })
-  .then(function(docRef) {
-      console.log("Document written with ID: ", docRef.id);
-  })
-  .catch(function(error) {
-      console.error("Error adding document: ", error);
+            addNewPost2CurrentUser.onSnapshot(doc => {
+               localStorage.setItem('allpostsids', JSON.stringify(doc.data().allPostsIDs));
+            })
+
+            // if there is no var for allpostsids: error will be: Unexpected token W in JSON at position 0
+            var allpostsids = JSON.parse(localStorage.getItem("allpostsids"));
+            console.log("allpostsids: " + allpostsids);
+            allpostsids.push(docRef.id);
+            return addNewPost2CurrentUser.update({
+                                  allPostsIDs: allpostsids
+                              })
+                              .then(function() {
+                                  console.log("allPostsIDs successfully updated!");
+
+                              })
+                              .catch(function(error) {
+                                  // The document probably doesn't exist.
+                                  console.error("Error updating allPostsIDs: ", error);
+                              });
+
+        })
+        .catch(function(error) {
+            console.error("Error adding document: ", error);
+        });
+
+  }).catch(function(error) {
+    alert("Error happened when getting file url")
   });
 
   // ---------------------upload new post ends---------------------
@@ -643,36 +671,21 @@ function fireBaseImageUpload(parameters, callBackData) {
       return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
 
+
 function downloadFoodUrl(fileName){
+  console.log("in downloadFoodUrl....");
   // Create a reference to the file we want to download
-var starsRef = storageRef.child('images/'+fileName);
+  var starsRef = storageRef.child('images/'+fileName);
+  // Get the download URL
+  starsRef.getDownloadURL().then(function(url) {
+    // Insert url into an <img> tag to "download"
 
-// Get the download URL
-starsRef.getDownloadURL().then(function(url) {
-  // Insert url into an <img> tag to "download"
-  return url;
-}).catch(function(error) {
-
-  // A full list of error codes is available at
-  // https://firebase.google.com/docs/storage/web/handle-errors
-  switch (error.code) {
-    case 'storage/object-not-found':
-      // File doesn't exist
-      break;
-
-    case 'storage/unauthorized':
-      // User doesn't have permission to access the object
-      break;
-
-    case 'storage/canceled':
-      // User canceled the upload
-      break;
-
-    case 'storage/unknown':
-      // Unknown error occurred, inspect the server response
-      break;
-  }
+  }).catch(function(error) {
+    alert("Error happened when getting file url")
 });
+
+return getUrl;
+
 }
 
 // Below is to show the post in the middle
