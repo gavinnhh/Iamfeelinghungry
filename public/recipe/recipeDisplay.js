@@ -4,15 +4,6 @@ document.getElementById('home').addEventListener('click', goHome, false);
 
 checkUserLoggedIn(); // edit button will show as long as there is a user logged in
 
-function checkUserLoggedIn(){
-  firebase.auth().onAuthStateChanged(function(user) {
-    // user is a firebase built-in variable, firebase knows user
-    if (user) {
-      // edit button will show as long as there is a user logged in
-      document.getElementById('editPost').style.display='block';
-    }})
-}
-
 function goHome(){
   window.location.href = "../index.html";
 }
@@ -67,3 +58,22 @@ mypostDisplay.onSnapshot(doc => {
         }
 
 });
+
+
+function checkUserLoggedIn(){
+  firebase.auth().onAuthStateChanged(function(user) {
+    // user is a firebase built-in variable, firebase knows user
+    console.log("current user.id = " + user.uid);
+    const mypostDisplay = db_recipeDsiaply.collection('posts').doc(currpostidDisplay);
+    mypostDisplay.onSnapshot(doc => {
+            const postdata = doc.data();
+            console.log("postdata.fromUser = " + postdata.fromUser);
+            if (user.uid === postdata.fromUser) {
+              // edit button will show as long as there is a user logged in
+              // and the displayed image user is equal to current signed in user account
+              console.log("show edit");
+              document.getElementById('editPost').style.display='block';
+            }})
+    })
+
+}
