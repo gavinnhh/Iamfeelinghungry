@@ -72,9 +72,8 @@ posts.get().then(snapshot => {
     var img = document.createElement('img');
     const storageRef = firebase.storage().ref();
     storageRef.child('images/no_results_found.png').getDownloadURL().then(function(url) {
-      console.log(url);
       img.src = url;
-      img.setAttribute("style", "width: 100%");
+      img.setAttribute("style", "width: 70%;");
       img_row_div.append(img);
     });
   }
