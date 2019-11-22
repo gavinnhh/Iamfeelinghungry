@@ -5,6 +5,7 @@ document.getElementById('home').addEventListener('click', goHome, false);
 checkUserLoggedIn(); // edit button will show as long as there is a user logged in
 
 function goHome(){
+  localStorage.clear();
   window.location.href = "../index.html";
 }
 
