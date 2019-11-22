@@ -3,10 +3,8 @@ const dabase = firebase.firestore();
 const posts = dabase.collection('posts');
 
 var chosen_tags = [];
-//var temp_chosen_tags = [];
 for (var i = 0; i < localStorage.getItem("length"); i++) {
   chosen_tags.push(localStorage[i]);
-  //temp_chosen_tags.push(localStorage[i]);
 }
 
 var temp_chosen_tag;
@@ -73,45 +71,14 @@ posts.get().then(snapshot => {
     var img_row_div = document.getElementById("image-row");
     var img = document.createElement('img');
     const storageRef = firebase.storage().ref();
-    const image = storageRef.child('images/no_results_found.png');
-    image.getDownloadURL().then(function(url) {
+    storageRef.child('images/no_results_found.png').getDownloadURL().then(function(url) {
+      console.log(url);
       img.src = url;
       img.setAttribute("style", "width: 100%");
       img_row_div.append(img);
-    })
+    });
   }
 });
-
-// posts.get().then(snapshot => {
-//   snapshot.forEach(doc => {
-//     if (food_urls.length != 6) {
-//       if (chosen_tags.length == 0) {
-//         console.log("push");
-//         for (var i = 0; i < temp_chosen_tags.length; i++) {
-//           chosen_tags.push(temp_chosen_tags[i]);
-//         }
-//       }
-//       var arr = doc.data().tags;
-//       loop:
-//       for (var i = 0; i < chosen_tags.length; i++) {
-//         for (var j = 0; j < arr.length; j++) {
-//           if (chosen_tags[i] == arr[j]) {
-//             food_urls.push(doc.data().foodUrl);
-//             chosen_tags.splice(i ,1);
-//             break loop;
-//           }
-//         }
-//       }
-//     }
-//     else {
-//       return true;
-//     }
-//     console.log(chosen_tags);
-//   });
-//   for (var i = 0; i < food_urls.length; i++) {
-//     loadImg(img_divs[i], i);
-//   }
-// });
 
 function loadImg(div, index) {
   var imgDiv = div;
