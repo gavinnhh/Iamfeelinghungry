@@ -63,9 +63,22 @@ posts.get().then(snapshot => {
       return true;
     }
   });
-  for (var i = 0; i < food_urls.length; i++) {
-    loadImg(img_divs[i], i);
-    loadImgInfo(info_button[i], userImg[i], username[i], i);
+  if (food_urls.length != 0) {
+    for (var i = 0; i < food_urls.length; i++) {
+      loadImg(img_divs[i], i);
+      loadImgInfo(info_button[i], userImg[i], username[i], i);
+    }
+  }
+  else {
+    var img_row_div = document.getElementById("image-row");
+    var img = document.createElement('img');
+    const storageRef = firebase.storage().ref();
+    const image = storageRef.child('images/no_results_found.png');
+    image.getDownloadURL().then(function(url) {
+      img.src = url;
+      img.setAttribute("style", "width: 100%");
+      img_row_div.append(img);
+    })
   }
 });
 
