@@ -106,17 +106,20 @@ function loadImg(div, index) {
   img.src = food_urls[index];
   img.setAttribute("style", "width: 100%");
   img.setAttribute("id", "foodImg");
-  imgDiv.prepend(img);
+  if (imgDiv != null)
+    imgDiv.prepend(img);
 }
 
 function loadImgInfo(button, user_img, user_name, index) {
-  button.innerText = title[index];
-  button.addEventListener('click', function(){handleViewMore(postID[index])}, false);
-  const userDoc = dabase.collection('users').doc(user[index]);
-  userDoc.get().then(function(doc) {
-    user_img.src = doc.data().photoUrl;
-    user_name.innerText = doc.data().username;
-  });
+  if (button != null) {
+    button.innerText = title[index];
+    button.addEventListener('click', function(){handleViewMore(postID[index])}, false);
+    const userDoc = dabase.collection('users').doc(user[index]);
+    userDoc.get().then(function(doc) {
+      user_img.src = doc.data().photoUrl;
+      user_name.innerText = doc.data().username;
+    });
+  }
 }
 
 function handleViewMore(postid){
