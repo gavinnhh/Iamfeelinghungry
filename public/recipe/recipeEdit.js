@@ -8,6 +8,8 @@ document.getElementById('home').addEventListener('click', goHome, false);
 document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
 document.getElementById('savePost').addEventListener('click', handleSavePost, false);
 document.getElementById('deletePost').addEventListener('click', handledeletePost, false);
+document.getElementById('addMoreIng').addEventListener('click', handleAddMoreIng, false);
+document.getElementById('addMoreDir').addEventListener('click', handleAddMoreDir, false);
 
 function handleCancelEdit(){
   window.location.href = "recipeDisplay.html";
@@ -275,3 +277,76 @@ function updateFoodPhoto(files, postId){
 
 }
 // update photo ends
+
+function handleAddMoreIng(){
+  console.log("handleAddMoreIng clicked");
+  firebase.auth().onAuthStateChanged(function(user) {
+    // user is a firebase built-in variable, firebase knows user
+    if (user) {
+
+      var ingredientsTag = document.getElementById('ingList'); // each ingredient will be appended into this div
+
+      //console.log("length = " + ingredientsTag.getElementsByTagName('div').length);
+      var currIndex = ingredientsTag.getElementsByTagName('div').length;
+      var eachIngredientDiv = document.createElement('div');
+      var eachIngredientInputTag = document.createElement('textarea');
+
+      eachIngredientInputTag.id = "ing"+currIndex;
+      eachIngredientInputTag.rows = "2";
+      eachIngredientInputTag.style.border = "none";
+      eachIngredientInputTag.style.width = "90%";
+      eachIngredientInputTag.innerHTML = "";
+      eachIngredientDiv.appendChild(eachIngredientInputTag);
+
+      eachIngredientDiv.innerHTML += '<button id="ingremove'+currIndex+'" class="btn"><i class="fas fa-trash"></i>&nbsp;</button>';
+      ingredientsTag.appendChild(eachIngredientDiv);
+
+      deleteBtn = eachIngredientDiv.getElementsByTagName("button")[0];
+      ingdeleteBtns.push(deleteBtn);
+      ingdeleteBtns.forEach(function(eachdeletebtn){
+        eachdeletebtn.addEventListener('click', function(){console.log(eachdeletebtn.id + "clicked");this.parentNode.remove();}, false);
+
+      });
+
+    }else{
+      alert("You are not signed in!!!");
+    }
+  })
+}
+
+function handleAddMoreDir(){
+  console.log("handleAddMoreDir clicked");
+  firebase.auth().onAuthStateChanged(function(user) {
+    // user is a firebase built-in variable, firebase knows user
+    if (user) {
+
+        var directionsTag = document.getElementById('dirList');
+        var currIndex = directionsTag.getElementsByTagName('div').length;
+        var eachDirectionDiv = document.createElement('div');
+        var eachDirectionInputTag = document.createElement('textarea');
+        eachDirectionInputTag.id = "dir"+currIndex;
+        eachDirectionInputTag.style.width = "90%";
+        eachDirectionInputTag.rows = "3";
+        eachDirectionInputTag.style.border = "none";
+        eachDirectionInputTag.innerHTML = "";
+        eachDirectionDiv.appendChild(eachDirectionInputTag);
+        eachDirectionDiv.innerHTML += '<button id="dirremove'+currIndex+'" class="btn"><i class="fas fa-trash"></i>&nbsp;</button>';
+
+        // make two more spacing for each div
+        var brtag = document.createElement("br");
+        var brtag2 = document.createElement("br");
+        eachDirectionDiv.appendChild(brtag);// add a new line
+        //eachDirectionDiv.appendChild(brtag2);
+        directionsTag.appendChild(eachDirectionDiv);
+        deleteBtn = eachDirectionDiv.getElementsByTagName("button")[0];
+        dirdeleteBtns.push(deleteBtn);
+        dirdeleteBtns.forEach(function(eachdeletebtn){
+          eachdeletebtn.addEventListener('click', function(){console.log(eachdeletebtn.id + "clicked");this.parentNode.remove();}, false);
+
+        });
+
+    }else{
+      alert("You are not signed in!!!");
+    }
+  })
+}
