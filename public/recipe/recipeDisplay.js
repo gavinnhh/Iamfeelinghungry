@@ -35,6 +35,7 @@ mypostDisplay.onSnapshot(doc => {
         const postdata = doc.data();
 
         document.getElementById('name').innerHTML = postdata.title;
+        document.getElementById('description').innerHTML = postdata.description;
         document.getElementById('imgID').src = postdata.foodUrl;
         var ingList = postdata.ingredient;
         var ingredientsTag = document.getElementById('ingList');
