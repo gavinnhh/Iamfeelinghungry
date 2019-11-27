@@ -323,6 +323,7 @@ function handleAddTitle(){
     input.style.background = 'white';
     input.style.width = '80%';
     input.placeholder= "New Title";
+    input.id = 'foodtitle';
     inputDiv.appendChild(input);
     inputDiv.innerHTML += '<button id="remove'+titleNum+'" class="btn"><i class="fas fa-trash"></i>&nbsp;</button>';
     inputDiv.appendChild(brtag2);
@@ -417,6 +418,7 @@ function handleAddDescription(){
   input.style.background = 'white';
   input.style.width = '80%';
   input.placeholder= "Add a short description";
+  input.id = 'fooddescription';
   inputDiv.appendChild(input);
   inputDiv.innerHTML += '<button id="remove'+descriptionNum+'" class="btn"><i class="fas fa-trash"></i>&nbsp;</button>';
   inputDiv.appendChild(brtag2);
@@ -438,10 +440,13 @@ function handleAddDescription(){
 // file uplaod js starts here <--------------------------
 
 //Upload button handler
-var fileName = "";
 function handleFileUploadbutton(){
   console.log("handleFileUploadbutton clikced");
-  //TODO: grab all ingredients and directions and upload to db
+  handleFileUpload(files,obj); // upload file first and it will set the global var fileName
+}
+
+//---------------------upload new post starts---------------------
+function uploadHelper(downloadURL){
   var ingredientDivArray = document.getElementById('ingredientinput'); // get txt area
   var inglen = ingredientDivArray.getElementsByTagName('div').length;
 
@@ -463,63 +468,67 @@ function handleFileUploadbutton(){
 
   }
 
+  var title = 'No title...';
+  titleElement = document.getElementById('foodtitle');
+  if(titleElement != null){
+    title = titleElement.value;
+  }
 
-  // ---------------------upload new post starts---------------------
-  handleFileUpload(files,obj); // upload file first and it will set the global var fileName
-  console.log("files[i].name) " + fileName); // file name is a global variable
-  //var downloadfoodurl = downloadFoodUrl(fileName);
-  //console.log("downloadfoodurl " + downloadfoodurl);
-  var starsRef = storageRef.child('images/'+fileName);
-  // Get the download URL
-  starsRef.getDownloadURL().then(function(url) {
-        // Insert url into an <img> tag to "download"
-        // Add a new document with a generated id.
-        console.log('url: ' + url);
-        db2.collection("posts").add({
-            description: "...",
-            direction: dirContents,
-            foodUrl: url,
-            fromUser: firebase.auth().currentUser.uid,
-            ingredient: ingContents,
-            tags: '...',
-            title: '...'
-        })
-        .then(function(docRef) {
-            console.log("Document written with ID: ", docRef.id);
-            var addNewPost2CurrentUser = db2.collection("users").doc(firebase.auth().currentUser.uid);
+  var description = 'No description';
+  descriptionElement = document.getElementById('fooddescription');
+  if(descriptionElement != null){
+    description = descriptionElement.value;
+  }
 
-            addNewPost2CurrentUser.onSnapshot(doc => {
-               localStorage.setItem('allpostsids', JSON.stringify(doc.data().allPostsIDs));
-            })
+  var tags = []
 
-            // if there is no var for allpostsids: error will be: Unexpected token W in JSON at position 0
-            var allpostsids = JSON.parse(localStorage.getItem("allpostsids"));
-            console.log("allpostsids: " + allpostsids);
-            allpostsids.push(docRef.id);
-            return addNewPost2CurrentUser.update({
-                                  allPostsIDs: allpostsids
-                              })
-                              .then(function() {
-                                  console.log("allPostsIDs successfully updated!");
+  var count = 0;
+    db2.collection("posts").add({
+              description: description,
+              direction: dirContents,
+              foodUrl: downloadURL,
+              fromUser: firebase.auth().currentUser.uid,
+              ingredient: ingContents,
+              tags: tags,
+              title: title
+          })
+          .then(function(docRef) {
+              console.log("Document written with ID: ", docRef.id);
+              var addNewPost2CurrentUser = db2.collection("users").doc(firebase.auth().currentUser.uid);
+              addNewPost2CurrentUser.onSnapshot(doc => {
+                 var allpostids = doc.data().allPostsIDs;
+                 count++;
+                 // the reason we do a count is that for some reason this nested promise call
+                 // is getting called mutiple times. So in order to avoid duplicate post created
+                 // we make a count so that the post gets created only once each time we click upload
+                 if(count <= 1){
+                   console.log('allpostids bef: ' + allpostids);
+                   allpostids.push(docRef.id);
+                   console.log('allpostids aft: ' + allpostids);
 
-                              })
-                              .catch(function(error) {
-                                  // The document probably doesn't exist.
-                                  console.error("Error updating allPostsIDs: ", error);
-                              });
+                   return addNewPost2CurrentUser.update({
+                                         allPostsIDs: allpostids
+                                     })
+                                     .then(function() {
+                                         console.log("allPostsIDs successfully updated!");
 
-        })
-        .catch(function(error) {
-            console.error("Error adding document: ", error);
-        });
+                                     })
+                                     .catch(function(error) {
+                                         // The document probably doesn't exist.
+                                         console.error("Error updating allPostsIDs: ", error);
+                                     });
+                 }
 
-  }).catch(function(error) {
-    alert("Error happened when getting file url")
-  });
+              })
 
-  // ---------------------upload new post ends---------------------
+            window.location.href = "profile.html";
+          })
+          .catch(function(error) {
+              console.error("Error adding document: ", error);
+          });
 
 }
+//---------------------upload new post ends---------------------
 
 //drag and drop handler-------------------------
 var obj = $("#drop-zone");
@@ -590,8 +599,8 @@ function handleFileUpload(files, obj) {
                 if (data.downloadURL) {
                     // update done
                     // download URL here "data.downloadURL"
-                      console.log("downloadURL " + downloadURL);
-                    localStorage.setItem('currentPhotoUrl', data.downloadURL);
+                    //  console.log("downloadURL " + downloadURL);
+                    //localStorage.setItem('currentPhotoUrl', data.downloadURL);
                 }
             } else {
                 console.log(data.error + ' Firebase image upload error');
@@ -641,14 +650,20 @@ function fireBaseImageUpload(parameters, callBackData) {
     }, function (error) {
       callBackData({error: error});
     }, function () {
-      var downloadURL = uploadFile.snapshot.downloadURL;
-      callBackData({
-        downloadURL: downloadURL,
-        element: name,
-        fileSize: fileSize,
-        fileType: fileType,
-        fileName: n});
-      });
+
+      uploadFile.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            console.log('File available at', downloadURL);
+            uploadHelper(downloadURL); // call helper to uplaod the post
+            callBackData({
+              downloadURL: downloadURL,
+              element: name,
+              fileSize: fileSize,
+              fileType: fileType,
+              fileName: n});
+            });
+        });
+
+
     }
 
     // function to generate random string to use in what creating firebase storage instance
