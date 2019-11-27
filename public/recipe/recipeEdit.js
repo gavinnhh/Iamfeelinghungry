@@ -76,13 +76,46 @@ function goHome(){
 
 function handledeletePost(){
   console.log("delete post clicked");
+  var count = 0;
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      db_recipe.collection("posts").doc().delete(currpostid).then(function() {
+      // first delete from posts collection
+      db_recipe.collection("posts").doc(currpostid).delete().then(function() {
           console.log("Post successfully deleted!");
+          window.location.href = "../profile/profile.html";
       }).catch(function(error) {
           console.error("Error removing post: ", error);
       });
+
+      // delete the post id in current user's allPostsIds
+      // get allPostsIds
+      count++;
+      // start if
+      if(count <= 1){
+        var deleteCurrentPostInUser = db_recipe.collection("users").doc(user.uid);
+        deleteCurrentPostInUser.onSnapshot(doc => {
+           var allpostids = doc.data().allPostsIDs;
+           for(i = 0; i < allpostids.length; i++){
+             if(allpostids[i] === currpostid){
+               allpostids.splice(i, 1);
+               break;
+             }
+           }
+
+           return deleteCurrentPostInUser.update({
+                                 allPostsIDs: allpostids
+                             })
+                             .then(function() {
+                                 console.log("allPostsIDs successfully updated!");
+
+                             })
+                             .catch(function(error) {
+                                 // The document probably doesn't exist.
+                                 console.error("Error updating allPostsIDs: ", error);
+                             });
+        })
+      }
+      // end if
     }else{
       alert("You are not signed in!!!");
     }
