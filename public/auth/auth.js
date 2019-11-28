@@ -5,6 +5,7 @@
 //var submitBtn = document.querySelector('input[type="button"]');
 // document.getElementById('signupbtn').addEventListener('click', toggleSignUp, false);
 const db = firebase.firestore();
+
 function handleSignIn(){
   console.log('sign in/out button clicked');
   var email = document.getElementById('name/email').value;
@@ -251,6 +252,34 @@ function initApp() {
   // document.getElementById('password-reset').addEventListener('click', sendPasswordReset, false);
 }
 
+function suggestWindowPop(){
+  firebase.auth().onAuthStateChanged(function(user) {
+    // user is a firebase built-in variable, firebase knows user
+    if (!user) {
+      // pop the window after a second and hide it after 1.5 seconds
+      setTimeout
+        (
+          function()
+          {
+          $('#suggest2signup').modal('show');
+          },
+          1000,
+        );
+
+        setTimeout
+          (
+            function()
+            {
+            $('#suggest2signup').modal('hide');
+            },
+            4000,
+          );
+
+    }});
+
+}
+
 window.onload = function() {
   initApp();
+  suggestWindowPop();
 };

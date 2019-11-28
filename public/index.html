@@ -223,6 +223,22 @@
   <div id="tags-container" class="container search-tags-container move-container mt-2 col-lg-auto" align="center"></div>
 </div>
 
+<!-- sign in to add more suggestion popup -->
+  <div id="suggest2signup" class="modal fade resetpwModal">
+    <div class="modal-dialog modal-login" >
+      <div id="modalContent" class="modal-content" style="background-color: #ffcc66">
+        <div class="modal-header">
+
+          <h2 style="color: white">Welcome</h2>
+        </div>
+        <div class="modal-body">
+          <h4 class="modal-title" style="color: white">Sign in to add more recipes :)</h4>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -277,5 +293,7 @@ firebase.initializeApp(firebaseConfig);
 <script src="auth/badwords.js"></script>
 <script src="bower_components/zxcvbn/dist/zxcvbn.js"></script>
 <!-- <script src="randomsearch/randomsearch.js"></script> -->
+
+</script>
 </body>
 </html>
