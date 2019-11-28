@@ -7,7 +7,7 @@ var imageHasBeenUpdated = false;
 document.getElementById('home').addEventListener('click', goHome, false);
 document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
 document.getElementById('savePost').addEventListener('click', handleSavePost, false);
-document.getElementById('deletePost').addEventListener('click', handledeletePost, false);
+//document.getElementById('deletePost').addEventListener('click', handledeletePost, false);
 document.getElementById('addMoreIng').addEventListener('click', handleAddMoreIng, false);
 document.getElementById('addMoreDir').addEventListener('click', handleAddMoreDir, false);
 
@@ -79,8 +79,20 @@ function goHome(){
   window.location.href = "../index.html";
 }
 
+function ConfirmDelete(){
+  console.log("ConfirmDelete clicked");
+  var x = confirm("Are you sure you want to delete? You can not reverse this step once delete clicked.");
+  if (x){
+    console.log("You confirmed to delete");
+    handledeletePost();
+  }else{
+    console.log("You canceled delete");
+  }
+}
+
 function handledeletePost(){
   console.log("delete post clicked");
+
   var count = 0;
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
