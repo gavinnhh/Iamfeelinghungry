@@ -384,6 +384,7 @@ function handleAddDirections(){
   var input = document.createElement('textarea');
   var brtag2 = document.createElement('br');
   input.style.background = 'white';
+  input.style.border = 'none';
   input.style.width = '80%';
   input.placeholder= "Next Step";
   inputDiv.appendChild(input);
@@ -416,6 +417,7 @@ function handleAddDescription(){
   var input = document.createElement('textarea');
   var brtag2 = document.createElement('br');
   input.style.background = 'white';
+  input.style.border = "none";
   input.style.width = '80%';
   input.placeholder= "Add a short description";
   input.id = 'fooddescription';

@@ -139,7 +139,10 @@ input{
   border-color:transparent;
   border-radius: 3px;
 }
+textarea {
 
+    border-radius: 3px;
+}
 
 /* column right: drop zone starts */
 
