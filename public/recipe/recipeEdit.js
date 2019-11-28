@@ -20,6 +20,8 @@ function handleSavePost(){
     // user is a firebase built-in variable, firebase knows user
     if (user) {
             console.log("handleSavePost clicked");
+
+            var updatedDescription = document.getElementById('updateDescription').value;
             var ingArray = document.getElementById('ingList'); // get txt area
             var inglen = ingArray.getElementsByTagName('div').length;
 
@@ -53,6 +55,7 @@ function handleSavePost(){
             var updatePosts = db_recipe.collection("posts").doc(currpostid);
             // Set the "PhotoUrl" field of the the document user.uid
             return updatePosts.update({
+                description: updatedDescription,
                 ingredient: ingContents,
                 direction: dirContents
             })
@@ -131,6 +134,18 @@ mypost.onSnapshot(doc => {
 
         document.getElementById('name').innerHTML = postdata.title;
         document.getElementById('imgID').src = postdata.foodUrl;
+
+        var descriptionDiv = document.createElement('div');
+        var descriptionInput = document.createElement('textarea');
+        descriptionInput.id = "updateDescription";
+        descriptionInput.rows = "4";
+        descriptionInput.style.border = "none";
+        descriptionInput.style.width = "90%";
+        descriptionInput.innerHTML = postdata.description;
+
+        descriptionDiv.appendChild(descriptionInput);
+        document.getElementById('editDescription').appendChild(descriptionDiv);
+
 
         var ingList = postdata.ingredient;// returning an array of ind
         var ingredientsTag = document.getElementById('ingList'); // each ingredient will be appended into this div
