@@ -7,7 +7,6 @@ var imageHasBeenUpdated = false;
 document.getElementById('home').addEventListener('click', goHome, false);
 document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit, false);
 document.getElementById('savePost').addEventListener('click', handleSavePost, false);
-//document.getElementById('deletePost').addEventListener('click', handledeletePost, false);
 document.getElementById('addMoreIng').addEventListener('click', handleAddMoreIng, false);
 document.getElementById('addMoreDir').addEventListener('click', handleAddMoreDir, false);
 

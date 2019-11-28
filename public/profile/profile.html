@@ -188,16 +188,19 @@
 <!-- column right start -->
 <div class="column right mx-auto">
   <label for="" class="label label-primary rounded-pill" style="font-size: 15px">Add New Recipe Here</label>
-  <form class="contaier" method="post" action="" enctype="multipart/form-data">
-    <div id="drop-zone">
-      <div id="notification" class="drop-zone-caption">Drag & Drop Image Here</div>
-      <span class="btn btn-primary btn-file" style="position: relative">
-        <span>Choose file</span>
-        <input type="file"id="drop-zone-file" name="files[]" accept=".jpg, .png">
-      </span>
-    </div>
-  </form>
-  <br><br>
+
+   <form class="contaier" method="post" action="" enctype="multipart/form-data">
+     <div id="drop-zone">
+       <div id="notification" class="drop-zone-caption">Drag & Drop Image Here</div>
+       <span class="btn btn-primary btn-file" style="position: relative">
+         <span>Choose file</span>
+         <input type="file"id="drop-zone-file" name="files[]" accept=".jpg, .png">
+       </span>
+     </div>
+   </form>
+
+
+  <br><br><br><br><br><hr><br>
   <div class = "col-md">
     <button id="addtags" class="btn btn-info btn-block rounded-pill shadow" style="width:130px;" data-toggle="modal" data-target="#">
       Add Tags +</button>
@@ -207,13 +210,15 @@
       Add Title +</button>
       <span id="titleinput"></span>
     <br>
+    <span id="ingredientinput"></span>
     <button id="addingredients" class="btn btn-info btn-block rounded-pill shadow" style="width:130px;" data-toggle="modal" data-target="#">
       Add Ingredients +</button>
-      <span id="ingredientinput"></span>
+
     <br>
+    <span id="directioninput"></span>
     <button id="adddirections" class="btn btn-info btn-block rounded-pill shadow" style="width:130px;" data-toggle="modal" data-target="#">
       Add Directions +</button>
-      <span id="directioninput"></span>
+
     <br>
     <button id="adddescription" class="btn btn-info btn-block rounded-pill shadow" style="width:130px;" data-toggle="modal" data-target="#">
       Add Description +</button>
