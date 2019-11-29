@@ -504,10 +504,9 @@ function uploadHelper(downloadURL){
                  // is getting called mutiple times. So in order to avoid duplicate post created
                  // we make a count so that the post gets created only once each time we click upload
                  if(count <= 1){
-                   console.log('allpostids bef: ' + allpostids);
-                   allpostids.push(docRef.id);
-                   console.log('allpostids aft: ' + allpostids);
 
+                   console.log("!!!Adding post into the current user's allPostsIds!!!");
+                   allpostids.push(docRef.id);
                    return addNewPost2CurrentUser.update({
                                          allPostsIDs: allpostids
                                      })
@@ -519,11 +518,14 @@ function uploadHelper(downloadURL){
                                          // The document probably doesn't exist.
                                          console.error("Error updating allPostsIDs: ", error);
                                      });
+
                  }
 
               })
-
-            window.location.href = "profile.html";
+              if(count <= 1){
+                 alert("SUCCESS!!!");
+                window.location.href = "profile.html";
+              }
           })
           .catch(function(error) {
               console.error("Error adding document: ", error);
