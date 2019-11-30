@@ -74,11 +74,11 @@ firebase.auth().onAuthStateChanged(function(user) {
       // load all its posts: title and image for the profile page
       //console.log("size of allPostsIDs = " + data.allPostsIDs.length);
       var allPosts = data.allPostsIDs; // get the user's all post ids
-      var theWholeDiv = [];
-      var len = allPosts.length;
+      //var theWholeDiv = [];
+      //var len = allPosts.length;
 
       var index = 0;
-      allPosts.forEach(pid => {
+      allPosts.reverse().forEach(pid => {
         const mypost = db2.collection('posts').doc(pid);
         mypost.onSnapshot(doc => {
           const postdata = doc.data();
@@ -525,6 +525,8 @@ function uploadHelper(downloadURL){
               if(count <= 1){
                  alert("SUCCESS!!!");
                 window.location.href = "profile.html";
+              }else{
+                 alert("Upload Failed. Try Again!!!");
               }
           })
           .catch(function(error) {
