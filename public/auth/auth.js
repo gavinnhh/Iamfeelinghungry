@@ -228,8 +228,8 @@ function initApp() {
       console.log('Currently no user signed in/up');
       document.getElementById('setting').style.visibility = 'hidden';
       // User is signed out. So return Sign In and Sign Up on home page
-      document.getElementById('home-signin').textContent = 'Sign In';
-      document.getElementById('home-signup').textContent = 'Sign Up';
+      document.getElementById('home-signin').textContent = 'Sign in';
+      document.getElementById('home-signup').textContent = 'Sign up';
 
       // To make window pop up again
       $('#home-signin').attr('data-target','#signInModal');
