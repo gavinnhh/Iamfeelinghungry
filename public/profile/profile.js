@@ -10,7 +10,7 @@ document.getElementById('cancelEdit').addEventListener('click', handleCancelEdit
 // document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
 //document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
 //document.getElementById('addpost').addEventListener('click', handleAddPosts, false);
-document.getElementById('addtags').addEventListener('click', handleAddTags, false);
+//document.getElementById('select').addEventListener('click', handleAddTags, false);
 document.getElementById('addtitle').addEventListener('click', handleAddTitle, false);
 document.getElementById('addingredients').addEventListener('click', handleAddIngredients, false);
 document.getElementById('adddirections').addEventListener('click', handleAddDirections, false);
@@ -277,35 +277,35 @@ function handleCancelEdit(){
 var ingNum=1;
 var directionNum=1;
 //adding tags ingredients and directions strts here<---------------------------
-var tagNum = 1;
+// var tagNum = 1;
 function handleAddTags(){
-  var inputDiv = document.createElement('div');
-  inputDiv.id = "inputdivID" + tagNum;
-  var allDeleteBtns = [];
-
-  var brtag = document.createElement('br');
-  var diTag = document.getElementById('taginput');
-  inputDiv.appendChild(brtag);
-  var input = document.createElement('input');
-  var brtag2 = document.createElement('br');
-  input.style.background = 'white';
-  input.style.width = '80%';
-  input.placeholder= "New Tag";
-  inputDiv.appendChild(input);
-  inputDiv.innerHTML += '<button id="remove'+tagNum+'" class="btn"><i class="fas fa-trash"></i>&nbsp;</button>';
-  inputDiv.appendChild(brtag2);
-  input.id = "ingredientNum" + tagNum;
-  tagNum++;
-
-  diTag.appendChild(inputDiv);
-  deleteBtn = inputDiv.getElementsByTagName("button")[0];
-  allDeleteBtns.push(deleteBtn);
-  //console.log(allDeleteBtns);
-  // diTag.innerHTML += '<button id="remove" class="btn btn-info rounded-pill shadow" data-toggle="modal" data-target="#"><i class="fas fa-trash"></i>&nbsp;</button>';
-  allDeleteBtns.forEach(function(eachdeletebtn){
-    eachdeletebtn.addEventListener('click', function(){console.log(eachdeletebtn.id + "clicked");this.parentNode.remove();}, false);
-
-  });
+//   var inputDiv = document.createElement('div');
+//   inputDiv.id = "inputdivID" + tagNum;
+//   var allDeleteBtns = [];
+//
+//   var brtag = document.createElement('br');
+//   var diTag = document.getElementById('taginput');
+//   inputDiv.appendChild(brtag);
+//   var input = document.createElement('input');
+//   var brtag2 = document.createElement('br');
+//   input.style.background = 'white';
+//   input.style.width = '80%';
+//   input.placeholder= "New Tag";
+//   inputDiv.appendChild(input);
+//   inputDiv.innerHTML += '<button id="remove'+tagNum+'" class="btn"><i class="fas fa-trash"></i>&nbsp;</button>';
+//   inputDiv.appendChild(brtag2);
+//   input.id = "ingredientNum" + tagNum;
+//   tagNum++;
+//
+//   diTag.appendChild(inputDiv);
+//   deleteBtn = inputDiv.getElementsByTagName("button")[0];
+//   allDeleteBtns.push(deleteBtn);
+//   //console.log(allDeleteBtns);
+//   // diTag.innerHTML += '<button id="remove" class="btn btn-info rounded-pill shadow" data-toggle="modal" data-target="#"><i class="fas fa-trash"></i>&nbsp;</button>';
+//   allDeleteBtns.forEach(function(eachdeletebtn){
+//     eachdeletebtn.addEventListener('click', function(){console.log(eachdeletebtn.id + "clicked");this.parentNode.remove();}, false);
+//
+//   });
 }
 
 var titleNum = 1;

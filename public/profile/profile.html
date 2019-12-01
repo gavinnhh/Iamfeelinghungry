@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <!-- Compiled and minified CSS -->
 <head>
   <meta charset="utf-8">
@@ -18,6 +20,7 @@
   <!-- Dropdown menu -->
   <!-- <link rel="stylesheet" type="text/css" href="../css/dropdown.css"> -->
   <!-- <link rel="stylesheet" type="text/css" href="../css/search-filter.css"> -->
+  <link rel="stylesheet" href="../bootstrap-select/bootstrap-select.css">
 
   <!-- to get the smily face icon -->
   <script src="https://kit.fontawesome.com/4d80183698.js" crossorigin="anonymous"></script>
@@ -200,12 +203,19 @@
    </form>
 
 
-  <br><br><br><br><br><hr><br>
-  <div class = "col-md">
-    <button id="addtags" class="btn btn-info btn-block rounded-pill shadow" style="width:130px;" data-toggle="modal" data-target="#">
-      Add Tags +</button>
-      <span id="taginput"></span>
+  <br><br><br><br><br><hr>
+  <!--<select id="select" class="selectpicker" required multiple data-max-options="4" title="Choose up to four tags..."  data-live-search="true">-->
+  <select required multiple class="selectpicker" data-max-options="4" data-live-search="true" title="Choose up to four tags...">
+    <option>Mustard</option>
+    <option>Ketchup</option>
+    <option>Relish</option>
+    <option>Relish</option>
+    <option>Relish</option>
+    <option>Relish</option>
+    <option>Relish</option>
+  </select>
     <br>
+    <hr>
     <button id="addtitle" class="btn btn-info btn-block rounded-pill shadow" style="width:130px;" data-toggle="modal" data-target="#">
       Add Title +</button>
       <span id="titleinput"></span>
@@ -247,6 +257,11 @@
 <!-- TODO: Add SDKs for Firebase products that you want to use
 https://firebase.google.com/docs/web/setup#available-libraries -->
 
+<!-- drop down stuff -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+<script src="../bootstrap-select/bootstrap-select.js"></script>
+
 <script>
 // Your web app's Firebase configuration
 // setting connections between front end and back end
@@ -263,6 +278,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 </script>
+
 
 <!--Placed at the end of the page so that the pages load faster-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
