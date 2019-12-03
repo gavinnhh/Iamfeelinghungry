@@ -890,7 +890,7 @@
     showSubtext: false,
     showIcon: true,
     showContent: true,
-    dropupAuto: true,
+    dropupAuto: false,
     header: false,
     liveSearch: false,
     liveSearchPlaceholder: null,

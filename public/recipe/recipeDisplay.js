@@ -33,7 +33,11 @@ const mypostDisplay = db_recipeDsiaply.collection('posts').doc(currpostidDisplay
 mypostDisplay.onSnapshot(doc => {
 
         const postdata = doc.data();
-
+        var tags = postdata.tags;
+        for(i = 0; i < tags.length; i++){
+          document.getElementById('tags').innerHTML += tags[i] + " ";
+        }
+        
         document.getElementById('name').innerHTML = postdata.title;
         document.getElementById('description').innerHTML = postdata.description;
         document.getElementById('imgID').src = postdata.foodUrl;

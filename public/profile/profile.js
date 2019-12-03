@@ -449,6 +449,14 @@ function handleFileUploadbutton(){
 
 //---------------------upload new post starts---------------------
 function uploadHelper(downloadURL){
+  // get tags
+  var tags = []
+  var selected = $('select').val();
+
+  for(i = 0; i < selected.length; i++){
+    tags.push(selected[i]);
+  }
+
   var ingredientDivArray = document.getElementById('ingredientinput'); // get txt area
   var inglen = ingredientDivArray.getElementsByTagName('div').length;
 
@@ -481,8 +489,6 @@ function uploadHelper(downloadURL){
   if(descriptionElement != null){
     description = descriptionElement.value;
   }
-
-  var tags = []
 
   var count = 0;
     db2.collection("posts").add({
@@ -523,7 +529,7 @@ function uploadHelper(downloadURL){
 
               })
               if(count <= 1){
-                 alert("SUCCESS!!!");
+                 //alert("SUCCESS!!!");
                 window.location.href = "profile.html";
               }else{
                  alert("Upload Failed. Try Again!!!");
