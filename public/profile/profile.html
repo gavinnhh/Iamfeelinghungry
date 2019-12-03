@@ -205,14 +205,7 @@
 
   <br><br><br><br><br><hr>
   <!--<select id="select" class="selectpicker" required multiple data-max-options="4" title="Choose up to four tags..."  data-live-search="true">-->
-  <select required multiple class="selectpicker" data-max-options="4" data-live-search="true" title="Choose up to four tags...">
-    <option>Mustard</option>
-    <option>Ketchup</option>
-    <option>Relish</option>
-    <option>Relish</option>
-    <option>Relish</option>
-    <option>Relish</option>
-    <option>Relish</option>
+  <select id="tagDropdown" required multiple class="selectpicker" data-width="400px" data-size="5" data-max-options="4" data-live-search="true" title="Choose up to four tags...">
   </select>
     <br>
     <hr>
@@ -258,9 +251,8 @@
 https://firebase.google.com/docs/web/setup#available-libraries -->
 
 <!-- drop down stuff -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
-<script src="../bootstrap-select/bootstrap-select.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>-->
 
 <script>
 // Your web app's Firebase configuration
@@ -280,8 +272,12 @@ firebase.initializeApp(firebaseConfig);
 </script>
 
 
+
+
 <!--Placed at the end of the page so that the pages load faster-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+<script src="../bootstrap-select/bootstrap-select.js"></script>
+<script src = "dropdownload.js"></script>
 <!-- Dropdown menu -->
 <!-- <script src="https://cpde.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/propper.js/1.14.7/umd/popper.min.js"></script> -->
