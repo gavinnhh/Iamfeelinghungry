@@ -11,9 +11,9 @@ function fillDropDown(arr){
   for(var i = 0; i<arr.length; i++){
     var option = arr[i];
     htmlOptions +="<option>"+option+"</option>\n";
-    console.log("added tag :" + arr[i]);
+    //console.log("added tag :" + arr[i]);
   }
-  console.log(htmlOptions);
+  //console.log(htmlOptions);
   dropdown.innerHTML = htmlOptions;
   $('.selectpicker').selectpicker('refresh');
 }
