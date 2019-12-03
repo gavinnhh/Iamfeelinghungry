@@ -21,6 +21,5 @@
     "firebase-functions-test": "^0.1.6",
     "jest": "^24.9.0"
   },
-
   "private": true
 }
