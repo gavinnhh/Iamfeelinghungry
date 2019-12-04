@@ -49,7 +49,7 @@ function handleSignUp(){
             lastname: lname,
             username: username,
             email: email,
-            photoUrl: "../load_user.gif"
+            photoUrl: "../defaultUser.png"
         })
         .then(function() {
             console.log("Document successfully written!");
@@ -272,7 +272,7 @@ function suggestWindowPop(){
             {
             $('#suggest2signup').modal('hide');
             },
-            4000,
+            3000,
           );
 
     }});
